@@ -1,20 +1,51 @@
 {
   "pages": {
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+    "/_not-found/page": [
+      "static/chunks/webpack-fcdb6064cbd14934.js",
+      "static/chunks/fd9d1056-ef8d620917e6db65.js",
+      "static/chunks/117-bc35fff4f9f05853.js",
+      "static/chunks/main-app-252b27775589f119.js",
+      "static/chunks/app/_not-found/page-2eeb002c8e5a70a4.js"
     ],
     "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+      "static/chunks/webpack-fcdb6064cbd14934.js",
+      "static/chunks/fd9d1056-ef8d620917e6db65.js",
+      "static/chunks/117-bc35fff4f9f05853.js",
+      "static/chunks/main-app-252b27775589f119.js",
+      "static/css/46250368ca015376.css",
+      "static/chunks/app/layout-8b69fe166a75d866.js"
     ],
     "/indica/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/indica/page.js"
+      "static/chunks/webpack-fcdb6064cbd14934.js",
+      "static/chunks/fd9d1056-ef8d620917e6db65.js",
+      "static/chunks/117-bc35fff4f9f05853.js",
+      "static/chunks/main-app-252b27775589f119.js",
+      "static/chunks/c15bf2b0-8cf2939e22aa2fb1.js",
+      "static/chunks/223-ad8bf6b96e370487.js",
+      "static/chunks/661-ab9998aa3c5330d1.js",
+      "static/chunks/144-b60212dace2fe329.js",
+      "static/chunks/app/indica/page-b3e8d6f9de830e6d.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-fcdb6064cbd14934.js",
+      "static/chunks/fd9d1056-ef8d620917e6db65.js",
+      "static/chunks/117-bc35fff4f9f05853.js",
+      "static/chunks/main-app-252b27775589f119.js",
+      "static/chunks/c15bf2b0-8cf2939e22aa2fb1.js",
+      "static/chunks/223-ad8bf6b96e370487.js",
+      "static/chunks/823-6ed7f5d5bec9d138.js",
+      "static/chunks/app/page-7ace240e2a5ccce5.js"
+    ],
+    "/sativa/page": [
+      "static/chunks/webpack-fcdb6064cbd14934.js",
+      "static/chunks/fd9d1056-ef8d620917e6db65.js",
+      "static/chunks/117-bc35fff4f9f05853.js",
+      "static/chunks/main-app-252b27775589f119.js",
+      "static/chunks/c15bf2b0-8cf2939e22aa2fb1.js",
+      "static/chunks/223-ad8bf6b96e370487.js",
+      "static/chunks/661-ab9998aa3c5330d1.js",
+      "static/chunks/144-b60212dace2fe329.js",
+      "static/chunks/app/sativa/page-f21afd19e0b4bb3d.js"
     ]
   }
 }

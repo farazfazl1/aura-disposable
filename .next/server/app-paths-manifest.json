@@ -1,4 +1,6 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/indica/page": "app/indica/page.js",
   "/page": "app/page.js",
-  "/indica/page": "app/indica/page.js"
+  "/sativa/page": "app/sativa/page.js"
 }
