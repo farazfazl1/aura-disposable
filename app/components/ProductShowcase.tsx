@@ -31,7 +31,11 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = memo(({ products, theme,
 
   useEffect(() => {
     if (initialProduct) {
-      const index = products.findIndex((p) => p.name.toLowerCase() === initialProduct.toLowerCase())
+      // Normalize the initialProduct by replacing hyphens with spaces
+      const normalizedInitialProduct = initialProduct.toLowerCase().replace(/-/g, ' ')
+      
+      // Find the product with the matching normalized name
+      const index = products.findIndex((p) => p.name.toLowerCase() === normalizedInitialProduct)
       if (index !== -1) {
         setCurrentProduct(index)
       }
