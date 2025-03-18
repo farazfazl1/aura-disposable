@@ -13,6 +13,8 @@ import { useSearchParams } from "next/navigation"
 
 gsap.registerPlugin(ScrollTrigger)
 
+//This is our Products
+
 const products = [
   {
     name: "Blue Dream",
@@ -57,6 +59,8 @@ const products = [
     sizes: ["2ml"],
   },
 ]
+
+// This is out Page Content
 
 function SativaPageContent() {
   const heroRef = useRef<HTMLDivElement>(null)
