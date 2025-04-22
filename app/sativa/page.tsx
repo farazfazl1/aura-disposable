@@ -31,17 +31,31 @@ const products = [
     sizes: ["1ml", "2ml"],
   },
   {
-    name: "Mango",
-    tagline: "A Tropical Wave of Pure Energy",
+    name: "Sweet Island Skunk",
+    tagline: "A Tropical Paradise in Every Puff",
     description:
-      "Transport yourself to a sun-soaked paradise with our Mango strain. This exotic blend combines tropical sweetness with energizing effects, perfect for turning any moment into an adventure.",
-    effects: ["Energy Boost", "Mood Elevation", "Creativity", "Focus"],
-    flavors: ["Tropical Mango", "Sweet Citrus", "Exotic Spice"],
+      "Immerse yourself in the exotic blend of tropical flavors with Sweet Island Skunk. This energizing sativa delivers a burst of uplifting effects perfect for daytime use, creative sessions, or socializing with friends.",
+    effects: ["Energetic", "Uplifting", "Happy"],
+    flavors: ["Pineapple", "Coconut", "Mango", "Guava"],
     terpenes: ["Limonene", "Myrcene", "Pinene"],
     thcContent: "Premium Grade | 80-90% THC",
-    color: "#fbbf24", // Sativa-like sunny yellow color
+    color: "#4CB4A1", // Tropical teal
+    textColor: "text-white", // Light text for dark background
+    hoverColor: "#5DC5B2", // Slightly lighter for hover effect
+    sizes: ["2ml"],
+  },
+  {
+    name: "Persian Gold",
+    tagline: "Feel the warmth of Persian Gold – Energize, Uplift, Focus",
+    description:
+      "Experience the luxury of Persian Gold, featuring the rare and rich flavor of saffron. This sophisticated sativa strain provides an energizing and focusing effect, perfect for productivity, creative flow, and mindful tasks.",
+    effects: ["Energetic", "Uplifting", "Happy", "Focusing"],
+    flavors: ["Saffron"],
+    terpenes: ["Limonene", "Caryophyllene", "Terpinolene"],
+    thcContent: "Premium Grade | 80-90% THC",
+    color: "#D4AF37", // Gold
     textColor: "text-gray-900", // Dark text for light background
-    hoverColor: "#fcd34d", // Slightly lighter for hover effect
+    hoverColor: "#E5C048", // Slightly lighter for hover effect
     sizes: ["2ml"],
   },
   {
@@ -241,4 +255,3 @@ export default function SativaPage() {
     </Suspense>
   )
 }
-
