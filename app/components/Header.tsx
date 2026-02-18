@@ -15,6 +15,7 @@ const Header = () => {
 
   const isIndicaPage = pathname.startsWith("/indica")
   const isSativaPage = pathname.startsWith("/sativa")
+  const isStorePage = pathname.startsWith("/store")
 
   const getHeaderStyle = () => {
     if (isIndicaPage) {
@@ -31,6 +32,10 @@ const Header = () => {
       return isSativaPage ? "text-purple-600" : "text-white"
     }
     return isIndicaPage ? "text-yellow-400" : "text-white"
+  }
+
+  const getStoreLinkStyle = () => {
+    return isStorePage ? "text-yellow-200" : "text-white"
   }
 
   const getLogoStyle = () => {
@@ -64,20 +69,29 @@ const Header = () => {
     if (pathname === "/") {
       return [
         { name: "Products", path: "/#products" },
+        { name: "Store", path: "/store" },
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },
       ]
     } else if (pathname.startsWith("/indica")) {
       return [
         { name: "Sativa", path: "/sativa" },
+        { name: "Store", path: "/store" },
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },
       ]
     } else if (pathname.startsWith("/sativa")) {
       return [
         { name: "Indica", path: "/indica" },
+        { name: "Store", path: "/store" },
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },
+      ]
+    } else if (pathname.startsWith("/store")) {
+      return [
+        { name: "Home", path: "/" },
+        { name: "Indica", path: "/indica" },
+        { name: "Sativa", path: "/sativa" },
       ]
     }
     return []
@@ -123,6 +137,9 @@ const Header = () => {
               <SunIcon className="mr-2" width={18} height={18} />
               Sativa
             </Link>
+            <Link href="/store" className={`flex items-center ${getStoreLinkStyle()}`}>
+              Store
+            </Link>
           </nav>
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -155,4 +172,3 @@ const Header = () => {
 }
 
 export default Header
-
