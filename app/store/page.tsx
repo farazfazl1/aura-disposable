@@ -10,6 +10,7 @@ import { MoonIcon, SunIcon } from "../components/Icons"
 const featuredProducts = [
   {
     name: "Aura No. 1",
+    slug: "aura-no-1",
     type: "indica",
     image: "/images/store/aura-store-01.jpeg",
     flavor: "Lorem Blend",
@@ -19,6 +20,7 @@ const featuredProducts = [
   },
   {
     name: "Aura No. 2",
+    slug: "aura-no-2",
     type: "sativa",
     image: "/images/store/aura-store-02.jpeg",
     flavor: "Lorem Zest",
@@ -28,6 +30,7 @@ const featuredProducts = [
   },
   {
     name: "Aura No. 3",
+    slug: "aura-no-3",
     type: "indica",
     image: "/images/store/aura-store-03.jpeg",
     flavor: "Lorem Drift",
@@ -37,6 +40,7 @@ const featuredProducts = [
   },
   {
     name: "Aura No. 4",
+    slug: "aura-no-4",
     type: "sativa",
     image: "/images/store/aura-store-01.jpeg",
     flavor: "Lorem Pulse",
@@ -46,6 +50,7 @@ const featuredProducts = [
   },
   {
     name: "Aura No. 5",
+    slug: "aura-no-5",
     type: "indica",
     image: "/images/store/aura-store-02.jpeg",
     flavor: "Lorem Mint",
@@ -55,6 +60,7 @@ const featuredProducts = [
   },
   {
     name: "Aura No. 6",
+    slug: "aura-no-6",
     type: "sativa",
     image: "/images/store/aura-store-03.jpeg",
     flavor: "Lorem Wave",
@@ -64,6 +70,7 @@ const featuredProducts = [
   },
   {
     name: "Aura No. 7",
+    slug: "aura-no-7",
     type: "indica",
     image: "/images/store/aura-store-01.jpeg",
     flavor: "Lorem Noir",
@@ -193,11 +200,13 @@ export default function StorePage() {
                     className={`rounded-3xl border ${isIndica ? "border-purple-800/60 bg-purple-900/20" : "border-yellow-400/40 bg-yellow-500/10"} p-6 flex flex-col gap-4`}
                   >
                     <div className="rounded-2xl bg-white/5 p-4 flex items-center justify-center">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="h-48 w-full object-contain"
-                      />
+                      <Link href={`/store/${product.slug}`} className="w-full">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="h-48 w-full object-contain"
+                        />
+                      </Link>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
@@ -217,15 +226,16 @@ export default function StorePage() {
                       </p>
                     </div>
                     <p className="text-gray-300">{product.description}</p>
-                    <button
+                    <Link
+                      href={`/store/${product.slug}`}
                       className={`mt-auto px-6 py-3 rounded-full text-sm font-semibold transition-colors duration-300 ${
                         isIndica
                           ? "bg-purple-700 text-white hover:bg-purple-600"
                           : "bg-yellow-400 text-black hover:bg-yellow-300"
-                      }`}
+                      } text-center`}
                     >
                       View Details
-                    </button>
+                    </Link>
                   </div>
                 )
               })}
