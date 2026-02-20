@@ -36,15 +36,15 @@ const BrandStory = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div initial="hidden" animate={controls} variants={fadeInUp}>
             <p className="text-lg mb-6">
-              At Aura, we're redefining disposable vaping by uniting cutting-edge technology with minimalist design. Our
-              vision: to transform vaping into a true art form.
+              At Aura, we&apos;re redefining disposable vaping by uniting cutting-edge technology with minimalist
+              design. Our vision: to transform vaping into a true art form.
             </p>
             <p className="text-lg mb-6">
               Every element of our products, from the precision-engineered vapor delivery to the timeless monochrome
               aesthetic, is meticulously crafted to elevate your experience.
             </p>
             <blockquote className="text-2xl font-italic my-8 pl-4 border-l-4 border-white">
-              "Vaping, Redefined."
+              &quot;Vaping, Redefined.&quot;
             </blockquote>
           </motion.div>
           <motion.div initial="hidden" animate={controls} variants={fadeInUp} className="grid gap-6">
@@ -82,4 +82,3 @@ const BrandStory = () => {
 }
 
 export default BrandStory
-

@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import ProductCard from "../components/ProductCard"
-import { MoonIcon, SunIcon } from "../components/Icons"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
+import ProductCard from "@/components/ProductCard"
+import { MoonIcon, SunIcon } from "@/components/Icons"
 
 const featuredProducts = [
   {
@@ -115,8 +115,8 @@ export default function StorePage() {
               <p className="uppercase tracking-[0.3em] text-sm text-gray-400 mb-4">Aura Store</p>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">Designed for elevated experiences</h1>
               <p className="text-lg text-gray-300 mb-8">
-                Explore the full Aura collection with curated Indica and Sativa profiles, premium hardware, and refined
-                flavor notes.
+                Explore the full Aura collection with curated Indica, Sativa, and Hybrid profiles, premium hardware,
+                and refined flavor notes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -130,6 +130,12 @@ export default function StorePage() {
                   className="px-8 py-3 rounded-full border border-yellow-500 text-yellow-300 hover:bg-yellow-500 hover:text-black transition-colors duration-300 text-center"
                 >
                   Shop Sativa
+                </Link>
+                <Link
+                  href="/hybrid"
+                  className="px-8 py-3 rounded-full border border-emerald-400 text-emerald-200 hover:bg-emerald-400 hover:text-black transition-colors duration-300 text-center"
+                >
+                  Shop Hybrid
                 </Link>
               </div>
             </motion.div>
@@ -160,7 +166,7 @@ export default function StorePage() {
               <h2 className="text-4xl md:text-5xl font-bold mb-4">Collections</h2>
               <p className="text-gray-400 text-lg">Choose your path with curated Aura profiles</p>
             </div>
-            <div className="grid md:grid-cols-2 gap-10">
+            <div className="grid md:grid-cols-3 gap-10">
               <ProductCard
                 type="indica"
                 title="Indica"
@@ -172,6 +178,12 @@ export default function StorePage() {
                 title="Sativa"
                 tagline="Energizing, uplifting, creative"
                 description="Bright citrus and sweet berry notes designed for daytime clarity and social energy."
+              />
+              <ProductCard
+                type="hybrid"
+                title="Hybrid"
+                tagline="Balanced, smooth, versatile"
+                description="A harmonious blend of calm and clarity, crafted for all-day balance with layered flavor."
               />
             </div>
           </div>

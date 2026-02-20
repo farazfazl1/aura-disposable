@@ -3,7 +3,8 @@
 import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { MoonIcon, SunIcon } from "./Icons"
+import { SunMoon } from "lucide-react"
+import { MoonIcon, SunIcon } from "@/components/Icons"
 import { Link as ScrollLink } from "react-scroll"
 import Link from "next/link"
 
@@ -11,9 +12,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 interface HeroProps {
   onVideoLoaded?: () => void
+  className?: string
 }
 
-const Hero = ({ onVideoLoaded }: HeroProps) => {
+const Hero = ({ onVideoLoaded, className }: HeroProps) => {
   const heroRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
@@ -45,14 +47,16 @@ const Hero = ({ onVideoLoaded }: HeroProps) => {
         ease: "power3.out",
       })
 
-      gsap.from(ctaRef.current?.children, {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        delay: 1,
-        ease: "power3.out",
-      })
+      if (ctaRef.current) {
+        gsap.from(Array.from(ctaRef.current.children), {
+          y: 20,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          delay: 1,
+          ease: "power3.out",
+        })
+      }
 
       if (videoRef.current && heroRef.current) {
         gsap.to(videoRef.current, {
@@ -72,7 +76,11 @@ const Hero = ({ onVideoLoaded }: HeroProps) => {
   }, [])
 
   return (
-    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden" id="home">
+    <section
+      ref={heroRef}
+      className={`relative h-screen flex items-center justify-center overflow-hidden ${className || ""}`}
+      id="home"
+    >
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
@@ -99,10 +107,7 @@ const Hero = ({ onVideoLoaded }: HeroProps) => {
         <p ref={subtitleRef} className="text-xl md:text-2xl text-gray-300 mb-12">
           Experience the art of premium disposable vaping
         </p>
-        <div
-          ref={ctaRef}
-          className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
-        >
+        <div ref={ctaRef} className="flex flex-col sm:flex-row justify-center items-center gap-4">
           <Link
             href="/indica"
             className="px-8 py-3 bg-transparent border border-purple-600 text-purple-600 rounded-full text-lg font-semibold hover:bg-purple-600 hover:text-white transition-colors duration-300 flex items-center cursor-pointer"
@@ -116,6 +121,13 @@ const Hero = ({ onVideoLoaded }: HeroProps) => {
           >
             <SunIcon className="mr-2" width={18} height={18} />
             Explore Sativa
+          </Link>
+          <Link
+            href="/hybrid"
+            className="px-8 py-3 bg-transparent border border-emerald-400 text-emerald-200 rounded-full text-lg font-semibold hover:bg-emerald-400 hover:text-black transition-colors duration-300 flex items-center cursor-pointer"
+          >
+            <SunMoon className="mr-2 h-5 w-5" />
+            Discover Hybrid
           </Link>
         </div>
       </div>
@@ -142,4 +154,3 @@ const Hero = ({ onVideoLoaded }: HeroProps) => {
 }
 
 export default Hero
-

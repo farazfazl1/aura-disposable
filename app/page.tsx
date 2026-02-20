@@ -3,14 +3,14 @@
 import { useState, Suspense } from "react"
 import { ThemeProvider } from "next-themes"
 import dynamic from "next/dynamic"
-import Header from "./components/Header"
-import Hero from "./components/Hero"
-import LoadingScreen from "./components/LoadingScreen"
+import Header from "@/components/Header"
+import Hero from "@/components/Hero"
+import LoadingScreen from "@/components/LoadingScreen"
 
-const ProductHighlight = dynamic(() => import("./components/ProductHighlight"), { ssr: false })
-const BrandStory = dynamic(() => import("./components/BrandStory"), { ssr: false })
-const FAQ = dynamic(() => import("./components/FAQ"), { ssr: false })
-const Footer = dynamic(() => import("./components/Footer"), { ssr: false })
+const ProductHighlight = dynamic(() => import("@/components/ProductHighlight"), { ssr: false })
+const BrandStory = dynamic(() => import("@/components/BrandStory"), { ssr: false })
+const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false })
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false })
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -27,7 +27,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Premium Wholesale Vapes</h2>
             <p className="text-xl mb-8">
               Aura Vape offers top-quality disposable vapes for wholesale. Elevate your inventory with our premium
-              Indica and Sativa options.
+              Indica, Sativa, and Hybrid options.
             </p>
             <button
               onClick={() =>
@@ -56,4 +56,3 @@ export default function Home() {
     </ThemeProvider>
   )
 }
-

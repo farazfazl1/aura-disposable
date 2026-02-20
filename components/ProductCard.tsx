@@ -3,10 +3,11 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { useState } from "react"
+import { SunMoon } from "lucide-react"
 import { MoonIcon, SunIcon } from "./Icons"
 
 interface ProductCardProps {
-  type: "indica" | "sativa"
+  type: "indica" | "sativa" | "hybrid"
   title: string
   tagline: string
   description: string
@@ -18,9 +19,13 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
   const bgClass =
     type === "indica"
       ? "bg-purple-900/90 backdrop-blur-lg"
-      : "bg-gradient-to-br from-yellow-400/90 to-yellow-500/90 backdrop-blur-lg"
+      : type === "sativa"
+        ? "bg-gradient-to-br from-yellow-400/90 to-yellow-500/90 backdrop-blur-lg"
+        : "bg-gradient-to-br from-purple-700/80 via-emerald-400/80 to-yellow-400/80 backdrop-blur-lg"
 
-  const Icon = type === "indica" ? MoonIcon : SunIcon
+  const Icon = type === "indica" ? MoonIcon : type === "sativa" ? SunIcon : SunMoon
+  const glowColor =
+    type === "indica" ? "rgba(147, 51, 234, 0.7)" : type === "sativa" ? "rgba(234, 179, 8, 0.7)" : "rgba(16, 185, 129, 0.7)"
 
   return (
     <motion.div
@@ -36,7 +41,7 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
         className={`absolute inset-0 opacity-20 transition-opacity duration-500 ${isHovered ? "opacity-30" : ""}`}
         style={{
           backgroundImage: `radial-gradient(circle at 50% 50%, 
-            ${type === "indica" ? "rgba(147, 51, 234, 0.7)" : "rgba(234, 179, 8, 0.7)"} 0%, 
+            ${glowColor} 0%, 
             transparent 70%)`,
         }}
       />
@@ -44,11 +49,19 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
       {/* Content */}
       <div className="relative z-10">
         <div className="flex items-center mb-4">
-          <Icon className={`w-6 h-6 ${type === "indica" ? "text-purple-300" : "text-yellow-200"}`} />
+          <Icon
+            className={`w-6 h-6 ${
+              type === "indica" ? "text-purple-300" : type === "sativa" ? "text-yellow-200" : "text-emerald-100"
+            }`}
+          />
           <h2 className="text-3xl font-bold text-white ml-3 tracking-wider">{title}</h2>
         </div>
 
-        <p className={`text-xl font-medium mb-4 ${type === "indica" ? "text-purple-200" : "text-yellow-100"}`}>
+        <p
+          className={`text-xl font-medium mb-4 ${
+            type === "indica" ? "text-purple-200" : type === "sativa" ? "text-yellow-100" : "text-emerald-100"
+          }`}
+        >
           {tagline}
         </p>
 
@@ -62,7 +75,9 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
             ${
               type === "indica"
                 ? "bg-purple-700 text-white hover:bg-purple-600"
-                : "bg-yellow-300 text-gray-900 hover:bg-yellow-200"
+                : type === "sativa"
+                  ? "bg-yellow-300 text-gray-900 hover:bg-yellow-200"
+                  : "bg-emerald-400 text-black hover:bg-emerald-300"
             }
             hover:scale-105 hover:shadow-lg
           `}
@@ -87,11 +102,9 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
         `}
         style={{
           background: `linear-gradient(45deg, 
-            ${
-              type === "indica"
-                ? "rgba(147, 51, 234, 0.3), rgba(147, 51, 234, 0)"
-                : "rgba(234, 179, 8, 0.3), rgba(234, 179, 8, 0)"
-            }
+            ${type === "indica" ? "rgba(147, 51, 234, 0.3), rgba(147, 51, 234, 0)" : ""}
+            ${type === "sativa" ? "rgba(234, 179, 8, 0.3), rgba(234, 179, 8, 0)" : ""}
+            ${type === "hybrid" ? "rgba(16, 185, 129, 0.35), rgba(234, 179, 8, 0.15)" : ""}
           )`,
         }}
       />
@@ -100,4 +113,3 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
 }
 
 export default ProductCard
-

@@ -21,7 +21,7 @@ interface Product {
 
 interface ProductShowcaseProps {
   products: Product[]
-  theme: "indica" | "sativa"
+  theme: "indica" | "sativa" | "hybrid"
   initialProduct?: string
 }
 
@@ -65,6 +65,8 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = memo(({ products, theme,
 
   const contrastColor = getContrastColor(currentProductData.color)
   const isLightBackground = contrastColor === "#000000"
+  const themeGlow =
+    theme === "indica" ? "rgba(147, 51, 234, 0.35)" : theme === "sativa" ? "rgba(234, 179, 8, 0.35)" : "rgba(16, 185, 129, 0.35)"
 
   return (
     <div
@@ -72,7 +74,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = memo(({ products, theme,
       style={{
         backgroundColor: currentProductData.color,
         color: contrastColor,
-        boxShadow: `0 4px 30px ${isLightBackground ? "rgba(0, 0, 0, 0.1)" : "rgba(255, 255, 255, 0.1)"}`,
+        boxShadow: `0 4px 30px ${isLightBackground ? "rgba(0, 0, 0, 0.1)" : "rgba(255, 255, 255, 0.1)"}, 0 0 0 1px ${themeGlow}`,
         border: `1px solid ${isLightBackground ? "rgba(0, 0, 0, 0.1)" : "rgba(255, 255, 255, 0.1)"}`,
       }}
     >
@@ -245,4 +247,3 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = memo(({ products, theme,
 ProductShowcase.displayName = "ProductShowcase"
 
 export default ProductShowcase
-

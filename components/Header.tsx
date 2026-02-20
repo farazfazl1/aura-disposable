@@ -1,11 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, SunMoon, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { useHeaderScroll } from "../hooks/useHeaderScroll"
-import { MoonIcon, SunIcon } from "./Icons"
+import { useHeaderScroll } from "@/hooks/useHeaderScroll"
+import { MoonIcon, SunIcon } from "@/components/Icons"
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,6 +16,7 @@ const Header = () => {
   const isIndicaPage = pathname.startsWith("/indica")
   const isSativaPage = pathname.startsWith("/sativa")
   const isStorePage = pathname.startsWith("/store")
+  const isHybridPage = pathname.startsWith("/hybrid")
 
   const getHeaderStyle = () => {
     if (isIndicaPage) {
@@ -24,14 +25,20 @@ const Header = () => {
     if (isSativaPage) {
       return "bg-gradient-to-r from-yellow-400 to-yellow-500"
     }
+    if (isHybridPage) {
+      return "bg-gradient-to-r from-purple-950 via-emerald-900 to-amber-900"
+    }
     return "bg-black"
   }
 
-  const getLinkStyle = (type: "indica" | "sativa") => {
+  const getLinkStyle = (type: "indica" | "sativa" | "hybrid") => {
     if (type === "indica") {
-      return isSativaPage ? "text-purple-600" : "text-white"
+      return isSativaPage ? "text-purple-600" : isHybridPage ? "text-purple-200" : "text-white"
     }
-    return isIndicaPage ? "text-yellow-400" : "text-white"
+    if (type === "sativa") {
+      return isIndicaPage ? "text-yellow-400" : isHybridPage ? "text-yellow-200" : "text-white"
+    }
+    return isHybridPage ? "text-emerald-100" : "text-white"
   }
 
   const getStoreLinkStyle = () => {
@@ -76,6 +83,7 @@ const Header = () => {
     } else if (pathname.startsWith("/indica")) {
       return [
         { name: "Sativa", path: "/sativa" },
+        { name: "Hybrid", path: "/hybrid" },
         { name: "Store", path: "/store" },
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },
@@ -83,6 +91,15 @@ const Header = () => {
     } else if (pathname.startsWith("/sativa")) {
       return [
         { name: "Indica", path: "/indica" },
+        { name: "Hybrid", path: "/hybrid" },
+        { name: "Store", path: "/store" },
+        { name: "Story", path: "/#story" },
+        { name: "FAQ", path: "/#faq" },
+      ]
+    } else if (pathname.startsWith("/hybrid")) {
+      return [
+        { name: "Indica", path: "/indica" },
+        { name: "Sativa", path: "/sativa" },
         { name: "Store", path: "/store" },
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },
@@ -92,6 +109,7 @@ const Header = () => {
         { name: "Home", path: "/" },
         { name: "Indica", path: "/indica" },
         { name: "Sativa", path: "/sativa" },
+        { name: "Hybrid", path: "/hybrid" },
       ]
     }
     return []
@@ -100,16 +118,8 @@ const Header = () => {
   const navItems = getNavItems()
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      setIsOpen(false)
-    }
-
-    router.events?.on("routeChangeComplete", handleRouteChange)
-
-    return () => {
-      router.events?.off("routeChangeComplete", handleRouteChange)
-    }
-  }, [router])
+    setIsOpen(false)
+  }, [pathname])
 
   return (
     <header
@@ -136,6 +146,10 @@ const Header = () => {
             <Link href="/sativa" className={`flex items-center ${getLinkStyle("sativa")}`}>
               <SunIcon className="mr-2" width={18} height={18} />
               Sativa
+            </Link>
+            <Link href="/hybrid" className={`flex items-center ${getLinkStyle("hybrid")}`}>
+              <SunMoon className="mr-2" width={18} height={18} />
+              Hybrid
             </Link>
             <Link href="/store" className={`flex items-center ${getStoreLinkStyle()}`}>
               Store

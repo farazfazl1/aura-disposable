@@ -3,7 +3,8 @@
 import { memo } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { MoonIcon, SunIcon } from "./Icons"
+import { SunMoon } from "lucide-react"
+import { MoonIcon, SunIcon } from "@/components/Icons"
 
 const ProductCard = memo(
   ({
@@ -16,8 +17,8 @@ const ProductCard = memo(
     name: string
     tagline: string
     description: string
-    color: "black" | "white" | "purple" | "sun"
-    icon: typeof MoonIcon | typeof SunIcon
+    color: "black" | "white" | "purple" | "sun" | "hybrid"
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
   }) => {
     const getStyles = () => {
       switch (color) {
@@ -25,6 +26,8 @@ const ProductCard = memo(
           return "border-purple-700 bg-gradient-to-br from-purple-900 to-black text-white"
         case "sun":
           return "border-yellow-400 bg-gradient-to-br from-yellow-400 to-yellow-600 text-black"
+        case "hybrid":
+          return "border-emerald-400 bg-gradient-to-br from-emerald-500 via-teal-500 to-yellow-400 text-black"
         case "white":
           return "border-gray-200 bg-gradient-to-br from-gray-100 to-white text-black"
         default:
@@ -37,6 +40,8 @@ const ProductCard = memo(
         case "purple":
           return "text-purple-300"
         case "sun":
+          return "text-black"
+        case "hybrid":
           return "text-black"
         case "white":
           return "text-gray-800"
@@ -51,12 +56,17 @@ const ProductCard = memo(
           return "bg-purple-600 text-white hover:bg-purple-700"
         case "sun":
           return "bg-yellow-700 text-white hover:bg-yellow-800"
+        case "hybrid":
+          return "bg-emerald-700 text-white hover:bg-emerald-800"
         case "white":
           return "bg-black text-white hover:bg-gray-800"
         default:
           return "bg-white text-black hover:bg-gray-200"
       }
     }
+
+    const href =
+      name.toLowerCase().includes("indica") ? "/indica" : name.toLowerCase().includes("hybrid") ? "/hybrid" : "/sativa"
 
     return (
       <motion.div
@@ -66,13 +76,13 @@ const ProductCard = memo(
         className={`p-8 rounded-3xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl border bg-yellow-400 ${getStyles()}`}
       >
         <div className="flex items-center mb-6">
-          <Icon size={24} className={`${color === "white" ? "text-black" : "text-white"} w-6 h-6`} />
+          <Icon className={`${color === "white" ? "text-black" : "text-white"} w-6 h-6`} />
           <h3 className="text-3xl font-bold ml-3">{name}</h3>
         </div>
         <p className={`text-xl font-semibold mb-4 ${getTextColor()}`}>{tagline}</p>
         <p className={`mb-6 text-lg ${color === "white" ? "text-gray-600" : "text-white"}`}>{description}</p>
         <Link
-          href={name.toLowerCase() === "indica" ? "/indica" : "/sativa"}
+          href={href}
           className={`px-6 py-3 rounded-full transition-colors duration-300 ${getButtonStyle()}`}
         >
           Learn More
@@ -101,7 +111,7 @@ const ProductHighlight = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-          className="grid md:grid-cols-2 gap-12"
+          className="grid md:grid-cols-3 gap-12"
         >
           <ProductCard
             name="INDICA"
@@ -116,6 +126,13 @@ const ProductHighlight = () => {
             description="Experience a burst of energy and creativity with our Sativa blend. Featuring vibrant citrus and sweet berry notes, it's perfect for daytime use and social occasions."
             color="sun"
             icon={SunIcon}
+          />
+          <ProductCard
+            name="HYBRID"
+            tagline="Balanced. Smooth. Versatile."
+            description="A harmonious blend of calm and clarity with layered flavor. Hybrid delivers an all-day balance that fits any moment."
+            color="hybrid"
+            icon={SunMoon}
           />
         </motion.div>
         <div className="mt-12 text-center">
@@ -135,4 +152,3 @@ const ProductHighlight = () => {
 }
 
 export default memo(ProductHighlight)
-
