@@ -2,6 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import PurchaseRequestDialog from "@/components/PurchaseRequestDialog"
 import { MoonIcon, SunIcon } from "@/components/Icons"
 
 const products = [
@@ -190,7 +191,11 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
         <section className="py-16 px-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div className={`rounded-3xl border ${accentBorder} ${accentBg} p-10`}>
-              <img src={product.image} alt={product.name} className="h-96 w-full object-contain" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="h-80 w-full max-w-md mx-auto object-contain lg:h-[420px] lg:max-w-lg"
+              />
             </div>
             <div className="space-y-6">
               <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-gray-400">
@@ -223,10 +228,11 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
                 </Link>
                 <a
                   href="mailto:auradisposable@gmail.com?subject=Store%20Product%20Inquiry&body=Hello%20Aura%20Team%2C%0A%0AI'm%20interested%20in%20Aura%20store%20products.%20Please%20send%20details%20on%20availability%20and%20pricing.%0A%0ABest%20regards%2C%0A[Your%20Name]"
-                  className={`inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold transition-colors ${buttonClass}`}
+                  className={`inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold transition-colors text-center w-full sm:w-auto ${buttonClass}`}
                 >
                   Contact for Wholesale
                 </a>
+                <PurchaseRequestDialog productName={product.name} buttonClass={buttonClass} />
               </div>
             </div>
           </div>
