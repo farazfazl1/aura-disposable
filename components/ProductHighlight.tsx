@@ -73,20 +73,22 @@ const ProductCard = memo(
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`p-8 rounded-3xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl border bg-yellow-400 ${getStyles()}`}
+        className={`p-8 rounded-3xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl border bg-yellow-400 flex flex-col ${getStyles()}`}
       >
         <div className="flex items-center mb-6">
           <Icon className={`${color === "white" ? "text-black" : "text-white"} w-6 h-6`} />
           <h3 className="text-3xl font-bold ml-3">{name}</h3>
         </div>
         <p className={`text-xl font-semibold mb-4 ${getTextColor()}`}>{tagline}</p>
-        <p className={`mb-6 text-lg ${color === "white" ? "text-gray-600" : "text-white"}`}>{description}</p>
-        <Link
-          href={href}
-          className={`px-6 py-3 rounded-full transition-colors duration-300 ${getButtonStyle()}`}
-        >
-          Learn More
-        </Link>
+        <p className={`mb-6 text-lg flex-grow ${color === "white" ? "text-gray-600" : "text-white"}`}>{description}</p>
+        <div className="mt-auto">
+          <Link
+            href={href}
+            className={`px-6 py-3 rounded-full transition-colors duration-300 inline-block ${getButtonStyle()}`}
+          >
+            Learn More
+          </Link>
+        </div>
       </motion.div>
     )
   },
