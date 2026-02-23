@@ -110,7 +110,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
           Purchase Request
         </button>
       </DialogTrigger>
-      <DialogContent className="w-[92vw] max-w-lg bg-black text-white border border-gray-800">
+      <DialogContent className="w-[92vw] max-w-lg bg-black text-white border border-gray-800 max-h-[90vh] overflow-y-auto">
         <DialogHeader className="text-left">
           <DialogTitle className="text-2xl font-semibold">Purchase Request</DialogTitle>
         </DialogHeader>
