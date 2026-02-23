@@ -28,7 +28,7 @@ const AdminPage = () => {
   const [error, setError] = useState("")
   const [isAuthed, setIsAuthed] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const perPage = 10
+  const perPage = 5
   const totalPages = Math.max(1, Math.ceil(requests.length / perPage))
 
   const loadRequests = async () => {
