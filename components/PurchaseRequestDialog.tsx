@@ -23,6 +23,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [address, setAddress] = useState("")
+  const [quantity, setQuantity] = useState(5)
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [honeypot, setHoneypot] = useState("")
@@ -61,6 +62,10 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
       setError("Enter a valid US phone number.")
       return
     }
+    if (quantity < 5) {
+      setError("Minimum order is 5 units.")
+      return
+    }
     setIsSubmitting(true)
     const { error: insertError } = await supabase.from("purchase_requests").insert({
       product_name: productName,
@@ -69,6 +74,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
       email: emailValue,
       phone: phoneValue,
       address: address.trim(),
+      quantity: quantity,
       status: "pending",
       delivery_note: "",
     })
@@ -83,6 +89,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
     setEmail("")
     setPhone("")
     setAddress("")
+    setQuantity(5)
     setHoneypot("")
     setIsSubmitting(false)
     setOpen(false)
@@ -115,6 +122,10 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
             <li>Payment is not online and must be paid to the courier at the door.</li>
             <li>The courier will text when arriving for pickup.</li>
           </ul>
+          <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mt-2">
+            <p className="text-yellow-200 text-sm font-semibold mb-1">Minimum Order: 5 Units ($100)</p>
+            <p className="text-yellow-200/80 text-xs">Each additional unit is $15.</p>
+          </div>
         </div>
         <form className="grid gap-4" onSubmit={handleSubmit}>
           <div className="hidden">
@@ -146,6 +157,29 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
             {!isEligible && (
               <p className="text-sm text-orange-200">We can only fulfill orders within Orange County.</p>
             )}
+          </div>
+          <div className="grid gap-2">
+            <label className="text-sm text-gray-300" htmlFor="purchase-quantity">
+              Quantity
+            </label>
+            <div className="flex items-center gap-4">
+              <input
+                id="purchase-quantity"
+                name="quantity"
+                type="number"
+                min={5}
+                required
+                value={quantity}
+                onChange={(event) => {
+                  const val = Number(event.target.value)
+                  setQuantity(val)
+                }}
+                className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+              />
+              <div className="whitespace-nowrap text-sm text-gray-400 font-mono bg-white/5 px-4 py-3 rounded-xl border border-white/10">
+                Total: ${quantity >= 5 ? 100 + (quantity - 5) * 15 : 0}
+              </div>
+            </div>
           </div>
           <div className="grid gap-2">
             <label className="text-sm text-gray-300" htmlFor="purchase-name">

@@ -76,6 +76,7 @@ const Header = () => {
     if (pathname === "/") {
       return [
         { name: "Products", path: "/#products" },
+        { name: "Verify", path: "/#verify" },
         { name: "Store", path: "/store" },
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },

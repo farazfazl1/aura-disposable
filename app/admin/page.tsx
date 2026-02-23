@@ -14,6 +14,7 @@ type PurchaseRequest = {
   created_at: string
   status?: "pending" | "out_for_delivery" | "delivered"
   delivery_note?: string
+  quantity?: number
 }
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
@@ -48,6 +49,7 @@ const AdminPage = () => {
         ...request,
         status: request.status ?? "pending",
         delivery_note: request.delivery_note ?? "",
+        quantity: request.quantity ?? 5,
       })) ?? []
     setRequests(normalized)
   }
@@ -95,6 +97,26 @@ const AdminPage = () => {
       return
     }
     loadRequests()
+  }
+
+  const updateStatus = async (id: string, newStatus: string) => {
+    if (!supabase) {
+      setError("Supabase is not configured.")
+      return
+    }
+    const { error: updateError } = await supabase
+      .from("purchase_requests")
+      .update({ status: newStatus })
+      .eq("id", id)
+
+    if (updateError) {
+      setError("Unable to update status.")
+      return
+    }
+    // Optimistic update
+    setRequests((prev) =>
+      prev.map((req) => (req.id === id ? { ...req, status: newStatus as any } : req))
+    )
   }
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -211,22 +233,50 @@ const AdminPage = () => {
               {visibleRequests.map((request) => (
               <div key={request.id} className="rounded-3xl border border-gray-800 bg-gray-900/40 p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.25em] text-gray-500">Product</p>
-                    <p className="text-xl font-semibold">{request.product_name}</p>
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.25em] text-gray-500">Product</p>
+                      <p className="text-xl font-semibold">{request.product_name}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <select
+                        value={request.status}
+                        onChange={(e) => updateStatus(request.id, e.target.value)}
+                        className={`rounded-full border px-3 py-1 text-xs font-semibold focus:outline-none ${
+                          request.status === "delivered"
+                            ? "border-green-500/50 bg-green-500/10 text-green-400"
+                            : request.status === "out_for_delivery"
+                            ? "border-yellow-500/50 bg-yellow-500/10 text-yellow-400"
+                            : "border-gray-700 bg-black text-gray-300"
+                        }`}
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="out_for_delivery">Out for Delivery</option>
+                        <option value="delivered">Delivered</option>
+                      </select>
+                      <button
+                        type="button"
+                        onClick={() => removeRequest(request.id)}
+                        className="rounded-full border border-red-900/50 bg-red-900/10 px-4 py-1 text-xs font-semibold text-red-400 hover:bg-red-900/20"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => removeRequest(request.id)}
-                    className="rounded-full border border-gray-700 px-4 py-1 text-xs font-semibold text-gray-300 hover:bg-gray-800"
-                  >
-                    Remove
-                  </button>
-                </div>
                 <div className="mt-4 grid gap-3 text-sm text-gray-300">
                   <div className="grid gap-1">
                     <span className="text-gray-500">Name</span>
                     <span>{request.name}</span>
+                  </div>
+                  <div className="grid gap-1">
+                    <span className="text-gray-500">Order Details</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-white bg-gray-800 px-2 py-1 rounded text-sm font-medium">
+                        Qty: {request.quantity ?? 5}
+                      </span>
+                      <span className="text-green-400 font-bold bg-green-500/10 px-2 py-1 rounded border border-green-500/20 text-sm">
+                        Total: ${100 + (Math.max(request.quantity ?? 5, 5) - 5) * 15}
+                      </span>
+                    </div>
                   </div>
                   <div className="grid gap-1">
                     <span className="text-gray-500">Email</span>
