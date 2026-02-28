@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { createClient } from "@supabase/supabase-js"
 
 type PurchaseRequest = {
@@ -22,6 +23,7 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
 const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
 
 const AdminPage = () => {
+  const router = useRouter()
   const [requests, setRequests] = useState<PurchaseRequest[]>([])
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -190,6 +192,13 @@ const AdminPage = () => {
               className="w-full rounded-full bg-white px-6 py-3 text-black font-semibold hover:bg-gray-200 transition-colors"
             >
               Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => router.push("/")}
+              className="w-full rounded-full border border-gray-700 px-6 py-3 text-sm font-semibold text-gray-200 hover:bg-gray-900 transition-colors"
+            >
+              Back to Home
             </button>
           </form>
         </div>

@@ -117,22 +117,22 @@ const ProductHighlight = () => {
         >
           <ProductCard
             name="INDICA"
-            tagline="Bold. Mysterious. Intense."
-            description="Experience the power of OG oil with every draw. Indica delivers a symphony of earthy, pine, and citrus notes for a full-bodied, euphoric high."
+            tagline="Deep. Calm. Immersive."
+            description="A rich, full-body unwind crafted for quiet evenings, smooth flavor, and slow, intentional moments"
             color="purple"
             icon={MoonIcon}
           />
           <ProductCard
             name="SATIVA"
-            tagline="Energizing. Uplifting. Creative."
-            description="Experience a burst of energy and creativity with our Sativa blend. Featuring vibrant citrus and sweet berry notes, it's perfect for daytime use and social occasions."
+            tagline="Bright. Uplifting. Focused."
+            description="Crisp citrus notes and vibrant clarity designed for creative flow and daytime momentum."
             color="sun"
             icon={SunIcon}
           />
           <ProductCard
             name="HYBRID"
-            tagline="Balanced. Smooth. Versatile."
-            description="A harmonious blend of calm and clarity with layered flavor. Hybrid delivers an all-day balance that fits any moment."
+            tagline="Balanced. Refined. Elevated."
+            description="A seamless fusion of body relaxation and mental clarity, designed for smooth, all-day performance with rich, layered terpenes."
             color="hybrid"
             icon={SunMoon}
           />
