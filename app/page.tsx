@@ -11,7 +11,6 @@ const ProductHighlight = dynamic(() => import("@/components/ProductHighlight"), 
 const BrandStory = dynamic(() => import("@/components/BrandStory"), { ssr: false })
 const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false })
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false })
-const ProductVerification = dynamic(() => import("@/components/ProductVerification"), { ssr: false })
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -47,9 +46,6 @@ export default function Home() {
           </div>
           <div id="story">
             <BrandStory />
-          </div>
-          <div id="verify">
-            <ProductVerification />
           </div>
           <div id="faq">
             <FAQ />

@@ -76,7 +76,7 @@ const Header = () => {
     if (pathname === "/") {
       return [
         { name: "Products", path: "/#products" },
-        { name: "Verify", path: "/#verify" },
+        { name: "Verify", path: "/verify" },
         { name: "Store", path: "/store" },
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },
@@ -154,6 +154,9 @@ const Header = () => {
             </Link>
             <Link href="/store" className={`flex items-center ${getStoreLinkStyle()}`}>
               Store
+            </Link>
+            <Link href="/verify" className="text-white hover:text-gray-300">
+              Verify
             </Link>
           </nav>
           <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>

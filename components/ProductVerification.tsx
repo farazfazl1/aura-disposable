@@ -71,7 +71,7 @@ const ProductVerification = () => {
   }
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden" id="verify">
+    <section className="py-20 px-4 relative overflow-hidden min-h-[calc(100vh-160px)] flex items-center justify-center" id="verify">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-black/95 z-0" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-[100px]" />
