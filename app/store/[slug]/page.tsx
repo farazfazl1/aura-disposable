@@ -1,20 +1,23 @@
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
-import PurchaseRequestDialog from "@/components/PurchaseRequestDialog"
-import { MoonIcon, SunIcon } from "@/components/Icons"
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import PurchaseRequestDialog from "@/components/PurchaseRequestDialog";
+import { MoonIcon, SunIcon } from "@/components/Icons";
 
 const products = [
   {
-    slug: "aura-no-1",
-    name: "Aura No. 1",
-    type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
-    flavor: "Lorem Blend",
-    size: "2ml",
-    price: "$40",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    slug: "sweet-island-skunk",
+    name: "Sweet Island Skunk",
+    type: "sativa",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.21 PM.jpeg",
+    flavor: "Coconut • Guava • Mango • Pineapple • Skunk",
+    effects: "Creative Energy • Uplifted • Happy • Focused",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "Elevate your session with Sweet Island Skunk - a vibrant sativa profile infused with lush tropical sweetness and classic skunk depth. Bright fruit layers meet crisp herbal undertones, delivering a clean cerebral lift and an effortlessly happy vibe. Designed for daytime momentum, creativity, and social flow.",
     overview:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat orci nulla.",
     experience:
@@ -22,22 +25,20 @@ const products = [
     finish:
       "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
     notes: ["Lorem Pine", "Ipsum Resin", "Dolor Spice", "Sit Citrus"],
-    specs: [
-      { label: "THC", value: "80-90%" },
-      { label: "Battery", value: "Premium Core" },
-      { label: "Device", value: "Disposable" },
-      { label: "Series", value: "Aura Signature" },
-    ],
+    specs: [{ label: "Terpenes", value: "Limonene • Pinene • Myrcene" }],
   },
   {
-    slug: "aura-no-2",
-    name: "Aura No. 2",
+    slug: "blurr-dream",
+    name: "Blurr Dream",
     type: "sativa",
-    image: "/images/store/photo_1404-12-09 12.11.16 PM.jpeg",
-    flavor: "Lorem Zest",
-    size: "1ml",
-    price: "$38",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.22 PM.jpeg",
+    flavor: "Sweet Blueberry",
+    effects: "Creative, Energy, Focus, Uplift",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "Blurr Dream is a vibrant berry-forward strain profile inspired by the classic fusion of Blueberry and Haze. Juicy blueberry sweetness opens the experience, layered with subtle citrus brightness and fresh pine undertones. Smooth on the inhale and clean on the finish — designed for daytime creativity, mental clarity, and an elevated social rhythm.",
     overview:
       "Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla. Nibh venenatis cras sed felis eget.",
     experience:
@@ -47,20 +48,21 @@ const products = [
     notes: ["Lorem Citrus", "Ipsum Bloom", "Dolor Sweet", "Sit Bright"],
     specs: [
       { label: "THC", value: "80-90%" },
-      { label: "Battery", value: "Premium Core" },
-      { label: "Device", value: "Disposable" },
-      { label: "Series", value: "Aura Signature" },
+      { label: "Terpenes", value: "Limonene • Pinene • Myrcene • Ocimene" },
     ],
   },
   {
-    slug: "aura-no-3",
-    name: "Aura No. 3",
+    slug: "double-bubble-og",
+    name: "Double Bubble OG",
     type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.18 PM.jpeg",
-    flavor: "Lorem Drift",
-    size: "1ml",
-    price: "$36",
-    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.19 PM.jpeg",
+    flavor: "Berry, Bubble Gum, Earthy",
+    effects: "Calm, Rest, Deep Relaxation",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "Double Buble OG is a rich, dessert-inspired indica profile blending sweet berry notes with nostalgic bubble gum and smooth earthy depth. Creamy on the inhale and grounding on the finish, this strain is crafted for evening wind-down, body ease, and tranquil rest.",
     overview:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     experience:
@@ -76,14 +78,41 @@ const products = [
     ],
   },
   {
-    slug: "aura-no-4",
-    name: "Aura No. 4",
+    slug: "og-mint",
+    name: "OG Mint",
+    type: "indica",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.16 PM.jpeg",
+    flavor: "Cool Mint • Earthy OG • Pine •",
+    effects: "Deep Relaxation • Body Calm • Restful",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "OG Mint is a cool, earthy indica profile layered with crisp mint and classic OG depth. Smooth on the inhale with a refreshing herbal finish, this strain settles into a soothing full-body calm. Crafted for evening wind-down, quiet moments, and deep restorative rest.",
+    overview:
+      "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec rutrum congue leo eget malesuada.",
+    experience:
+      "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.",
+    finish: "Curabitur aliquet quam id dui posuere blandit.",
+    notes: ["Lorem Mint", "Ipsum Cool", "Dolor Shadow", "Sit Crisp"],
+    specs: [
+      { label: "THC", value: "80-90%" },
+      { label: "Battery", value: "Premium Core" },
+      { label: "Device", value: "Disposable" },
+      { label: "Series", value: "Aura Signature" },
+    ],
+  },
+  {
+    slug: "saffron",
+    name: "Saffron",
     type: "sativa",
-    image: "/images/store/photo_1404-12-09 12.11.19 PM.jpeg",
-    flavor: "Lorem Pulse",
-    size: "2ml",
-    price: "$44",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
+    flavor: "Exotic Spice, Floral, Sweet Citrus",
+    size: "1ml - 2ml",
+    price: "$100",
+    description:
+      "Saffron is a rare, spice-forward sativa profile inspired by the warmth and elegance of golden saffron threads. Delicate floral sweetness blends with subtle citrus brightness and a smooth herbal finish. Light on the body yet vibrant in the mind - crafted for daytime clarity, elevated mood, and creative momentum.",
     overview:
       "Vivamus suscipit tortor eget felis porttitor volutpat. Pellentesque in ipsum id orci porta dapibus.",
     experience:
@@ -99,66 +128,41 @@ const products = [
     ],
   },
   {
-    slug: "aura-no-5",
-    name: "Aura No. 5",
-    type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
-    flavor: "Lorem Mint",
-    size: "2ml",
-    price: "$42",
-    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
-    overview:
-      "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec rutrum congue leo eget malesuada.",
-    experience:
-      "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.",
-    finish:
-      "Curabitur aliquet quam id dui posuere blandit.",
-    notes: ["Lorem Mint", "Ipsum Cool", "Dolor Shadow", "Sit Crisp"],
-    specs: [
-      { label: "THC", value: "80-90%" },
-      { label: "Battery", value: "Premium Core" },
-      { label: "Device", value: "Disposable" },
-      { label: "Series", value: "Aura Signature" },
-    ],
-  },
-  {
-    slug: "aura-no-6",
-    name: "Aura No. 6",
+    slug: "blueberry",
+    name: "Blueberry",
     type: "sativa",
-    image: "/images/store/photo_1404-12-09 12.11.21 PM.jpeg",
-    flavor: "Lorem Wave",
-    size: "1ml",
-    price: "$36",
-    description: "Mollit anim id est laborum, luctus et ultrices posuere cubilia.",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
+    flavor: "Sweet Blueberry, Light Citrus",
+    size: "1ml - 2ml",
+    price: "$100",
+    description:
+      "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
     overview:
-      "Nulla quis lorem ut libero malesuada feugiat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat orci nulla.",
     experience:
-      "Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt.",
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
     finish:
-      "Quisque velit nisi, pretium ut lacinia in, elementum id enim.",
-    notes: ["Lorem Citrus", "Ipsum Lift", "Dolor Glow", "Sit Clean"],
-    specs: [
-      { label: "THC", value: "80-90%" },
-      { label: "Battery", value: "Premium Core" },
-      { label: "Device", value: "Disposable" },
-      { label: "Series", value: "Aura Signature" },
-    ],
+      "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+    notes: ["Lorem Pine", "Ipsum Resin", "Dolor Spice", "Sit Citrus"],
+    specs: [{ label: "Terpenes", value: "Limonene • Pinene • Myrcene" }],
   },
   {
     slug: "aura-no-7",
     name: "Aura No. 7",
-    type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.22 PM.jpeg",
-    flavor: "Lorem Noir",
-    size: "2ml",
-    price: "$43",
-    description: "Pellentesque habitant morbi tristique senectus et netus et malesuada.",
+    type: "sativa",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
+    flavor: "Sweet Blueberry, Light Citrus",
+    size: "1ml - 2ml",
+    price: "$100",
+    description:
+      "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
     overview:
       "Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat.",
     experience:
       "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.",
-    finish:
-      "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.",
+    finish: "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.",
     notes: ["Lorem Noir", "Ipsum Resin", "Dolor Depth", "Sit Echo"],
     specs: [
       { label: "THC", value: "80-90%" },
@@ -167,22 +171,28 @@ const products = [
       { label: "Series", value: "Aura Signature" },
     ],
   },
-]
+];
 
-export default function StoreProductPage({ params }: { params: { slug: string } }) {
-  const product = products.find((item) => item.slug === params.slug)
+export default function StoreProductPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const product = products.find((item) => item.slug === params.slug);
 
   if (!product) {
-    notFound()
+    notFound();
   }
 
-  const isIndica = product.type === "indica"
-  const accentText = isIndica ? "text-purple-300" : "text-yellow-300"
-  const accentBorder = isIndica ? "border-purple-700/60" : "border-yellow-400/40"
-  const accentBg = isIndica ? "bg-purple-900/20" : "bg-yellow-500/10"
+  const isIndica = product.type === "indica";
+  const accentText = isIndica ? "text-purple-300" : "text-yellow-300";
+  const accentBorder = isIndica
+    ? "border-purple-700/60"
+    : "border-yellow-400/40";
+  const accentBg = isIndica ? "bg-purple-900/20" : "bg-yellow-500/10";
   const buttonClass = isIndica
     ? "bg-purple-700 text-white hover:bg-purple-600"
-    : "bg-yellow-400 text-black hover:bg-yellow-300"
+    : "bg-yellow-400 text-black hover:bg-yellow-300";
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -190,11 +200,13 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
       <main className="pt-24">
         <section className="py-16 px-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            <div className={`rounded-3xl border ${accentBorder} ${accentBg} p-10`}>
+            <div
+              className={`rounded-3xl border ${accentBorder} ${accentBg} overflow-hidden`}
+            >
               <img
                 src={product.image}
                 alt={product.name}
-                className="h-80 w-full max-w-md mx-auto object-contain lg:h-[420px] lg:max-w-lg"
+                className="h-80 w-full object-contain lg:h-[420px]"
               />
             </div>
             <div className="space-y-6">
@@ -206,10 +218,15 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
                 )}
                 <span>{product.type}</span>
               </div>
+              <p className={`text-sm font-medium ${accentText}`}>
+                {product.grade}
+              </p>
               <h1 className="text-4xl md:text-6xl font-bold">{product.name}</h1>
               <p className="text-lg text-gray-300">{product.description}</p>
               <div className="flex flex-wrap gap-3">
-                <span className={`px-4 py-2 rounded-full text-sm border ${accentBorder} ${accentBg}`}>
+                <span
+                  className={`px-4 py-2 rounded-full text-sm border ${accentBorder} ${accentBg}`}
+                >
                   {product.flavor}
                 </span>
                 <span className="px-4 py-2 rounded-full text-sm border border-gray-800 bg-gray-900/60">
@@ -218,6 +235,12 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
                 <span className="px-4 py-2 rounded-full text-sm border border-gray-800 bg-gray-900/60">
                   {product.price}
                 </span>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 mb-2 uppercase tracking-wider">
+                  Effects
+                </p>
+                <p className="text-gray-300">{product.effects}</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -232,7 +255,10 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
                 >
                   Contact for Wholesale
                 </a>
-                <PurchaseRequestDialog productName={product.name} buttonClass={buttonClass} />
+                <PurchaseRequestDialog
+                  productName={product.name}
+                  buttonClass={buttonClass}
+                />
               </div>
             </div>
           </div>
@@ -241,14 +267,23 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
         <section className="py-20 px-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 border border-gray-800 rounded-3xl p-10 bg-gray-900/40">
-              <h2 className="text-3xl font-semibold mb-4">About This Release</h2>
-              <p className="text-gray-300 leading-relaxed">{product.overview}</p>
+              <h2 className="text-3xl font-semibold mb-4">
+                About This Release
+              </h2>
+              <p className="text-gray-300 leading-relaxed">
+                {product.overview}
+              </p>
             </div>
-            <div className={`border ${accentBorder} ${accentBg} rounded-3xl p-8`}>
+            <div
+              className={`border ${accentBorder} ${accentBg} rounded-3xl p-8`}
+            >
               <h3 className="text-2xl font-semibold mb-6">Specifications</h3>
               <div className="space-y-4">
                 {product.specs.map((spec) => (
-                  <div key={spec.label} className="flex items-center justify-between text-sm">
+                  <div
+                    key={spec.label}
+                    className="flex items-center justify-between text-sm"
+                  >
                     <span className="text-gray-400">{spec.label}</span>
                     <span className="font-semibold">{spec.value}</span>
                   </div>
@@ -264,7 +299,10 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
               <h3 className="text-2xl font-semibold mb-4">Flavor Notes</h3>
               <div className="flex flex-wrap gap-2">
                 {product.notes.map((note) => (
-                  <span key={note} className={`px-3 py-1 rounded-full text-sm border ${accentBorder} ${accentBg}`}>
+                  <span
+                    key={note}
+                    className={`px-3 py-1 rounded-full text-sm border ${accentBorder} ${accentBg}`}
+                  >
                     {note}
                   </span>
                 ))}
@@ -272,7 +310,9 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
             </div>
             <div className="border border-gray-800 rounded-3xl p-8 bg-black/60">
               <h3 className="text-2xl font-semibold mb-4">Experience</h3>
-              <p className="text-gray-300 leading-relaxed">{product.experience}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {product.experience}
+              </p>
             </div>
             <div className="border border-gray-800 rounded-3xl p-8 bg-black/60">
               <h3 className="text-2xl font-semibold mb-4">Finish</h3>
@@ -283,5 +323,5 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
       </main>
       <Footer />
     </div>
-  )
+  );
 }

@@ -1,89 +1,101 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Link from "next/link"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
-import ProductCard from "@/components/ProductCard"
-import { MoonIcon, SunIcon } from "@/components/Icons"
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ProductCard from "@/components/ProductCard";
+import { MoonIcon, SunIcon } from "@/components/Icons";
 
 const featuredProducts = [
   {
-    name: "Aura No. 1",
-    slug: "aura-no-1",
-    type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
-    flavor: "Lorem Blend",
-    size: "2ml",
-    price: "$40",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    name: "Aura No. 2",
-    slug: "aura-no-2",
-    type: "sativa",
-    image: "/images/store/photo_1404-12-09 12.11.16 PM.jpeg",
-    flavor: "Lorem Zest",
-    size: "1ml",
-    price: "$38",
-    description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    name: "Aura No. 3",
-    slug: "aura-no-3",
-    type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.18 PM.jpeg",
-    flavor: "Lorem Drift",
-    size: "1ml",
-    price: "$36",
-    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-  },
-  {
-    name: "Aura No. 4",
-    slug: "aura-no-4",
-    type: "sativa",
-    image: "/images/store/photo_1404-12-09 12.11.19 PM.jpeg",
-    flavor: "Lorem Pulse",
-    size: "2ml",
-    price: "$44",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
-  },
-  {
-    name: "Aura No. 5",
-    slug: "aura-no-5",
-    type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
-    flavor: "Lorem Mint",
-    size: "2ml",
-    price: "$42",
-    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
-  },
-  {
-    name: "Aura No. 6",
-    slug: "aura-no-6",
+    name: "Sweet Island Skunk",
+    slug: "sweet-island-skunk",
     type: "sativa",
     image: "/images/store/photo_1404-12-09 12.11.21 PM.jpeg",
-    flavor: "Lorem Wave",
-    size: "1ml",
-    price: "$36",
-    description: "Mollit anim id est laborum, luctus et ultrices posuere cubilia.",
+    flavor: "Coconut • Guava • Mango • Pineapple • Skunk",
+    effects: "Creative Energy • Uplifted • Happy • Focused",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "Elevate your session with Sweet Island Skunk - a vibrant sativa profile infused with lush tropical sweetness and classic skunk depth. Bright fruit layers meet crisp herbal undertones, delivering a clean cerebral lift and an effortlessly happy vibe. Designed for daytime momentum, creativity, and social flow.",
+  },
+  {
+    name: "Blurr Dream",
+    slug: "blurr-dream",
+    type: "sativa",
+    image: "/images/store/photo_1404-12-09 12.11.22 PM.jpeg",
+    flavor: "Sweet Blueberry",
+    effects: "Creative, Energy, Focus, Uplift",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "Blurr Dream is a vibrant berry-forward strain profile inspired by the classic fusion of Blueberry and Haze. Juicy blueberry sweetness opens the experience, layered with subtle citrus brightness and fresh pine undertones. Smooth on the inhale and clean on the finish — designed for daytime creativity, mental clarity, and an elevated social rhythm.",
+  },
+  {
+    name: "Double Bubble OG",
+    slug: "double-bubble-og",
+    type: "indica",
+    image: "/images/store/photo_1404-12-09 12.11.19 PM.jpeg",
+    flavor: "Berry, Bubble Gum, Earthy",
+    effects: "Calm, Rest, Deep Relaxation",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "Double Buble OG is a rich, dessert-inspired indica profile blending sweet berry notes with nostalgic bubble gum and smooth earthy depth. Creamy on the inhale and grounding on the finish, this strain is crafted for evening wind-down, body ease, and tranquil rest.",
+  },
+  {
+    name: "OG Mint",
+    slug: "og-mint",
+    type: "indica",
+    image: "/images/store/photo_1404-12-09 12.11.16 PM.jpeg",
+    flavor: "Cool Mint • Earthy OG • Pine •",
+    effects: "Deep Relaxation • Body Calm • Restful",
+    size: "1ml . 2ml",
+    price: "$100",
+    description:
+      "OG Mint is a cool, earthy indica profile layered with crisp mint and classic OG depth. Smooth on the inhale with a refreshing herbal finish, this strain settles into a soothing full-body calm. Crafted for evening wind-down, quiet moments, and deep restorative rest.",
+  },
+  {
+    name: "Saffron",
+    slug: "Saffron",
+    type: "sativa",
+    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
+    flavor: "Exotic Spice, Floral, Sweet Citrus",
+    size: "1ml - 2ml",
+    price: "$100",
+    description:
+      "Saffron is a rare, spice-forward sativa profile inspired by the warmth and elegance of golden saffron threads. Delicate floral sweetness blends with subtle citrus brightness and a smooth herbal finish. Light on the body yet vibrant in the mind - crafted for daytime clarity, elevated mood, and creative momentum.",
+  },
+  {
+    name: "Blueberry",
+    slug: "blueberry",
+    type: "sativa",
+    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
+    flavor: "Sweet Blueberry, Light Citrus",
+    size: "1ml - 2ml",
+    price: "$100",
+    description:
+      "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
   },
   {
     name: "Aura No. 7",
     slug: "aura-no-7",
-    type: "indica",
-    image: "/images/store/photo_1404-12-09 12.11.22 PM.jpeg",
-    flavor: "Lorem Noir",
-    size: "2ml",
-    price: "$43",
-    description: "Pellentesque habitant morbi tristique senectus et netus et malesuada.",
+    type: "sativa",
+    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
+    flavor: "Sweet Blueberry, Light Citrus",
+    size: "1ml - 2ml",
+    price: "$100",
+    description:
+      "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
   },
-]
+];
 
 const perks = [
   {
     title: "Premium Hardware",
-    description: "Precision-crafted devices with consistent airflow and premium materials.",
+    description:
+      "Precision-crafted devices with consistent airflow and premium materials.",
   },
   {
     title: "Curated Terpenes",
@@ -91,9 +103,10 @@ const perks = [
   },
   {
     title: "Wholesale Ready",
-    description: "Optimized for retailers with consistent inventory and clean packaging.",
+    description:
+      "Optimized for retailers with consistent inventory and clean packaging.",
   },
-]
+];
 
 export default function StorePage() {
   return (
@@ -112,11 +125,15 @@ export default function StorePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <p className="uppercase tracking-[0.3em] text-sm text-gray-400 mb-4">Aura Store</p>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">Designed for elevated experiences</h1>
+              <p className="uppercase tracking-[0.3em] text-sm text-gray-400 mb-4">
+                Aura Store
+              </p>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                Designed for elevated experiences
+              </h1>
               <p className="text-lg text-gray-300 mb-8">
-                Explore the full Aura collection with curated Indica, Sativa, and Hybrid profiles, premium hardware,
-                and refined flavor notes.
+                Explore the full Aura collection with curated Indica, Sativa,
+                and Hybrid profiles, premium hardware, and refined flavor notes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -151,7 +168,10 @@ export default function StorePage() {
                 { label: "Device Sizes", value: "1ml / 2ml" },
                 { label: "Wholesale", value: "Available" },
               ].map((stat) => (
-                <div key={stat.label} className="border border-gray-800 rounded-2xl p-6 bg-black/60 backdrop-blur">
+                <div
+                  key={stat.label}
+                  className="border border-gray-800 rounded-2xl p-6 bg-black/60 backdrop-blur"
+                >
                   <p className="text-sm text-gray-400 mb-2">{stat.label}</p>
                   <p className="text-2xl font-semibold">{stat.value}</p>
                 </div>
@@ -163,8 +183,12 @@ export default function StorePage() {
         <section className="py-24 px-4 bg-black">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Collections</h2>
-              <p className="text-gray-400 text-lg">Choose your path with curated Aura profiles</p>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Collections
+              </h2>
+              <p className="text-gray-400 text-lg">
+                Choose your path with curated Aura profiles
+              </p>
             </div>
             <div className="grid md:grid-cols-3 gap-10">
               <ProductCard
@@ -193,8 +217,12 @@ export default function StorePage() {
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Picks</h2>
-                <p className="text-gray-400 text-lg">A refined selection of Aura favorites</p>
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                  Featured Picks
+                </h2>
+                <p className="text-gray-400 text-lg">
+                  A refined selection of Aura favorites
+                </p>
               </div>
               <Link
                 href="/#products"
@@ -205,13 +233,17 @@ export default function StorePage() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredProducts.map((product) => {
-                const isIndica = product.type === "indica"
+                const isIndica = product.type === "indica";
                 return (
                   <div
                     key={product.name}
-                    className={`rounded-3xl border ${isIndica ? "border-purple-800/60 bg-purple-900/20" : "border-yellow-400/40 bg-yellow-500/10"} p-6 flex flex-col gap-4`}
+                    className={`rounded-3xl border ${
+                      isIndica
+                        ? "border-purple-800/60 bg-purple-900/20"
+                        : "border-yellow-400/40 bg-yellow-500/10"
+                    } p-6 flex flex-col gap-4`}
                   >
-                    <div className="rounded-2xl bg-white/5 p-4 flex items-center justify-center">
+                    <div className="rounded-2xl bg-white/5 overflow-hidden">
                       <Link href={`/store/${product.slug}`} className="w-full">
                         <img
                           src={product.image}
@@ -223,21 +255,35 @@ export default function StorePage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         {isIndica ? (
-                          <MoonIcon className="text-purple-300" width={20} height={20} />
+                          <MoonIcon
+                            className="text-purple-300"
+                            width={20}
+                            height={20}
+                          />
                         ) : (
-                          <SunIcon className="text-yellow-300" width={20} height={20} />
+                          <SunIcon
+                            className="text-yellow-300"
+                            width={20}
+                            height={20}
+                          />
                         )}
-                        <span className="text-sm uppercase tracking-[0.2em] text-gray-400">{product.type}</span>
+                        <span className="text-sm uppercase tracking-[0.2em] text-gray-400">
+                          {product.type}
+                        </span>
                       </div>
-                      <span className="text-lg font-semibold">{product.price}</span>
+                      <span className="text-lg font-semibold">
+                        {product.price}
+                      </span>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-semibold mb-2">{product.name}</h3>
+                      <h3 className="text-2xl font-semibold mb-2">
+                        {product.name}
+                      </h3>
                       <p className="text-sm text-gray-400">
                         {product.flavor} · {product.size}
                       </p>
                     </div>
-                    <p className="text-gray-300">{product.description}</p>
+                    <p className="text-gray-300 line-clamp-3">{product.description}</p>
                     <Link
                       href={`/store/${product.slug}`}
                       className={`mt-auto px-6 py-3 rounded-full text-sm font-semibold transition-colors duration-300 ${
@@ -249,7 +295,7 @@ export default function StorePage() {
                       View Details
                     </Link>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -258,13 +304,19 @@ export default function StorePage() {
         <section className="py-24 px-4 bg-black">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-4xl md:text-5xl font-bold">Why retailers choose Aura</h2>
+              <h2 className="text-4xl md:text-5xl font-bold">
+                Why retailers choose Aura
+              </h2>
               <p className="text-gray-400 text-lg">
-                Minimalist design, consistent performance, and premium flavor profiles that keep customers coming back.
+                Minimalist design, consistent performance, and premium flavor
+                profiles that keep customers coming back.
               </p>
               <div className="grid gap-4">
                 {perks.map((perk) => (
-                  <div key={perk.title} className="border border-gray-800 rounded-2xl p-6 bg-gray-900/40">
+                  <div
+                    key={perk.title}
+                    className="border border-gray-800 rounded-2xl p-6 bg-gray-900/40"
+                  >
                     <h3 className="text-xl font-semibold mb-2">{perk.title}</h3>
                     <p className="text-gray-400">{perk.description}</p>
                   </div>
@@ -272,9 +324,12 @@ export default function StorePage() {
               </div>
             </div>
             <div className="rounded-3xl border border-gray-800 p-10 bg-gradient-to-br from-gray-900 via-black to-gray-900">
-              <h3 className="text-3xl font-semibold mb-4">Wholesale Concierge</h3>
+              <h3 className="text-3xl font-semibold mb-4">
+                Wholesale Concierge
+              </h3>
               <p className="text-gray-400 mb-6">
-                Partner with Aura for curated drops, premium merchandising, and dedicated support.
+                Partner with Aura for curated drops, premium merchandising, and
+                dedicated support.
               </p>
               <button
                 onClick={() =>
@@ -291,5 +346,5 @@ export default function StorePage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }

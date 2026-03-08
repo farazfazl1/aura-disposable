@@ -101,7 +101,7 @@ const AdminPage = () => {
     loadRequests()
   }
 
-  const updateStatus = async (id: string, newStatus: string) => {
+  const updateStatus = async (id: string, newStatus: PurchaseRequest["status"]) => {
     if (!supabase) {
       setError("Supabase is not configured.")
       return
@@ -117,7 +117,7 @@ const AdminPage = () => {
     }
     // Optimistic update
     setRequests((prev) =>
-      prev.map((req) => (req.id === id ? { ...req, status: newStatus as any } : req))
+      prev.map((req) => (req.id === id ? { ...req, status: newStatus } : req))
     )
   }
 
@@ -249,7 +249,9 @@ const AdminPage = () => {
                     <div className="flex items-center gap-2">
                       <select
                         value={request.status}
-                        onChange={(e) => updateStatus(request.id, e.target.value)}
+                        onChange={(e) =>
+                          updateStatus(request.id, e.target.value as PurchaseRequest["status"])
+                        }
                         className={`rounded-full border px-3 py-1 text-xs font-semibold focus:outline-none ${
                           request.status === "delivered"
                             ? "border-green-500/50 bg-green-500/10 text-green-400"
