@@ -60,8 +60,9 @@ const featuredProducts = [
     name: "Saffron",
     slug: "Saffron",
     type: "sativa",
-    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
+    image: "/images/store/photo_1404-12-09 12.11.18 PM.jpeg",
     flavor: "Exotic Spice, Floral, Sweet Citrus",
+    effects: "Uplifted, Creative Energy, Focus, Euphoric",
     size: "1ml - 2ml",
     price: "$100",
     description:
@@ -73,21 +74,23 @@ const featuredProducts = [
     type: "sativa",
     image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
     flavor: "Sweet Blueberry, Light Citrus",
+    effects: "Uplifted, Creative Energy, Focus, Happy",
     size: "1ml - 2ml",
     price: "$100",
     description:
       "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
   },
   {
-    name: "Aura No. 7",
-    slug: "aura-no-7",
+    name: "Jealousy",
+    slug: "jealousy",
     type: "sativa",
-    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
-    flavor: "Sweet Blueberry, Light Citrus",
+    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
+    flavor: "Earthy • Fruity • Kush",
+    effects: "Creative Boost • Euphoria • Talkative • Social Energy",
     size: "1ml - 2ml",
     price: "$100",
     description:
-      "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
+      "Elevate your experience with Jealousy - a refined hybrid that blends earthy richness with vibrant fruit undertones. Designed for smooth mental uplift and relaxed body ease, this strain delivers social warmth, giggly euphoria, and effortless clarity.",
   },
 ];
 
@@ -243,7 +246,7 @@ export default function StorePage() {
                         : "border-yellow-400/40 bg-yellow-500/10"
                     } p-6 flex flex-col gap-4`}
                   >
-                    <div className="rounded-2xl bg-white/5 overflow-hidden">
+                    <div className="rounded-2xl bg-white/5 p-4 flex items-center justify-center">
                       <Link href={`/store/${product.slug}`} className="w-full">
                         <img
                           src={product.image}
@@ -283,7 +286,9 @@ export default function StorePage() {
                         {product.flavor} · {product.size}
                       </p>
                     </div>
-                    <p className="text-gray-300 line-clamp-3">{product.description}</p>
+                    <p className="text-gray-300 line-clamp-3">
+                      {product.description}
+                    </p>
                     <Link
                       href={`/store/${product.slug}`}
                       className={`mt-auto px-6 py-3 rounded-full text-sm font-semibold transition-colors duration-300 ${

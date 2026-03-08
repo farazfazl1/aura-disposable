@@ -201,12 +201,12 @@ export default function StoreProductPage({
         <section className="py-16 px-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div
-              className={`rounded-3xl border ${accentBorder} ${accentBg} overflow-hidden`}
+              className={`rounded-3xl border ${accentBorder} ${accentBg} p-10`}
             >
               <img
                 src={product.image}
                 alt={product.name}
-                className="h-80 w-full object-contain lg:h-[420px]"
+                className="h-80 w-full max-w-md mx-auto object-contain lg:h-[420px] lg:max-w-lg"
               />
             </div>
             <div className="space-y-6">
