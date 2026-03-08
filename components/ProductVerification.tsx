@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { createClient } from "@supabase/supabase-js"
 import { useSearchParams } from "next/navigation"
 import { CheckCircle, XCircle, Search, Loader2 } from "lucide-react"
@@ -13,11 +14,19 @@ const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supa
 
 type VerificationStatus = "idle" | "loading" | "success" | "error"
 
+const slugifyProductName = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+
 const ProductVerification = () => {
   const searchParams = useSearchParams()
   const [code, setCode] = useState("")
   const [status, setStatus] = useState<VerificationStatus>("idle")
   const [productName, setProductName] = useState("")
+  const [productImage, setProductImage] = useState("")
+  const [productSlug, setProductSlug] = useState<string | null>(null)
   const [errorMessage, setErrorMessage] = useState("")
 
   // Auto-verify if code is present in URL
@@ -35,6 +44,8 @@ const ProductVerification = () => {
     setStatus("loading")
     setErrorMessage("")
     setProductName("")
+    setProductImage("")
+    setProductSlug(null)
 
     try {
       if (!supabase) {
@@ -43,7 +54,7 @@ const ProductVerification = () => {
 
       const { data, error } = await supabase
         .from("product_codes")
-        .select("product_name, is_verified")
+        .select("product_name, is_verified, image_url")
         .eq("code", codeToVerify.trim())
         .single()
 
@@ -57,6 +68,8 @@ const ProductVerification = () => {
       // await supabase.from("product_codes").update({ is_verified: true }).eq("code", codeToVerify)
 
       setProductName(data.product_name)
+      setProductImage(data.image_url)
+      setProductSlug(slugifyProductName(data.product_name))
       setStatus("success")
     } catch (err) {
       console.error("Verification error:", err)
@@ -133,8 +146,23 @@ const ProductVerification = () => {
                   <p className="text-green-400 font-medium mb-6">Verified Original Aura Disposable</p>
                   
                   <div className="bg-black/40 rounded-xl p-4 w-full max-w-sm border border-white/5">
+                    {productImage && (
+                      <div className="mb-4 flex justify-center bg-white/5 rounded-lg p-2">
+                        <img
+                          src={productImage}
+                          alt={productName}
+                          className="h-48 w-full object-contain"
+                        />
+                      </div>
+                    )}
                     <p className="text-sm text-gray-500 mb-1 uppercase tracking-wider">Product Model</p>
-                    <p className="text-xl text-white font-semibold">{productName}</p>
+                    <p className="text-xl text-white font-semibold mb-4">{productName}</p>
+                    <Link
+                      href={productSlug ? `/store/${productSlug}` : "/store"}
+                      className="inline-flex w-full justify-center rounded-full bg-white text-black font-semibold px-6 py-3 text-sm hover:bg-gray-200 transition-colors"
+                    >
+                      View Product Details
+                    </Link>
                   </div>
                 </div>
               </motion.div>
