@@ -171,6 +171,31 @@ const products = [
       { label: "Series", value: "Aura Signature" },
     ],
   },
+  {
+    slug: "jealousy",
+    name: "Jealousy",
+    type: "hybrid",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
+    flavor: "Earthy • Fruity • Kush",
+    effects: "Creative Boost • Euphoria • Talkative • Social Energy",
+    size: "1ml - 2ml",
+    price: "$100",
+    description:
+      "Elevate your experience with Jealousy - a refined hybrid that blends earthy richness with vibrant fruit undertones. Designed for smooth mental uplift and relaxed body ease, this strain delivers social warmth, giggly euphoria, and effortless clarity.",
+    overview:
+      "A balanced hybrid profile built for a calm body feel with a bright, social headspace.",
+    experience:
+      "Smooth uplift with a comfortable, grounded finish that stays clear and functional.",
+    finish: "Clean kush notes with a subtle fruity sweetness.",
+    notes: ["Earthy Kush", "Bright Fruit", "Smooth Uplift", "Social Ease"],
+    specs: [
+      { label: "THC", value: "80-90%" },
+      { label: "Battery", value: "Premium Core" },
+      { label: "Device", value: "Disposable" },
+      { label: "Series", value: "Aura Signature" },
+    ],
+  },
 ];
 
 export default function StoreProductPage({
@@ -178,7 +203,10 @@ export default function StoreProductPage({
 }: {
   params: { slug: string };
 }) {
-  const product = products.find((item) => item.slug === params.slug);
+  const requestedSlug = decodeURIComponent(params.slug).toLowerCase();
+  const product = products.find(
+    (item) => item.slug.toLowerCase() === requestedSlug,
+  );
 
   if (!product) {
     notFound();

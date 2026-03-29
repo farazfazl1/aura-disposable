@@ -58,7 +58,7 @@ const featuredProducts = [
   },
   {
     name: "Saffron",
-    slug: "Saffron",
+    slug: "saffron",
     type: "sativa",
     image: "/images/store/photo_1404-12-09 12.11.18 PM.jpeg",
     flavor: "Exotic Spice, Floral, Sweet Citrus",
