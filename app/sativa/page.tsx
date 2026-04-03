@@ -4,11 +4,11 @@ import { useEffect, useRef, Suspense } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { motion, useScroll, useTransform } from "framer-motion"
-import Header from "../components/Header"
-import UsageInstructions from "../components/UsageInstructions"
-import Footer from "../components/Footer"
-import { SunIcon } from "../components/Icons"
-import ProductShowcase from "../components/ProductShowcase"
+import Header from "@/components/Header"
+import UsageInstructions from "@/components/UsageInstructions"
+import Footer from "@/components/Footer"
+import { SunIcon } from "@/components/Icons"
+import ProductShowcase from "@/components/ProductShowcase"
 import { useSearchParams } from "next/navigation"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -95,16 +95,18 @@ function SativaPageContent() {
         ease: "power3.out",
       })
 
-      gsap.from(contentRef.current?.children, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top 80%",
-        },
-      })
+      if (contentRef.current) {
+        gsap.from(Array.from(contentRef.current.children), {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: "top 80%",
+          },
+        })
+      }
     })
 
     return () => ctx.revert()
@@ -158,7 +160,7 @@ function SativaPageContent() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-lg md:text-xl text-white mb-12"
           >
-            Sativa is known for its uplifting and energizing effects, perfect for daytime use. It's often associated
+            Sativa is known for its uplifting and energizing effects, perfect for daytime use. It&apos;s often associated
             with increased creativity, focus, and sociability.
           </motion.p>
           <motion.div

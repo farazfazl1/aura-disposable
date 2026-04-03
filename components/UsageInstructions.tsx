@@ -1,76 +1,66 @@
 "use client"
 
+import type React from "react"
 import { motion } from "framer-motion"
+import { CloudFog, Sparkles, Zap } from "lucide-react"
 
 interface UsageInstructionsProps {
   theme: "dark" | "light"
   productName: string
 }
 
-const UsageInstructions = ({ theme, productName }: UsageInstructionsProps) => {
+const UsageInstructions: React.FC<UsageInstructionsProps> = ({ theme, productName }) => {
   const isDark = theme === "dark"
+  const isHybrid = productName === "Hybrid"
 
-  const bgColor = isDark ? "bg-gray-900" : "bg-gray-100"
-  const textColor = isDark ? "text-white" : "text-gray-900"
-  const mutedTextColor = isDark ? "text-gray-300" : "text-gray-700"
-  const stepBgColor = isDark ? "bg-gray-800" : "bg-white"
-  const stepNumberColor = isDark ? "text-primary" : "text-gray-900"
+  const bgColor = isHybrid ? "bg-emerald-950/70 border border-emerald-500/30" : isDark ? "bg-gray-900" : "bg-gray-100"
+  const textColor = isHybrid ? "text-emerald-50" : isDark ? "text-white" : "text-gray-900"
+  const mutedTextColor = isHybrid ? "text-emerald-100/80" : isDark ? "text-gray-300" : "text-gray-700"
+  const accentColor = isHybrid ? "text-emerald-200" : isDark ? "text-primary" : "text-gray-900"
+  const stepBgColor = isHybrid ? "bg-black/40 border border-emerald-500/20" : isDark ? "bg-gray-800" : "bg-white"
 
   const steps = [
-    "Activate device with 5 rapid clicks",
-    "Draw gently for up to 3 seconds",
-    "Wait 10-15 minutes between sessions",
+    { title: "Activate", description: "Click the button 5 times rapidly to power on" },
+    { title: "Draw", description: "Inhale gently for up to 3 seconds" },
+    { title: "Enjoy", description: "Savor the flavor and effects" },
+    { title: "Rest", description: "Wait 10-15 minutes between sessions" },
   ]
+
+  const Icon = productName === "Sativa" ? Zap : productName === "Hybrid" ? Sparkles : CloudFog
 
   return (
     <section className="mb-24">
       <h2 className={`text-4xl font-bold mb-12 text-center ${textColor}`}>How to Enjoy Your {productName}</h2>
-      <div className={`${bgColor} p-8 rounded-lg hover-lift max-w-3xl mx-auto`}>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className={`text-lg leading-relaxed mb-8 ${mutedTextColor}`}
-        >
-          For an optimal {productName.toLowerCase()} experience, simply draw gently on the mouthpiece. We recommend{" "}
-          {productName === "Sativa" ? "keeping your draw under" : "a draw duration of no more than"} three seconds to{" "}
-          {productName === "Sativa"
-            ? "fully appreciate the smooth, balanced flavor"
-            : "preserve the quality of each puff"}
-          . Allow 10 to 15 minutes between sessions to{" "}
-          {productName === "Sativa"
-            ? "let the effects evolve naturally"
-            : "fully appreciate the evolving flavor and effects"}
-          . Our intuitive design ensures that every {productName === "Sativa" ? "puff" : "use"} is as effortless as it
-          is {productName === "Sativa" ? "inspiring" : "rewarding"}.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid gap-6"
-        >
+      <div className={`${bgColor} p-8 rounded-lg shadow-lg max-w-4xl mx-auto`}>
+        <div className="flex flex-col md:flex-row items-center mb-8">
+          <div className="mb-6 md:mb-0 md:mr-8">
+            <Icon size={80} className={accentColor} />
+          </div>
+          <p className={`text-lg leading-relaxed ${mutedTextColor}`}>
+            {productName === "Sativa"
+              ? "Experience the uplifting and energizing effects of our Sativa blend. Perfect for daytime use, it promotes creativity and focus."
+              : productName === "Hybrid"
+                ? "Enjoy a balanced fusion of calm and clarity. Our Hybrid blend delivers a smooth, versatile experience designed for any moment."
+                : "Indulge in the relaxing and calming properties of our Indica blend. Ideal for evening use, it helps you unwind and achieve deep relaxation."}
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="flex items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            className={`p-4 rounded-lg ${stepBgColor} shadow`}
             >
-              <div
-                className={`w-12 h-12 ${stepBgColor} rounded-full flex items-center justify-center mr-4 ${isDark ? "" : "shadow-md"}`}
-              >
-                <span className={`${stepNumberColor} font-bold text-lg`}>{index + 1}</span>
-              </div>
-              <span className={`${mutedTextColor} text-lg`}>{step}</span>
+              <h3 className={`text-xl font-semibold mb-2 ${accentColor}`}>{step.title}</h3>
+              <p className={mutedTextColor}>{step.description}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
 }
 
 export default UsageInstructions
-

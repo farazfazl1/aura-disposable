@@ -1,4 +1,5 @@
 import { ThemeProvider } from "next-themes"
+import { Toaster } from "@/components/ui/toaster"
 import type { Metadata } from "next"
 import "./globals.css"
 import type { ReactNode } from "react"
@@ -74,7 +75,10 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
       </head>
       <body>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <ThemeProvider attribute="class">
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )
