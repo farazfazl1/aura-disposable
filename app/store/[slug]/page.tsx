@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import PurchaseRequestDialog from "@/components/PurchaseRequestDialog";
 import { MoonIcon, SunIcon } from "@/components/Icons";
 import { STORE_PRODUCTS } from "@/lib/storeCatalog";
+import ProductGallery from "@/components/ProductGallery";
 
 export default function StoreProductPage({
   params,
@@ -49,16 +50,13 @@ export default function StoreProductPage({
       <Header />
       <main className="pt-24">
         <section className="py-16 px-4">
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            <div
-              className={`rounded-3xl border ${accentBorder} ${accentBg} p-10`}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-80 w-full max-w-md mx-auto object-contain lg:h-[420px] lg:max-w-lg"
-              />
-            </div>
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
+            <ProductGallery
+              images={product.gallery && product.gallery.length > 0 ? product.gallery : [product.image]}
+              productName={product.name}
+              accentBorder={accentBorder}
+              accentBg={accentBg}
+            />
             <div className="space-y-6">
               <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-gray-400">
                 {isIndica ? (

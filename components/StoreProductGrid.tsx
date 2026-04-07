@@ -41,12 +41,12 @@ export default function StoreProductGrid({ products }: StoreProductGridProps) {
             key={product.slug}
             className={`rounded-3xl border ${cardBorder} p-6 flex flex-col gap-4 text-white`}
           >
-            <div className="rounded-2xl bg-white/5 p-4 flex items-center justify-center">
+            <div className="rounded-2xl bg-white/5 flex items-center justify-center overflow-hidden">
               <Link href={`/store/${product.slug}`} className="w-full">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-48 w-full object-contain"
+                  className="h-48 w-full object-cover"
                 />
               </Link>
             </div>

@@ -6,6 +6,7 @@ export type StoreProduct = {
   type: VapeType;
   grade: string;
   image: string;
+  gallery: string[];
   flavor: string;
   effects: string;
   size: string;
@@ -24,11 +25,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     name: "Sweet Island Skunk",
     type: "sativa",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.21 PM.jpeg",
+    image: "/images/12.jpg",
+    gallery: ["/images/12.jpg", "/images/4.jpg"],
     flavor: "Coconut • Guava • Mango • Pineapple • Skunk",
     effects: "Creative Energy • Uplifted • Happy • Focused",
     size: "1ml . 2ml",
-    price: "$100",
+    price: "$20",
     description:
       "Elevate your session with Sweet Island Skunk - a vibrant sativa profile infused with lush tropical sweetness and classic skunk depth. Bright fruit layers meet crisp herbal undertones, delivering a clean cerebral lift and an effortlessly happy vibe. Designed for daytime momentum, creativity, and social flow.",
     overview:
@@ -45,11 +47,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     name: "Blurr Dream",
     type: "sativa",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.22 PM.jpeg",
+    image: "/images/8.jpg",
+    gallery: ["/images/8.jpg", "/images/5.jpg"],
     flavor: "Sweet Blueberry",
     effects: "Creative, Energy, Focus, Uplift",
     size: "1ml . 2ml",
-    price: "$100",
+    price: "$20",
     description:
       "Blurr Dream is a vibrant berry-forward strain profile inspired by the classic fusion of Blueberry and Haze. Juicy blueberry sweetness opens the experience, layered with subtle citrus brightness and fresh pine undertones. Smooth on the inhale and clean on the finish — designed for daytime creativity, mental clarity, and an elevated social rhythm.",
     overview:
@@ -69,11 +72,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     name: "Double Bubble OG",
     type: "indica",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.19 PM.jpeg",
+    image: "/images/7.jpg",
+    gallery: ["/images/7.jpg"],
     flavor: "Berry, Bubble Gum, Earthy",
     effects: "Calm, Rest, Deep Relaxation",
     size: "1ml . 2ml",
-    price: "$100",
+    price: "$20",
     description:
       "Double Buble OG is a rich, dessert-inspired indica profile blending sweet berry notes with nostalgic bubble gum and smooth earthy depth. Creamy on the inhale and grounding on the finish, this strain is crafted for evening wind-down, body ease, and tranquil rest.",
     overview:
@@ -95,11 +99,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     name: "OG Mint",
     type: "indica",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.16 PM.jpeg",
+    image: "/images/10.jpg",
+    gallery: ["/images/10.jpg", "/images/6.jpg"],
     flavor: "Cool Mint • Earthy OG • Pine •",
     effects: "Deep Relaxation • Body Calm • Restful",
     size: "1ml . 2ml",
-    price: "$100",
+    price: "$20",
     description:
       "OG Mint is a cool, earthy indica profile layered with crisp mint and classic OG depth. Smooth on the inhale with a refreshing herbal finish, this strain settles into a soothing full-body calm. Crafted for evening wind-down, quiet moments, and deep restorative rest.",
     overview:
@@ -120,11 +125,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     name: "Saffron",
     type: "sativa",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.18 PM.jpeg",
+    image: "/images/9.jpg",
+    gallery: ["/images/9.jpg", "/images/2 (1).jpg"],
     flavor: "Exotic Spice, Floral, Sweet Citrus",
     effects: "Uplifted • Creative Energy • Focus • Euphoric",
     size: "1ml - 2ml",
-    price: "$100",
+    price: "$20",
     description:
       "Saffron is a rare, spice-forward sativa profile inspired by the warmth and elegance of golden saffron threads. Delicate floral sweetness blends with subtle citrus brightness and a smooth herbal finish. Light on the body yet vibrant in the mind - crafted for daytime clarity, elevated mood, and creative momentum.",
     overview:
@@ -146,11 +152,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     name: "Blueberry",
     type: "sativa",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
+    image: "/images/13.jpg",
+    gallery: ["/images/13.jpg", "/images/1.jpg"],
     flavor: "Sweet Blueberry, Light Citrus",
     effects: "Uplifted • Creative Energy • Focus • Happy",
     size: "1ml - 2ml",
-    price: "$100",
+    price: "$20",
     description:
       "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
     overview:
@@ -163,40 +170,16 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     specs: [{ label: "Terpenes", value: "Limonene • Pinene • Myrcene" }],
   },
   {
-    slug: "aura-no-7",
-    name: "Aura No. 7",
-    type: "sativa",
-    grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.12 PM.jpeg",
-    flavor: "Sweet Blueberry, Light Citrus",
-    effects: "Uplifted • Creative Energy • Focus • Clarity",
-    size: "1ml - 2ml",
-    price: "$100",
-    description:
-      "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
-    overview:
-      "Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat.",
-    experience:
-      "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.",
-    finish: "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.",
-    notes: ["Lorem Noir", "Ipsum Resin", "Dolor Depth", "Sit Echo"],
-    specs: [
-      { label: "THC", value: "80-90%" },
-      { label: "Battery", value: "Premium Core" },
-      { label: "Device", value: "Disposable" },
-      { label: "Series", value: "Aura Signature" },
-    ],
-  },
-  {
     slug: "jealousy",
     name: "Jealousy",
     type: "hybrid",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/store/photo_1404-12-09 12.11.20 PM.jpeg",
+    image: "/images/11.jpg",
+    gallery: ["/images/11.jpg", "/images/3.jpg"],
     flavor: "Earthy • Fruity • Kush",
     effects: "Creative Boost • Euphoria • Talkative • Social Energy",
     size: "1ml - 2ml",
-    price: "$100",
+    price: "$20",
     description:
       "Elevate your experience with Jealousy - a refined hybrid that blends earthy richness with vibrant fruit undertones. Designed for smooth mental uplift and relaxed body ease, this strain delivers social warmth, giggly euphoria, and effortless clarity.",
     overview:
@@ -288,11 +271,6 @@ const SHOWCASE_COLORS: Record<
   blueberry: {
     color: "#354377",
     hoverColor: "#455487",
-    textColor: "text-white",
-  },
-  "aura-no-7": {
-    color: "#1f2937",
-    hoverColor: "#374151",
     textColor: "text-white",
   },
   jealousy: {
