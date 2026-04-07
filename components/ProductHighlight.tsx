@@ -1,10 +1,15 @@
 "use client"
 
 import { memo } from "react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { SunMoon } from "lucide-react"
 import { MoonIcon, SunIcon } from "@/components/Icons"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+
+/** Width ÷ height for each highlight card image (e.g. export 1600×1200). */
+export const PRODUCT_HIGHLIGHT_IMAGE_RATIO = 4 / 3
 
 const ProductCard = memo(
   ({
@@ -13,12 +18,16 @@ const ProductCard = memo(
     description,
     color,
     icon: Icon,
+    imageSrc,
+    imageAlt,
   }: {
     name: string
     tagline: string
     description: string
     color: "black" | "white" | "purple" | "sun" | "hybrid"
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+    imageSrc?: string
+    imageAlt?: string
   }) => {
     const getStyles = () => {
       switch (color) {
@@ -75,6 +84,20 @@ const ProductCard = memo(
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={`p-8 rounded-3xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl border bg-yellow-400 flex flex-col ${getStyles()}`}
       >
+        {imageSrc ? (
+          <AspectRatio
+            ratio={PRODUCT_HIGHLIGHT_IMAGE_RATIO}
+            className="relative mb-6 w-full overflow-hidden rounded-2xl bg-black/20"
+          >
+            <Image
+              src={imageSrc}
+              alt={imageAlt ?? name}
+              fill
+              sizes="(min-width: 768px) 33vw, 100vw"
+              className="object-contain"
+            />
+          </AspectRatio>
+        ) : null}
         <div className="flex items-center mb-6">
           <Icon className={`${color === "white" ? "text-black" : "text-white"} w-6 h-6`} />
           <h3 className="text-3xl font-bold ml-3">{name}</h3>

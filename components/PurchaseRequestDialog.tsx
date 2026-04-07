@@ -8,13 +8,15 @@ import { useToast } from "@/hooks/use-toast"
 interface PurchaseRequestDialogProps {
   productName: string
   buttonClass: string
+  /** Use full-width trigger (e.g. product cards in a grid). */
+  fullWidth?: boolean
 }
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
 const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
 
-const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDialogProps) => {
+const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: PurchaseRequestDialogProps) => {
   const [open, setOpen] = useState(false)
   const { toast } = useToast()
   const [deliveryArea, setDeliveryArea] = useState("orange-county")
@@ -105,7 +107,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass }: PurchaseRequestDial
       <DialogTrigger asChild>
         <button
           type="button"
-          className={`inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold transition-colors ${buttonClass} w-full sm:w-auto`}
+          className={`inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold transition-colors ${buttonClass} ${fullWidth ? "w-full" : "w-full sm:w-auto"}`}
         >
           Purchase Request
         </button>
