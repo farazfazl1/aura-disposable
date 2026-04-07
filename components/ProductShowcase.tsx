@@ -3,9 +3,11 @@
 import { useState, useCallback, memo, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link"
 import type React from "react"
 
 interface Product {
+  slug: string
   name: string
   tagline: string
   description: string
@@ -31,11 +33,14 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = memo(({ products, theme,
 
   useEffect(() => {
     if (initialProduct) {
-      // Normalize the initialProduct by replacing hyphens with spaces
-      const normalizedInitialProduct = initialProduct.toLowerCase().replace(/-/g, ' ')
-      
-      // Find the product with the matching normalized name
-      const index = products.findIndex((p) => p.name.toLowerCase() === normalizedInitialProduct)
+      const key = initialProduct.toLowerCase().trim()
+      const normalizedName = key.replace(/-/g, " ")
+      const index = products.findIndex(
+        (p) =>
+          p.slug.toLowerCase() === key ||
+          p.name.toLowerCase() === normalizedName ||
+          p.name.toLowerCase().replace(/\s+/g, " ") === normalizedName,
+      )
       if (index !== -1) {
         setCurrentProduct(index)
       }
@@ -201,7 +206,19 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = memo(({ products, theme,
             <span className="text-xl sm:text-2xl font-semibold">{currentProductData.thcContent}</span>
           </div>
 
-          {/* Sizes */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center pt-2">
+            <Link
+              href={`/store/${currentProductData.slug}`}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm sm:text-base font-semibold transition-all duration-300 text-center border-2"
+              style={{
+                borderColor: contrastColor,
+                color: contrastColor,
+                backgroundColor: `${contrastColor}12`,
+              }}
+            >
+              Full details
+            </Link>
+          </div>
         </motion.div>
       </AnimatePresence>
 

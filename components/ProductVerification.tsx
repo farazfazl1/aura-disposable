@@ -147,11 +147,11 @@ const ProductVerification = () => {
                   
                   <div className="bg-black/40 rounded-xl p-4 w-full max-w-sm border border-white/5">
                     {productImage && (
-                      <div className="mb-4 flex justify-center bg-white/5 rounded-lg p-2">
+                      <div className="mb-4 flex justify-center bg-white/5 rounded-lg overflow-hidden">
                         <img
                           src={productImage}
                           alt={productName}
-                          className="h-48 w-full object-contain"
+                          className="h-48 w-full object-cover"
                         />
                       </div>
                     )}

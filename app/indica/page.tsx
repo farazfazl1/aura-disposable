@@ -9,40 +9,14 @@ import UsageInstructions from "@/components/UsageInstructions"
 import Footer from "@/components/Footer"
 import { MoonIcon } from "@/components/Icons"
 import ProductShowcase from "@/components/ProductShowcase"
+import StoreProductGrid from "@/components/StoreProductGrid"
 import { useSearchParams } from "next/navigation"
+import { showcaseProductsForType, storeProductsByType } from "@/lib/storeCatalog"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const products = [
-  {
-    name: "OG",
-    tagline: "A Legendary Staple in the Cannabis World",
-    description:
-      "Immerse yourself in the rich heritage of OG, where tradition meets innovation. This legendary strain delivers a symphony of bold flavors and profound effects that have earned it its iconic status.",
-    effects: ["Deep Relaxation", "Stress Relief", "Pain Management", "Sleep Aid"],
-    flavors: ["Earthy Pine", "Citrus Zest", "Spicy Gas", "Woody"],
-    terpenes: ["Myrcene", "Caryophyllene", "Limonene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#000000", // Black
-    textColor: "text-white", // Light text for dark background
-    hoverColor: "#1a1a1a", // Slightly lighter for hover effect
-    sizes: ["1ml", "2ml"],
-  },
-  {
-    name: "OG Mint",
-    tagline: "A Crisp Take on Classic OG",
-    description:
-      "Experience the perfect fusion of classic OG potency with invigorating mint freshness. OG Mint offers a unique twist on the traditional, delivering a cool, refreshing sensation with every draw.",
-    effects: ["Balanced Relief", "Mental Clarity", "Physical Comfort", "Mood Elevation"],
-    flavors: ["Cool Mint", "Sweet Herbs", "Pine Forest", "Earth"],
-    terpenes: ["Limonene", "Myrcene", "Caryophyllene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#6c776e", // Muted Green
-    textColor: "text-white", // Light text for dark background
-    hoverColor: "#7c877e", // Slightly lighter for hover effect
-    sizes: ["2ml"],
-  },
-]
+const products = showcaseProductsForType("indica")
+const shopProducts = storeProductsByType("indica")
 
 function IndicaPageContent() {
   const heroRef = useRef<HTMLDivElement>(null)
@@ -165,6 +139,18 @@ function IndicaPageContent() {
             </button>
           </div>
         </section>
+
+        <section
+          className="mb-24 rounded-3xl border border-white/10 bg-black p-6 md:p-10 text-white shadow-2xl"
+          id="shop"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-3 text-center text-indica-200">Shop Indica</h2>
+          <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto text-lg">
+            Same Aura store catalog—open full specs or submit a purchase request (Orange County, CA).
+          </p>
+          <StoreProductGrid products={shopProducts} />
+        </section>
+
         {/* Product Showcase Section */}
         <section className="mb-24" id="products">
           <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center text-indica-200">Our Indica Products</h2>

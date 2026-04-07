@@ -10,53 +10,13 @@ import Header from "@/components/Header"
 import UsageInstructions from "@/components/UsageInstructions"
 import Footer from "@/components/Footer"
 import ProductShowcase from "@/components/ProductShowcase"
+import StoreProductGrid from "@/components/StoreProductGrid"
+import { showcaseProductsForType, storeProductsByType } from "@/lib/storeCatalog"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const products = [
-  {
-    name: "Mosaic Mint",
-    tagline: "Balanced clarity with a cool finish",
-    description:
-      "Mosaic Mint blends smooth relaxation with a bright, focused lift. Expect a clean mint edge layered over mellow herbal tones.",
-    effects: ["Balanced Calm", "Clear Focus", "Steady Energy", "Uplifted Mood"],
-    flavors: ["Cool Mint", "Herbal", "Sweet Pine", "Citrus"],
-    terpenes: ["Limonene", "Myrcene", "Pinene", "Caryophyllene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#E8F7F1",
-    textColor: "text-gray-900",
-    hoverColor: "#F5FFFB",
-    sizes: ["1ml", "2ml"],
-  },
-  {
-    name: "Citrus Drift",
-    tagline: "A smooth, sunny glide",
-    description:
-      "Citrus Drift delivers a relaxed, bright experience with soft citrus sweetness and a lingering, silky finish.",
-    effects: ["Gentle Euphoria", "Creative Ease", "Social Balance"],
-    flavors: ["Mandarin", "Lemon Zest", "Honey", "Fresh Herbs"],
-    terpenes: ["Limonene", "Terpinolene", "Humulene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#F7F0D4",
-    textColor: "text-gray-900",
-    hoverColor: "#FFF7E0",
-    sizes: ["2ml"],
-  },
-  {
-    name: "Velvet Coast",
-    tagline: "Calm waves, clean focus",
-    description:
-      "Velvet Coast blends gentle calm with a polished edge, delivering a rich flavor profile and a steady, balanced lift.",
-    effects: ["Relaxed Clarity", "Even Mood", "Soft Body Ease"],
-    flavors: ["Stone Fruit", "Pine", "Cedar", "Sweet Cream"],
-    terpenes: ["Caryophyllene", "Linalool", "Pinene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#2B5D5B",
-    textColor: "text-white",
-    hoverColor: "#3A6F6D",
-    sizes: ["2ml"],
-  },
-]
+const products = showcaseProductsForType("hybrid")
+const shopProducts = storeProductsByType("hybrid")
 
 function HybridPageContent() {
   const heroRef = useRef<HTMLDivElement>(null)
@@ -148,6 +108,17 @@ function HybridPageContent() {
               Contact Us for Wholesale Inquiries
             </a>
           </div>
+        </section>
+
+        <section
+          className="mb-24 rounded-3xl border border-white/10 bg-black p-6 md:p-10 text-white shadow-2xl"
+          id="shop"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-3 text-center text-white">Shop Hybrid</h2>
+          <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto text-lg">
+            Same Aura store catalog—open full specs or submit a purchase request (Orange County, CA).
+          </p>
+          <StoreProductGrid products={shopProducts} />
         </section>
 
         <section className="mb-24" id="products">

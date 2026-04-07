@@ -9,70 +9,14 @@ import UsageInstructions from "@/components/UsageInstructions"
 import Footer from "@/components/Footer"
 import { SunIcon } from "@/components/Icons"
 import ProductShowcase from "@/components/ProductShowcase"
+import StoreProductGrid from "@/components/StoreProductGrid"
 import { useSearchParams } from "next/navigation"
+import { showcaseProductsForType, storeProductsByType } from "@/lib/storeCatalog"
 
 gsap.registerPlugin(ScrollTrigger)
 
-//This is our Products
-
-const products = [
-  {
-    name: "Blue Dream",
-    tagline: "The Perfect Harmony of Flavor & Experience",
-    description:
-      "Elevate your consciousness with Blue Dream, a masterfully balanced hybrid that brings together the best of both worlds. Experience an uplifting mental clarity paired with gentle, full-body relaxation.",
-    effects: ["Creative Boost", "Euphoria", "Focus", "Social Energy"],
-    flavors: ["Sweet Berry", "Mountain Pine", "Citrus", "Herbs"],
-    terpenes: ["Myrcene", "Pinene", "Caryophyllene", "Limonene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#f1f0ee", // Off-White
-    textColor: "text-gray-900", // Dark text for light background
-    hoverColor: "#ffffff", // Pure white for hover effect
-    sizes: ["1ml", "2ml"],
-  },
-  {
-    name: "Sweet Island Skunk",
-    tagline: "A Tropical Paradise in Every Puff",
-    description:
-      "Immerse yourself in the exotic blend of tropical flavors with Sweet Island Skunk. This energizing sativa delivers a burst of uplifting effects perfect for daytime use, creative sessions, or socializing with friends.",
-    effects: ["Energetic", "Uplifting", "Happy"],
-    flavors: ["Pineapple", "Coconut", "Mango", "Guava"],
-    terpenes: ["Limonene", "Myrcene", "Pinene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#4CB4A1", // Tropical teal
-    textColor: "text-white", // Light text for dark background
-    hoverColor: "#5DC5B2", // Slightly lighter for hover effect
-    sizes: ["2ml"],
-  },
-  {
-    name: "Persian Gold",
-    tagline: "Feel the warmth of Persian Gold – Energize, Uplift, Focus",
-    description:
-      "Experience the luxury of Persian Gold, featuring the rare and rich flavor of saffron. This sophisticated sativa strain provides an energizing and focusing effect, perfect for productivity, creative flow, and mindful tasks.",
-    effects: ["Energetic", "Uplifting", "Happy", "Focusing"],
-    flavors: ["Saffron"],
-    terpenes: ["Limonene", "Caryophyllene", "Terpinolene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#D4AF37", // Gold
-    textColor: "text-gray-900", // Dark text for light background
-    hoverColor: "#E5C048", // Slightly lighter for hover effect
-    sizes: ["2ml"],
-  },
-  {
-    name: "Blueberry",
-    tagline: "A Burst of Berry-Infused Energy",
-    description:
-      "Indulge in the perfect balance of flavor and function with our Blueberry strain. This carefully crafted blend delivers a burst of sweet berry notes while elevating your mind and energizing your spirit.",
-    effects: ["Mental Clarity", "Creative Flow", "Uplifting", "Focused Energy"],
-    flavors: ["Sweet Blueberry", "Fresh Citrus", "Herbal", "Earth"],
-    terpenes: ["Limonene", "Pinene", "Myrcene"],
-    thcContent: "Premium Grade | 80-90% THC",
-    color: "#354377", // Deep Blue
-    textColor: "text-white", // Light text for dark background
-    hoverColor: "#455487", // Slightly lighter for hover effect
-    sizes: ["2ml"],
-  },
-]
+const products = showcaseProductsForType("sativa")
+const shopProducts = storeProductsByType("sativa")
 
 // This is out Page Content
 
@@ -194,6 +138,17 @@ function SativaPageContent() {
               Contact Us for Wholesale Inquiries
             </button>
           </div>
+        </section>
+
+        <section
+          className="mb-24 rounded-3xl border border-white/10 bg-black p-6 md:p-10 text-white shadow-2xl"
+          id="shop"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-3 text-center text-white">Shop Sativa</h2>
+          <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto text-lg">
+            Same Aura store catalog—open full specs or submit a purchase request (Orange County, CA).
+          </p>
+          <StoreProductGrid products={shopProducts} />
         </section>
 
         {/* Product Showcase Section */}
