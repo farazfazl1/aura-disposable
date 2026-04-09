@@ -21,13 +21,13 @@ export type StoreProduct = {
 
 export const STORE_PRODUCTS: StoreProduct[] = [
   {
-    slug: "sweet-island-skunk",
-    name: "Sweet Island Skunk",
+    slug: "sweet-island",
+    name: "Sweet Island",
     type: "sativa",
     grade: "Premium Grade | 80-90% THC",
     image: "/images/12.jpg",
     gallery: ["/images/12.jpg", "/images/4.jpg"],
-    flavor: "Coconut • Guava • Mango • Pineapple • Skunk",
+    flavor: "Coconut • Guava • Mango • Pineapple",
     effects: "Creative Energy • Uplifted • Happy • Focused",
     size: "1ml . 2ml",
     price: "$20",
@@ -43,8 +43,8 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     specs: [{ label: "Terpenes", value: "Limonene • Pinene • Myrcene" }],
   },
   {
-    slug: "blurr-dream",
-    name: "Blurr Dream",
+    slug: "blue-dream",
+    name: "Blue Dream",
     type: "sativa",
     grade: "Premium Grade | 80-90% THC",
     image: "/images/8.jpg",
@@ -68,12 +68,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     ],
   },
   {
-    slug: "double-bubble-og",
-    name: "Double Bubble OG",
+    slug: "og",
+    name: "OG",
     type: "indica",
     grade: "Premium Grade | 80-90% THC",
-    image: "/images/7.jpg",
-    gallery: ["/images/7.jpg"],
+    image: "/images/IMG_20260408_135851_018.jpg",
+    gallery: ["/images/IMG_20260408_135851_018.jpg"],
     flavor: "Berry, Bubble Gum, Earthy",
     effects: "Calm, Rest, Deep Relaxation",
     size: "1ml . 2ml",
@@ -121,8 +121,8 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     ],
   },
   {
-    slug: "saffron",
-    name: "Saffron",
+    slug: "persian-gold",
+    name: "Persian Gold",
     type: "sativa",
     grade: "Premium Grade | 80-90% THC",
     image: "/images/9.jpg",
@@ -195,6 +195,32 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       { label: "Series", value: "Aura Signature" },
     ],
   },
+  {
+    slug: "laughing-buddha",
+    name: "Laughing Buddha",
+    type: "sativa",
+    grade: "Premium Grade | 80-90% THC",
+    image: "/images/7.jpg",
+    gallery: ["/images/7.jpg"],
+    flavor: "Earthy • Gas • Pine",
+    effects: "Energetic • Uplifted • Euphoric • Focused",
+    size: "1ml • 2ml",
+    price: "$20",
+    description:
+      "Step into a brighter state with Laughing Buddha - a vibrant sativa expression infused with earthy depth, light gassy character, and fresh pine clarity. Its balanced profile creates an energetic and uplifting headspace designed for daytime movement, positive mood, and sharp creative flow.",
+    overview:
+      "A vibrant sativa expression infused with earthy depth, light gassy character, and fresh pine clarity.",
+    experience:
+      "An energetic and uplifting headspace designed for daytime movement.",
+    finish: "Fresh pine clarity with a light gassy character.",
+    notes: ["Earthy", "Gas", "Pine"],
+    specs: [
+      { label: "THC", value: "80-90%" },
+      { label: "Battery", value: "Premium Core" },
+      { label: "Device", value: "Disposable" },
+      { label: "Series", value: "Aura Signature" },
+    ],
+  },
 ];
 
 const FEATURED_SLUG_ORDER = [
@@ -204,6 +230,7 @@ const FEATURED_SLUG_ORDER = [
   "og-mint",
   "saffron",
   "blueberry",
+  "laughing-buddha",
   "jealousy",
 ] as const;
 
@@ -272,6 +299,11 @@ const SHOWCASE_COLORS: Record<
     color: "#354377",
     hoverColor: "#455487",
     textColor: "text-white",
+  },
+  "laughing-buddha": {
+    color: "#EAB308",
+    hoverColor: "#FACC15",
+    textColor: "text-gray-900",
   },
   jealousy: {
     color: "#2B5D5B",
