@@ -79,7 +79,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     size: "1ml . 2ml",
     price: "$20",
     description:
-      "Double Buble OG is a rich, dessert-inspired indica profile blending sweet berry notes with nostalgic bubble gum and smooth earthy depth. Creamy on the inhale and grounding on the finish, this strain is crafted for evening wind-down, body ease, and tranquil rest.",
+      "OG is a rich, dessert-inspired indica profile blending sweet berry notes with nostalgic bubble gum and smooth earthy depth. Creamy on the inhale and grounding on the finish, this strain is crafted for evening wind-down, body ease, and tranquil rest.",
     overview:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     experience:
@@ -224,14 +224,14 @@ export const STORE_PRODUCTS: StoreProduct[] = [
 ];
 
 const FEATURED_SLUG_ORDER = [
-  "sweet-island-skunk",
-  "blurr-dream",
-  "double-bubble-og",
+  "sweet-island",
+  "blue-dream",
+  "og",
   "og-mint",
-  "saffron",
+  "persian-gold",
   "blueberry",
-  "laughing-buddha",
   "jealousy",
+  "laughing-buddha",
 ] as const;
 
 export function getFeaturedStoreProducts(): StoreProduct[] {
