@@ -32,7 +32,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     size: "1ml . 2ml",
     price: "$20",
     description:
-      "Elevate your session with Sweet Island Skunk - a vibrant sativa profile infused with lush tropical sweetness and classic skunk depth. Bright fruit layers meet crisp herbal undertones, delivering a clean cerebral lift and an effortlessly happy vibe. Designed for daytime momentum, creativity, and social flow.",
+      "Elevate your session with Sweet Island - a vibrant sativa profile infused with lush tropical sweetness and classic skunk depth. Bright fruit layers meet crisp herbal undertones, delivering a clean cerebral lift and an effortlessly happy vibe. Designed for daytime momentum, creativity, and social flow.",
     overview:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices gravida dictum fusce ut placerat orci nulla.",
     experience:
@@ -54,7 +54,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     size: "1ml . 2ml",
     price: "$20",
     description:
-      "Blurr Dream is a vibrant berry-forward strain profile inspired by the classic fusion of Blueberry and Haze. Juicy blueberry sweetness opens the experience, layered with subtle citrus brightness and fresh pine undertones. Smooth on the inhale and clean on the finish — designed for daytime creativity, mental clarity, and an elevated social rhythm.",
+      "Blue Dream is a vibrant berry-forward strain profile inspired by the classic fusion of Blueberry and Haze. Juicy blueberry sweetness opens the experience, layered with subtle citrus brightness and fresh pine undertones. Smooth on the inhale and clean on the finish — designed for daytime creativity, mental clarity, and an elevated social rhythm.",
     overview:
       "Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla. Nibh venenatis cras sed felis eget.",
     experience:
@@ -132,7 +132,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     size: "1ml - 2ml",
     price: "$20",
     description:
-      "Saffron is a rare, spice-forward sativa profile inspired by the warmth and elegance of golden saffron threads. Delicate floral sweetness blends with subtle citrus brightness and a smooth herbal finish. Light on the body yet vibrant in the mind - crafted for daytime clarity, elevated mood, and creative momentum.",
+      "Persian Gold is a rare, spice-forward sativa profile inspired by the warmth and elegance of golden saffron threads. Delicate floral sweetness blends with subtle citrus brightness and a smooth herbal finish. Light on the body yet vibrant in the mind - crafted for daytime clarity, elevated mood, and creative momentum.",
     overview:
       "Vivamus suscipit tortor eget felis porttitor volutpat. Pellentesque in ipsum id orci porta dapibus.",
     experience:
