@@ -125,8 +125,8 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
             <li>The courier will text when arriving for pickup.</li>
           </ul>
           <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mt-2">
-            <p className="text-yellow-200 text-sm font-semibold mb-1">Minimum Order: 5 Units ($100)</p>
-            <p className="text-yellow-200/80 text-xs">Each additional unit is $15.</p>
+            <p className="text-yellow-200 text-sm font-semibold mb-1">Minimum Order: 5 Units ($200)</p>
+            <p className="text-yellow-200/80 text-xs">Each additional unit is $35.</p>
           </div>
         </div>
         <form className="grid gap-4" onSubmit={handleSubmit}>
@@ -179,7 +179,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
                 className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
               />
               <div className="whitespace-nowrap text-sm text-gray-400 font-mono bg-white/5 px-4 py-3 rounded-xl border border-white/10">
-                Total: ${quantity >= 5 ? 100 + (quantity - 5) * 15 : 0}
+                Total: ${quantity >= 5 ? 200 + (quantity - 5) * 35 : 0}
               </div>
             </div>
           </div>
