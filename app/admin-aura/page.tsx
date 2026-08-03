@@ -285,7 +285,7 @@ const AdminPage = () => {
                         Qty: {request.quantity ?? 5}
                       </span>
                       <span className="text-green-400 font-bold bg-green-500/10 px-2 py-1 rounded border border-green-500/20 text-sm">
-                        Total: ${100 + (Math.max(request.quantity ?? 5, 5) - 5) * 15}
+                        Total: ${200 + (Math.max(request.quantity ?? 5, 5) - 5) * 35}
                       </span>
                     </div>
                   </div>
