@@ -86,9 +86,9 @@ const ProductVerification = () => {
   return (
     <section className="py-20 px-4 relative overflow-hidden min-h-[calc(100vh-160px)] flex items-center justify-center" id="verify">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-black/95 z-0" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-900/20 rounded-full blur-[100px]" />
+      <div className="absolute inset-0 z-0 bg-[#f7f6f2]/95" />
+      <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-[#d9c8f3]/50 blur-[100px]" />
+      <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-[#c9eadb]/60 blur-[100px]" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <motion.div
@@ -97,15 +97,15 @@ const ProductVerification = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white tracking-tight">
+          <h2 className="mb-6 text-3xl font-bold tracking-tight text-[#17201b] md:text-5xl">
             Product Verification
           </h2>
-          <p className="text-gray-400 mb-10 text-lg max-w-xl mx-auto">
+          <p className="mx-auto mb-10 max-w-xl text-lg text-[#657068]">
             Ensure your Aura product is authentic. Enter the unique code found on your package or scan the QR code.
           </p>
         </motion.div>
 
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+        <div className="rounded-3xl border border-[#dfe5df] bg-white/80 p-8 shadow-2xl backdrop-blur-xl">
           <form onSubmit={handleSubmit} className="relative max-w-md mx-auto">
             <div className="relative">
               <input
@@ -113,12 +113,12 @@ const ProductVerification = () => {
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="AURA-XXXX-XXXX-XXXX"
-                className="w-full bg-black/50 border border-white/20 rounded-full py-4 pl-6 pr-14 text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all font-mono text-lg uppercase"
+                className="w-full rounded-full border border-[#cbd6cd] bg-[#f7f6f2] py-4 pl-6 pr-14 font-mono text-lg uppercase text-[#17201b] placeholder:text-[#98a39b] transition-all focus:border-[#6f42c1] focus:outline-none focus:ring-1 focus:ring-[#6f42c1]"
               />
               <button
                 type="submit"
                 disabled={status === "loading" || !code}
-                className="absolute right-2 top-2 bottom-2 aspect-square bg-white text-black rounded-full flex items-center justify-center hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="absolute bottom-2 right-2 top-2 flex aspect-square items-center justify-center rounded-full bg-[#17201b] text-white transition-colors hover:bg-[#33423a] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "loading" ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -136,18 +136,18 @@ const ProductVerification = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="mt-8 bg-green-500/10 border border-green-500/20 rounded-2xl p-6 md:p-8"
+                className="mt-8 rounded-2xl border border-green-200 bg-green-50 p-6 md:p-8"
               >
                 <div className="flex flex-col items-center">
                   <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
                     <CheckCircle className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Authentic Product</h3>
-                  <p className="text-green-400 font-medium mb-6">Verified Original Aura Disposable</p>
+                  <h3 className="mb-2 text-2xl font-bold text-[#17201b]">Authentic Product</h3>
+                  <p className="mb-6 font-medium text-green-700">Verified Original Aura Disposable</p>
                   
-                  <div className="bg-black/40 rounded-xl p-4 w-full max-w-sm border border-white/5">
+                  <div className="w-full max-w-sm rounded-xl border border-green-100 bg-white p-4">
                     {productImage && (
-                      <div className="mb-4 flex justify-center bg-white/5 rounded-lg overflow-hidden">
+                      <div className="mb-4 flex justify-center overflow-hidden rounded-lg bg-[#f7f6f2]">
                         <img
                           src={productImage}
                           alt={productName}
@@ -155,11 +155,11 @@ const ProductVerification = () => {
                         />
                       </div>
                     )}
-                    <p className="text-sm text-gray-500 mb-1 uppercase tracking-wider">Product Model</p>
-                    <p className="text-xl text-white font-semibold mb-4">{productName}</p>
+                    <p className="mb-1 text-sm uppercase tracking-wider text-[#657068]">Product Model</p>
+                    <p className="mb-4 text-xl font-semibold text-[#17201b]">{productName}</p>
                     <Link
                       href={productSlug ? `/store/${productSlug}` : "/store"}
-                      className="inline-flex w-full justify-center rounded-full bg-white text-black font-semibold px-6 py-3 text-sm hover:bg-gray-200 transition-colors"
+                      className="inline-flex w-full justify-center rounded-full bg-[#17201b] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#33423a]"
                     >
                       View Product Details
                     </Link>
@@ -174,17 +174,17 @@ const ProductVerification = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="mt-8 bg-red-500/10 border border-red-500/20 rounded-2xl p-6 md:p-8"
+                className="mt-8 rounded-2xl border border-red-200 bg-red-50 p-6 md:p-8"
               >
                 <div className="flex flex-col items-center">
                   <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
                     <XCircle className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Verification Failed</h3>
-                  <p className="text-red-400 font-medium text-center max-w-xs">
+                  <h3 className="mb-2 text-2xl font-bold text-[#17201b]">Verification Failed</h3>
+                  <p className="max-w-xs text-center font-medium text-red-700">
                     {errorMessage}
                   </p>
-                  <div className="mt-6 p-4 bg-red-950/30 rounded-lg text-sm text-red-200/80 max-w-sm">
+                  <div className="mt-6 max-w-sm rounded-lg bg-red-100 p-4 text-sm text-red-800">
                     Warning: If you just purchased this product, it may be counterfeit. Please contact the seller.
                   </div>
                 </div>

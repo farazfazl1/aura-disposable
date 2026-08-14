@@ -13,40 +13,28 @@ const Header = () => {
   const pathname = usePathname()
   const visible = useHeaderScroll()
 
-  const isIndicaPage = pathname.startsWith("/indica")
-  const isSativaPage = pathname.startsWith("/sativa")
   const isStorePage = pathname.startsWith("/store")
-  const isHybridPage = pathname.startsWith("/hybrid")
 
   const getHeaderStyle = () => {
-    if (isIndicaPage) {
-      return "bg-purple-900"
-    }
-    if (isSativaPage) {
-      return "bg-gradient-to-r from-yellow-400 to-yellow-500"
-    }
-    if (isHybridPage) {
-      return "bg-gradient-to-r from-purple-950 via-emerald-900 to-amber-900"
-    }
-    return "bg-black"
+    return "border-b border-[#dfe5df] bg-[#f7f6f2]/90 shadow-[0_8px_24px_rgba(23,32,27,0.06)] backdrop-blur-md"
   }
 
   const getLinkStyle = (type: "indica" | "sativa" | "hybrid") => {
     if (type === "indica") {
-      return isSativaPage ? "text-purple-600" : isHybridPage ? "text-purple-200" : "text-white"
+      return "text-[#6f42c1] hover:text-[#522b9f]"
     }
     if (type === "sativa") {
-      return isIndicaPage ? "text-yellow-400" : isHybridPage ? "text-yellow-200" : "text-white"
+      return "text-[#a16207] hover:text-[#854d0e]"
     }
-    return isHybridPage ? "text-emerald-100" : "text-white"
+    return "text-[#087f5b] hover:text-[#065f46]"
   }
 
   const getStoreLinkStyle = () => {
-    return isStorePage ? "text-yellow-200" : "text-white"
+    return isStorePage ? "text-[#a16207] font-semibold" : "text-[#17201b] hover:text-[#a16207]"
   }
 
   const getLogoStyle = () => {
-    return "text-white" // AURA is always white
+    return "text-[#17201b]"
   }
 
   const handleNavigation = (path: string) => {
@@ -155,11 +143,11 @@ const Header = () => {
             <Link href="/store" className={`flex items-center ${getStoreLinkStyle()}`}>
               Store
             </Link>
-            <Link href="/verify" className="text-white hover:text-gray-300">
+            <Link href="/verify" className="text-[#17201b] hover:text-[#6f42c1]">
               Verify
             </Link>
           </nav>
-          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+          <button className="text-[#17201b] md:hidden" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -167,17 +155,13 @@ const Header = () => {
       {isOpen && (
         <div className="md:hidden">
           <div
-            className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 ${getHeaderStyle().includes("bg-black") ? "bg-black" : "bg-white"}`}
+            className="space-y-1 border-t border-[#dfe5df] bg-[#f7f6f2] px-2 pb-3 pt-2 sm:px-3"
           >
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => handleNavigation(item.path)}
-                className={`block w-full text-left px-3 py-2 text-base font-medium hover:bg-opacity-75 transition duration-150 ease-in-out cursor-pointer ${
-                  getHeaderStyle().includes("bg-black")
-                    ? "text-white hover:bg-gray-900"
-                    : "text-black hover:bg-gray-200"
-                }`}
+                className="block w-full cursor-pointer px-3 py-2 text-left text-base font-medium text-[#17201b] transition duration-150 ease-in-out hover:bg-[#eef1ea]"
               >
                 {item.name.toUpperCase()}
               </button>

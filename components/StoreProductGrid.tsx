@@ -9,20 +9,20 @@ function typeStyles(product: StoreProduct) {
   const isIndica = product.type === "indica"
   const isHybrid = product.type === "hybrid"
   const cardBorder = isIndica
-    ? "border-purple-800/60 bg-purple-900/20"
+    ? "border-[#c9b4e8] bg-[#f3ecfb]"
     : isHybrid
-      ? "border-emerald-500/40 bg-emerald-500/10"
-      : "border-yellow-400/40 bg-yellow-500/10"
+      ? "border-[#a6d7c3] bg-[#e7f5ee]"
+      : "border-[#e6c970] bg-[#fff7dc]"
   const typeIconClass = isIndica
-    ? "text-purple-300"
+    ? "text-[#6f42c1]"
     : isHybrid
-      ? "text-emerald-300"
-      : "text-yellow-300"
+      ? "text-[#087f5b]"
+      : "text-[#a16207]"
   const ctaClass = isIndica
-    ? "bg-purple-700 text-white hover:bg-purple-600"
+    ? "bg-[#6f42c1] text-white hover:bg-[#58309f]"
     : isHybrid
-      ? "bg-emerald-500 text-black hover:bg-emerald-400"
-      : "bg-yellow-400 text-black hover:bg-yellow-300"
+      ? "bg-[#087f5b] text-white hover:bg-[#065f46]"
+      : "bg-[#a16207] text-white hover:bg-[#854d0e]"
   const TypeIcon = isIndica ? MoonIcon : isHybrid ? SunMoon : SunIcon
   return { cardBorder, typeIconClass, ctaClass, TypeIcon }
 }
@@ -39,9 +39,9 @@ export default function StoreProductGrid({ products }: StoreProductGridProps) {
         return (
           <div
             key={product.slug}
-            className={`rounded-3xl border ${cardBorder} p-6 flex flex-col gap-4 text-white`}
+            className={`flex flex-col gap-4 rounded-3xl border p-6 text-[#17201b] ${cardBorder}`}
           >
-            <div className="rounded-2xl bg-white/5 flex items-center justify-center overflow-hidden">
+            <div className="flex items-center justify-center overflow-hidden rounded-2xl bg-white/70">
               <Link href={`/store/${product.slug}`} className="w-full">
                 <img
                   src={product.image}
@@ -53,7 +53,7 @@ export default function StoreProductGrid({ products }: StoreProductGridProps) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <TypeIcon className={typeIconClass} width={20} height={20} />
-                <span className="text-sm uppercase tracking-[0.2em] text-gray-400">
+                <span className="text-sm uppercase tracking-[0.2em] text-[#657068]">
                   {product.type}
                 </span>
               </div>
@@ -61,11 +61,11 @@ export default function StoreProductGrid({ products }: StoreProductGridProps) {
             </div>
             <div>
               <h3 className="text-2xl font-semibold mb-2">{product.name}</h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-[#657068]">
                 {product.flavor} · {product.size}
               </p>
             </div>
-            <p className="text-gray-300 line-clamp-3">{product.description}</p>
+            <p className="line-clamp-3 text-[#536057]">{product.description}</p>
             <div className="mt-auto flex flex-col gap-3">
               <Link
                 href={`/store/${product.slug}`}

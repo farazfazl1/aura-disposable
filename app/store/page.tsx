@@ -25,14 +25,14 @@ const perks = [
 
 export default function StorePage() {
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="aura-page min-h-screen">
       <Header />
       <main className="pt-24">
-        <section className="relative overflow-hidden py-20 px-4">
+        <section className="relative overflow-hidden bg-[#eef1ea] px-4 py-20">
           <div className="absolute inset-0">
             <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-purple-600/30 blur-3xl" />
             <div className="absolute top-24 right-10 h-72 w-72 rounded-full bg-yellow-400/30 blur-3xl" />
-            <div className="absolute inset-0 bg-black/70" />
+            <div className="absolute inset-0 bg-[#f7f6f2]/80" />
           </div>
           <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -40,32 +40,32 @@ export default function StorePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <p className="uppercase tracking-[0.3em] text-sm text-gray-400 mb-4">
+              <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#657068]">
                 Aura Store
               </p>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
                 Designed for elevated experiences
               </h1>
-              <p className="text-lg text-gray-300 mb-8">
+              <p className="mb-8 text-lg text-[#536057]">
                 Explore the full Aura collection with curated Indica, Sativa,
                 and Hybrid profiles, premium hardware, and refined flavor notes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/indica"
-                  className="px-8 py-3 rounded-full border border-purple-500 text-purple-300 hover:bg-purple-600 hover:text-white transition-colors duration-300 text-center"
+                    className="rounded-full border border-[#6f42c1] px-8 py-3 text-center text-[#6f42c1] transition-colors duration-300 hover:bg-[#6f42c1] hover:text-white"
                 >
                   Shop Indica
                 </Link>
                 <Link
                   href="/sativa"
-                  className="px-8 py-3 rounded-full border border-yellow-500 text-yellow-300 hover:bg-yellow-500 hover:text-black transition-colors duration-300 text-center"
+                    className="rounded-full border border-[#b7791f] px-8 py-3 text-center text-[#a16207] transition-colors duration-300 hover:bg-[#a16207] hover:text-white"
                 >
                   Shop Sativa
                 </Link>
                 <Link
                   href="/hybrid"
-                  className="px-8 py-3 rounded-full border border-emerald-400 text-emerald-200 hover:bg-emerald-400 hover:text-black transition-colors duration-300 text-center"
+                    className="rounded-full border border-[#087f5b] px-8 py-3 text-center text-[#087f5b] transition-colors duration-300 hover:bg-[#087f5b] hover:text-white"
                 >
                   Shop Hybrid
                 </Link>
@@ -85,9 +85,9 @@ export default function StorePage() {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="border border-gray-800 rounded-2xl p-6 bg-black/60 backdrop-blur"
+                  className="rounded-2xl border border-[#dfe5df] bg-white/80 p-6 backdrop-blur"
                 >
-                  <p className="text-sm text-gray-400 mb-2">{stat.label}</p>
+                  <p className="mb-2 text-sm text-[#657068]">{stat.label}</p>
                   <p className="text-2xl font-semibold">{stat.value}</p>
                 </div>
               ))}
@@ -95,13 +95,13 @@ export default function StorePage() {
           </div>
         </section>
 
-        <section className="py-24 px-4 bg-black">
+        <section className="bg-[#f7f6f2] px-4 py-24">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 Collections
               </h2>
-              <p className="text-gray-400 text-lg">
+              <p className="text-lg text-[#657068]">
                 Choose your path with curated Aura profiles
               </p>
             </div>
@@ -128,13 +128,13 @@ export default function StorePage() {
           </div>
         </section>
 
-        <section className="py-24 px-4 bg-black">
+        <section className="bg-[#eef1ea] px-4 py-24">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-bold">
                 Why retailers choose Aura
               </h2>
-              <p className="text-gray-400 text-lg">
+              <p className="text-lg text-[#657068]">
                 Minimalist design, consistent performance, and premium flavor
                 profiles that keep customers coming back.
               </p>
@@ -142,19 +142,19 @@ export default function StorePage() {
                 {perks.map((perk) => (
                   <div
                     key={perk.title}
-                    className="border border-gray-800 rounded-2xl p-6 bg-gray-900/40"
+                    className="rounded-2xl border border-[#dfe5df] bg-white p-6"
                   >
                     <h3 className="text-xl font-semibold mb-2">{perk.title}</h3>
-                    <p className="text-gray-400">{perk.description}</p>
+                    <p className="text-[#657068]">{perk.description}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-3xl border border-gray-800 p-10 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+            <div className="rounded-3xl border border-[#cddbcf] bg-gradient-to-br from-[#e3f2e9] via-white to-[#fff4cf] p-10">
               <h3 className="text-3xl font-semibold mb-4">
                 Wholesale Concierge
               </h3>
-              <p className="text-gray-400 mb-6">
+              <p className="mb-6 text-[#657068]">
                 Partner with Aura for curated drops, premium merchandising, and
                 dedicated support.
               </p>
@@ -163,7 +163,7 @@ export default function StorePage() {
                   (window.location.href =
                     "mailto:auradisposable@gmail.com?subject=Store%20Wholesale%20Inquiry&body=Hello%20Aura%20Team%2C%0A%0AI'm%20interested%20in%20wholesale%20opportunities%20and%20store%20support.%20Please%20share%20details%20on%20product%20lines%20and%20pricing.%0A%0ABest%20regards%2C%0A[Your%20Name]")
                 }
-                className="w-full px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors"
+                className="w-full rounded-full bg-[#17201b] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#33423a]"
               >
                 Contact Wholesale Team
               </button>

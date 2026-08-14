@@ -67,7 +67,7 @@ function IndicaPageContent() {
   }, [product])
 
   return (
-    <div className="bg-gradient-to-b from-indica to-black text-white min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-[#f1e9fb] via-[#f7f6f2] to-[#f7f6f2] text-[#17201b]">
       <Header />
 
       {/* Hero Section */}
@@ -76,7 +76,7 @@ function IndicaPageContent() {
         className="relative h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
       >
         <motion.div
-          className="absolute inset-0 z-0 bg-gradient-to-b from-indica via-indica/80 to-black"
+          className="absolute inset-0 z-0 bg-gradient-to-b from-[#eadcf8] via-[#f5edfd] to-[#f7f6f2]"
           style={{ opacity, scale }}
         />
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -84,7 +84,7 @@ function IndicaPageContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl md:text-8xl font-bold mb-6 text-indica-100 text-shadow"
+            className="mb-6 text-6xl font-bold text-[#552e89] text-shadow md:text-8xl"
           >
             INDICA
           </motion.h1>
@@ -92,7 +92,7 @@ function IndicaPageContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-3xl text-white mb-12 text-shadow"
+            className="mb-12 text-xl text-[#17201b] text-shadow md:text-3xl"
           >
             The Essence of Bold Intensity
           </motion.p>
@@ -100,7 +100,7 @@ function IndicaPageContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-xl text-indica-100 mb-12"
+            className="mb-12 text-lg text-[#6f42c1] md:text-xl"
           >
             Indica is one of the main subspecies of the cannabis plant, known for its relaxing, sedative, and
             body-focused effects. It is commonly used for relaxation, sleep aid, and pain relief.
@@ -111,7 +111,7 @@ function IndicaPageContent() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="relative w-32 h-32 mx-auto"
           >
-            <MoonIcon className="text-indica-200 opacity-80" width={128} height={128} />
+            <MoonIcon className="text-[#6f42c1] opacity-80" width={128} height={128} />
           </motion.div>
         </div>
       </section>
@@ -120,10 +120,10 @@ function IndicaPageContent() {
       <div ref={contentRef} className="max-w-6xl mx-auto px-4 py-24">
         {/* Wholesale Section */}
         <section className="mb-24">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center text-indica-200">
+          <h2 className="mb-8 text-center text-4xl font-bold text-[#552e89] md:text-5xl">
             Premium Wholesale Indica Vapes
           </h2>
-          <p className="text-xl text-center mb-12 text-white">
+          <p className="mb-12 text-center text-xl text-[#536057]">
             Elevate your inventory with our premium Indica vapes. We offer wholesale options for businesses looking to
             provide top-quality products to their customers.
           </p>
@@ -133,7 +133,7 @@ function IndicaPageContent() {
                 (window.location.href =
                   "mailto:auradisposable@gmail.com?subject=Wholesale%20Inquiry%20for%20Aura%20Vape%20Indica&body=Hello%20Aura%20Vape%20Team%2C%0A%0AI'm%20interested%20in your wholesale options for Indica products. Please provide me with more information about your products and pricing.%0A%0ABest%20regards%2C%0A[Your%20Name]")
               }
-              className="bg-indica-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-indica-700 transition-colors duration-300"
+              className="rounded-full bg-[#6f42c1] px-8 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-[#58309f]"
             >
               Contact Us for Wholesale Inquiries
             </button>
@@ -141,11 +141,11 @@ function IndicaPageContent() {
         </section>
 
         <section
-          className="mb-24 rounded-3xl border border-white/10 bg-black p-6 md:p-10 text-white shadow-2xl"
+          className="mb-24 rounded-3xl border border-[#d9cceb] bg-white p-6 text-[#17201b] shadow-xl md:p-10"
           id="shop"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-3 text-center text-indica-200">Shop Indica</h2>
-          <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto text-lg">
+          <h2 className="mb-3 text-center text-3xl font-bold text-[#552e89] md:text-5xl">Shop Indica</h2>
+          <p className="mx-auto mb-10 max-w-2xl text-center text-lg text-[#657068]">
             Same Aura store catalog—open full specs or submit a purchase request (Orange County, CA).
           </p>
           <StoreProductGrid products={shopProducts} />
@@ -153,7 +153,7 @@ function IndicaPageContent() {
 
         {/* Product Showcase Section */}
         <section className="mb-24" id="products">
-          <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center text-indica-200">Our Indica Products</h2>
+          <h2 className="mb-12 text-center text-5xl font-bold text-[#552e89] md:text-6xl">Our Indica Products</h2>
           <ProductShowcase products={products} theme="indica" initialProduct={product || undefined} />
           <div className="mt-12 text-center">
             <button
@@ -161,7 +161,7 @@ function IndicaPageContent() {
                 (window.location.href =
                   "mailto:auradisposable@gmail.com?subject=Wholesale%20Inquiry%20for%20Aura%20Vape%20Indica&body=Hello%20Aura%20Vape%20Team%2C%0A%0AI'm%20interested%20in%20your%20wholesale%20options%20for%20Indica%20products.%20Please%20provide%20me%20with%20more%20information%20about%20your%20products%20and%20pricing.%0A%0ABest%20regards%2C%0A[Your%20Name]")
               }
-              className="bg-indica-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-indica-700 transition-colors duration-300"
+              className="rounded-full bg-[#6f42c1] px-8 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-[#58309f]"
             >
               Get Wholesale Pricing
             </button>
@@ -169,16 +169,16 @@ function IndicaPageContent() {
         </section>
 
         {/* Usage Instructions Section */}
-        <UsageInstructions theme="dark" productName="Indica" />
+        <UsageInstructions theme="light" productName="Indica" />
 
         {/* Safety Warning Section */}
         <section>
-          <h2 className="text-4xl font-bold mb-8 text-center text-indica-200">Important Safety Information</h2>
-          <div className="border border-indica-700 p-8 rounded-lg bg-indica bg-opacity-20 hover-lift">
+          <h2 className="mb-8 text-center text-4xl font-bold text-[#552e89]">Important Safety Information</h2>
+          <div className="rounded-lg border border-[#c9b4e8] bg-[#f3ecfb] p-8 hover-lift">
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-12 w-12 text-indica-200 mr-4 flex-shrink-0"
+                className="mr-4 h-12 w-12 flex-shrink-0 text-[#6f42c1]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -190,7 +190,7 @@ function IndicaPageContent() {
                   d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                 />
               </svg>
-              <p className="text-lg leading-relaxed text-white">
+              <p className="text-lg leading-relaxed text-[#46554c]">
                 This product contains cannabis and is intended for use only by individuals 21 years of age or older.
                 Please use responsibly. The intoxicating effects of cannabis may be delayed by up to two hours.
                 Consuming this product while pregnant or breastfeeding may be harmful. For full safety guidelines,

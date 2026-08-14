@@ -271,44 +271,44 @@ const SHOWCASE_COLORS: Record<
   { color: string; hoverColor: string; textColor: string }
 > = {
   "sweet-island-skunk": {
-    color: "#4CB4A1",
-    hoverColor: "#5DC5B2",
-    textColor: "text-white",
+    color: "#d9f0e8",
+    hoverColor: "#c6e7dc",
+    textColor: "text-gray-900",
   },
   "blurr-dream": {
-    color: "#5B7FD1",
-    hoverColor: "#6B8FE1",
-    textColor: "text-white",
+    color: "#e0e8fb",
+    hoverColor: "#d0dcf6",
+    textColor: "text-gray-900",
   },
   "double-bubble-og": {
-    color: "#4a2c5c",
-    hoverColor: "#5c3a72",
-    textColor: "text-white",
+    color: "#eadcf6",
+    hoverColor: "#dfcef0",
+    textColor: "text-gray-900",
   },
   "og-mint": {
-    color: "#6c776e",
-    hoverColor: "#7c877e",
-    textColor: "text-white",
+    color: "#dce9e1",
+    hoverColor: "#cfe1d7",
+    textColor: "text-gray-900",
   },
   saffron: {
-    color: "#D4AF37",
-    hoverColor: "#E5C048",
+    color: "#fff0b8",
+    hoverColor: "#ffe79a",
     textColor: "text-gray-900",
   },
   blueberry: {
-    color: "#354377",
-    hoverColor: "#455487",
-    textColor: "text-white",
+    color: "#dce5fb",
+    hoverColor: "#ccd9f6",
+    textColor: "text-gray-900",
   },
   "laughing-buddha": {
-    color: "#EAB308",
-    hoverColor: "#FACC15",
+    color: "#ffefb3",
+    hoverColor: "#ffe68e",
     textColor: "text-gray-900",
   },
   jealousy: {
-    color: "#2B5D5B",
-    hoverColor: "#3A6F6D",
-    textColor: "text-white",
+    color: "#d8eee5",
+    hoverColor: "#c5e3d6",
+    textColor: "text-gray-900",
   },
 };
 
@@ -329,9 +329,9 @@ export type ShowcaseProduct = {
 
 export function storeProductToShowcase(p: StoreProduct): ShowcaseProduct {
   const palette = SHOWCASE_COLORS[p.slug] ?? {
-    color: "#111827",
-    hoverColor: "#1f2937",
-    textColor: "text-white",
+    color: "#ffffff",
+    hoverColor: "#f3f5f0",
+    textColor: "text-gray-900",
   };
   return {
     slug: p.slug,

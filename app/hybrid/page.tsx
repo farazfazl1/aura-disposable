@@ -66,21 +66,21 @@ function HybridPageContent() {
   }, [product])
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-[#dff3e9] via-[#f3faf5] to-[#f7f6f2] text-[#17201b]">
       <Header />
       <section
         ref={heroRef}
         className="relative h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
       >
         <motion.div style={{ opacity, scale }} className="absolute inset-0 z-0">
-          <div className="absolute -top-28 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-purple-600/30 blur-3xl" />
-          <div className="absolute top-16 right-10 h-80 w-80 rounded-full bg-emerald-400/30 blur-3xl" />
-          <div className="absolute bottom-10 left-10 h-80 w-80 rounded-full bg-yellow-300/20 blur-3xl" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/75 to-black" />
+          <div className="absolute -top-28 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-[#d9c8f3]/60 blur-3xl" />
+          <div className="absolute right-10 top-16 h-80 w-80 rounded-full bg-[#bfe7d4]/70 blur-3xl" />
+          <div className="absolute bottom-10 left-10 h-80 w-80 rounded-full bg-[#ffe9a9]/60 blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f7f6f2]/20 via-[#f7f6f2]/70 to-[#f7f6f2]" />
         </motion.div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">Hybrid Collection</h1>
-          <p className="text-xl md:text-2xl mb-10 text-white/90">
+          <p className="mb-10 text-xl text-[#536057] md:text-2xl">
             Balanced profiles crafted to deliver calm, clarity, and a refined lift for any moment.
           </p>
           <motion.div
@@ -89,21 +89,21 @@ function HybridPageContent() {
             transition={{ duration: 1, delay: 0.4 }}
             className="relative w-32 h-32 mx-auto"
           >
-            <SunMoon className="text-emerald-100 opacity-80" width={128} height={128} />
+            <SunMoon className="text-[#087f5b] opacity-80" width={128} height={128} />
           </motion.div>
         </div>
       </section>
 
       <div ref={contentRef} className="max-w-6xl mx-auto px-4 py-24">
         <section className="mb-24">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center text-white">Premium Wholesale Hybrid Vapes</h2>
-          <p className="text-xl text-center mb-12 text-white">
+          <h2 className="mb-8 text-center text-4xl font-bold text-[#087f5b] md:text-5xl">Premium Wholesale Hybrid Vapes</h2>
+          <p className="mb-12 text-center text-xl text-[#536057]">
             Curate a balanced lineup with our Hybrid vapes. Provide customers with a refined blend of calm and clarity.
           </p>
           <div className="text-center">
             <a
               href="mailto:auradisposable@gmail.com?subject=Wholesale%20Inquiry%20for%20Aura%20Vape%20Hybrid&body=Hello%20Aura%20Vape%20Team%2C%0A%0AI'm%20interested%20in%20your%20wholesale%20options%20for%20Hybrid%20products.%20Please%20provide%20me%20with%20more%20information%20about%20your%20products%20and%20pricing.%0A%0ABest%20regards%2C%0A[Your%20Name]"
-              className="inline-flex items-center justify-center bg-emerald-300 text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-200 transition-colors duration-300"
+              className="inline-flex items-center justify-center rounded-full bg-[#087f5b] px-8 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-[#065f46]"
             >
               Contact Us for Wholesale Inquiries
             </a>
@@ -111,23 +111,23 @@ function HybridPageContent() {
         </section>
 
         <section
-          className="mb-24 rounded-3xl border border-white/10 bg-black p-6 md:p-10 text-white shadow-2xl"
+          className="mb-24 rounded-3xl border border-[#b8dfce] bg-white p-6 text-[#17201b] shadow-xl md:p-10"
           id="shop"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-3 text-center text-white">Shop Hybrid</h2>
-          <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto text-lg">
+          <h2 className="mb-3 text-center text-3xl font-bold text-[#087f5b] md:text-5xl">Shop Hybrid</h2>
+          <p className="mx-auto mb-10 max-w-2xl text-center text-lg text-[#657068]">
             Same Aura store catalog—open full specs or submit a purchase request (Orange County, CA).
           </p>
           <StoreProductGrid products={shopProducts} />
         </section>
 
         <section className="mb-24" id="products">
-          <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center text-white">Our Hybrid Products</h2>
+          <h2 className="mb-12 text-center text-5xl font-bold text-[#087f5b] md:text-6xl">Our Hybrid Products</h2>
           <ProductShowcase products={products} theme="hybrid" initialProduct={product || undefined} />
           <div className="mt-12 text-center">
             <a
               href="mailto:auradisposable@gmail.com?subject=Wholesale%20Inquiry%20for%20Aura%20Vape%20Hybrid&body=Hello%20Aura%20Vape%20Team%2C%0A%0AI'm%20interested%20in%20your%20wholesale%20options%20for%20Hybrid%20products.%20Please%20provide%20me%20with%20more%20information%20about%20your%20products%20and%20pricing.%0A%0ABest%20regards%2C%0A[Your%20Name]"
-              className="inline-flex items-center justify-center bg-emerald-300 text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-200 transition-colors duration-300"
+              className="inline-flex items-center justify-center rounded-full bg-[#087f5b] px-8 py-3 text-lg font-semibold text-white transition-colors duration-300 hover:bg-[#065f46]"
             >
               Get Wholesale Pricing
             </a>
@@ -137,12 +137,12 @@ function HybridPageContent() {
         <UsageInstructions theme="light" productName="Hybrid" />
 
         <section>
-          <h2 className="text-4xl font-bold mb-8 text-center text-white">Important Safety Information</h2>
-          <div className="border border-emerald-200 p-8 rounded-lg bg-emerald-400 bg-opacity-20 hover-lift">
+          <h2 className="mb-8 text-center text-4xl font-bold text-[#087f5b]">Important Safety Information</h2>
+          <div className="rounded-lg border border-[#a6d7c3] bg-[#e7f5ee] p-8 hover-lift">
             <div className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-12 w-12 text-emerald-100 mr-4 flex-shrink-0"
+                className="mr-4 h-12 w-12 flex-shrink-0 text-[#087f5b]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -154,7 +154,7 @@ function HybridPageContent() {
                   d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                 />
               </svg>
-              <p className="text-white/90">
+              <p className="text-[#46554c]">
                 This product contains THC and is intended for adult use only. Please consume responsibly and follow all
                 local regulations.
               </p>

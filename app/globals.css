@@ -5,19 +5,68 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 23, 32, 27;
+  --background-start-rgb: 247, 246, 242;
+  --background-end-rgb: 247, 246, 242;
+  --aura-paper: #f7f6f2;
+  --aura-surface: #fffefa;
+  --aura-soft: #eef1ea;
+  --aura-ink: #17201b;
+  --aura-muted: #657068;
+  --aura-line: #dfe5df;
+  --aura-purple: #6f42c1;
+  --aura-gold: #a16207;
+  --aura-green: #087f5b;
+  --border: 214 22% 87%;
+  --input: 214 22% 87%;
+  --ring: 262 52% 51%;
+  --background: 45 25% 97%;
+  --foreground: 145 15% 13%;
+  --primary: 145 15% 13%;
+  --primary-foreground: 45 25% 97%;
+  --secondary: 100 18% 93%;
+  --secondary-foreground: 145 15% 13%;
+  --muted: 100 18% 93%;
+  --muted-foreground: 145 10% 42%;
+  --accent: 262 52% 95%;
+  --accent-foreground: 262 52% 30%;
+  --popover: 45 25% 99%;
+  --popover-foreground: 145 15% 13%;
+  --card: 45 25% 99%;
+  --card-foreground: 145 15% 13%;
+  --radius: 1rem;
+}
+
+html {
+  background: var(--aura-paper);
+  color-scheme: light;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background: var(--aura-paper);
   font-family: "Inter", sans-serif;
 }
 
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: #d9c8f3;
+  color: var(--aura-ink);
+}
+
+.aura-page {
+  background: var(--aura-paper);
+  color: var(--aura-ink);
+}
+
 .gradient-text {
-  background: linear-gradient(45deg, #4ecdc4, #45b7af);
+  background: linear-gradient(45deg, var(--aura-purple), var(--aura-green));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -39,11 +88,11 @@ body {
 }
 
 .bg-gradient-radial {
-  background-image: radial-gradient(circle, rgba(76, 29, 149, 0.1) 0%, rgba(255, 255, 255, 1) 70%);
+  background-image: radial-gradient(circle, rgba(111, 66, 193, 0.12) 0%, rgba(255, 254, 250, 1) 70%);
 }
 
 .text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 12px rgba(23, 32, 27, 0.12);
 }
 
 .hover-lift {
@@ -52,10 +101,9 @@ body {
 
 .hover-lift:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 30px rgba(23, 32, 27, 0.12);
 }
 
 .bg-blur {
   backdrop-filter: blur(8px);
 }
-

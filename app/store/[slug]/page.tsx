@@ -25,28 +25,28 @@ export default function StoreProductPage({
   const isIndica = product.type === "indica";
   const isHybrid = product.type === "hybrid";
   const accentText = isIndica
-    ? "text-purple-300"
+    ? "text-[#6f42c1]"
     : isHybrid
-      ? "text-emerald-300"
-      : "text-yellow-300";
+      ? "text-[#087f5b]"
+      : "text-[#a16207]";
   const accentBorder = isIndica
-    ? "border-purple-700/60"
+    ? "border-[#c9b4e8]"
     : isHybrid
-      ? "border-emerald-500/50"
-      : "border-yellow-400/40";
+      ? "border-[#a6d7c3]"
+      : "border-[#e6c970]";
   const accentBg = isIndica
-    ? "bg-purple-900/20"
+    ? "bg-[#f3ecfb]"
     : isHybrid
-      ? "bg-emerald-500/10"
-      : "bg-yellow-500/10";
+      ? "bg-[#e7f5ee]"
+      : "bg-[#fff7dc]";
   const buttonClass = isIndica
-    ? "bg-purple-700 text-white hover:bg-purple-600"
+    ? "bg-[#6f42c1] text-white hover:bg-[#58309f]"
     : isHybrid
-      ? "bg-emerald-400 text-black hover:bg-emerald-300"
-      : "bg-yellow-400 text-black hover:bg-yellow-300";
+      ? "bg-[#087f5b] text-white hover:bg-[#065f46]"
+      : "bg-[#a16207] text-white hover:bg-[#854d0e]";
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="aura-page min-h-screen">
       <Header />
       <main className="pt-24">
         <section className="py-16 px-4">
@@ -58,7 +58,7 @@ export default function StoreProductPage({
               accentBg={accentBg}
             />
             <div className="space-y-6">
-              <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-gray-400">
+              <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-[#657068]">
                 {isIndica ? (
                   <MoonIcon className={accentText} width={18} height={18} />
                 ) : isHybrid ? (
@@ -72,30 +72,30 @@ export default function StoreProductPage({
                 {product.grade}
               </p>
               <h1 className="text-4xl md:text-6xl font-bold">{product.name}</h1>
-              <p className="text-lg text-gray-300">{product.description}</p>
+              <p className="text-lg text-[#536057]">{product.description}</p>
               <div className="flex flex-wrap gap-3">
                 <span
                   className={`px-4 py-2 rounded-full text-sm border ${accentBorder} ${accentBg}`}
                 >
                   {product.flavor}
                 </span>
-                <span className="px-4 py-2 rounded-full text-sm border border-gray-800 bg-gray-900/60">
+                <span className="rounded-full border border-[#dfe5df] bg-white px-4 py-2 text-sm">
                   {product.size}
                 </span>
-                <span className="px-4 py-2 rounded-full text-sm border border-gray-800 bg-gray-900/60">
+                <span className="rounded-full border border-[#dfe5df] bg-white px-4 py-2 text-sm">
                   {product.price}
                 </span>
               </div>
               <div>
-                <p className="text-sm text-gray-500 mb-2 uppercase tracking-wider">
+                <p className="mb-2 text-sm uppercase tracking-wider text-[#657068]">
                   Effects
                 </p>
-                <p className="text-gray-300">{product.effects}</p>
+                <p className="text-[#536057]">{product.effects}</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/store"
-                  className="px-6 py-3 rounded-full border border-gray-700 text-gray-200 hover:bg-gray-900 transition-colors text-center"
+                  className="rounded-full border border-[#bcc8be] px-6 py-3 text-center text-[#46554c] transition-colors hover:bg-[#eef1ea]"
                 >
                   Back to Store
                 </Link>
@@ -116,11 +116,11 @@ export default function StoreProductPage({
 
         <section className="py-20 px-4">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 border border-gray-800 rounded-3xl p-10 bg-gray-900/40">
+            <div className="rounded-3xl border border-[#dfe5df] bg-white p-10 lg:col-span-2">
               <h2 className="text-3xl font-semibold mb-4">
                 About This Release
               </h2>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="leading-relaxed text-[#536057]">
                 {product.overview}
               </p>
             </div>
@@ -134,7 +134,7 @@ export default function StoreProductPage({
                     key={spec.label}
                     className="flex items-center justify-between text-sm"
                   >
-                    <span className="text-gray-400">{spec.label}</span>
+                    <span className="text-[#657068]">{spec.label}</span>
                     <span className="font-semibold">{spec.value}</span>
                   </div>
                 ))}
@@ -145,7 +145,7 @@ export default function StoreProductPage({
 
         <section className="py-20 px-4">
           <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
-            <div className="border border-gray-800 rounded-3xl p-8 bg-black/60">
+            <div className="rounded-3xl border border-[#dfe5df] bg-white p-8">
               <h3 className="text-2xl font-semibold mb-4">Flavor Notes</h3>
               <div className="flex flex-wrap gap-2">
                 {product.notes.map((note) => (
@@ -158,15 +158,15 @@ export default function StoreProductPage({
                 ))}
               </div>
             </div>
-            <div className="border border-gray-800 rounded-3xl p-8 bg-black/60">
+            <div className="rounded-3xl border border-[#dfe5df] bg-white p-8">
               <h3 className="text-2xl font-semibold mb-4">Experience</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="leading-relaxed text-[#536057]">
                 {product.experience}
               </p>
             </div>
-            <div className="border border-gray-800 rounded-3xl p-8 bg-black/60">
+            <div className="rounded-3xl border border-[#dfe5df] bg-white p-8">
               <h3 className="text-2xl font-semibold mb-4">Finish</h3>
-              <p className="text-gray-300 leading-relaxed">{product.finish}</p>
+              <p className="leading-relaxed text-[#536057]">{product.finish}</p>
             </div>
           </div>
         </section>

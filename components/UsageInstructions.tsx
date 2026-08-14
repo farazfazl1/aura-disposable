@@ -9,15 +9,14 @@ interface UsageInstructionsProps {
   productName: string
 }
 
-const UsageInstructions: React.FC<UsageInstructionsProps> = ({ theme, productName }) => {
-  const isDark = theme === "dark"
+const UsageInstructions: React.FC<UsageInstructionsProps> = ({ productName }) => {
   const isHybrid = productName === "Hybrid"
 
-  const bgColor = isHybrid ? "bg-emerald-950/70 border border-emerald-500/30" : isDark ? "bg-gray-900" : "bg-gray-100"
-  const textColor = isHybrid ? "text-emerald-50" : isDark ? "text-white" : "text-gray-900"
-  const mutedTextColor = isHybrid ? "text-emerald-100/80" : isDark ? "text-gray-300" : "text-gray-700"
-  const accentColor = isHybrid ? "text-emerald-200" : isDark ? "text-primary" : "text-gray-900"
-  const stepBgColor = isHybrid ? "bg-black/40 border border-emerald-500/20" : isDark ? "bg-gray-800" : "bg-white"
+  const bgColor = isHybrid ? "border border-[#a6d7c3] bg-[#e7f5ee]" : "border border-[#dfe5df] bg-white"
+  const textColor = "text-[#17201b]"
+  const mutedTextColor = "text-[#5a665e]"
+  const accentColor = isHybrid ? "text-[#087f5b]" : productName === "Sativa" ? "text-[#a16207]" : "text-[#6f42c1]"
+  const stepBgColor = isHybrid ? "border border-[#b8dfce] bg-white/70" : "border border-[#e7ebe5] bg-[#f7f6f2]"
 
   const steps = [
     { title: "Activate", description: "Click the button 5 times rapidly to power on" },

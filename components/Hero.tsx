@@ -3,8 +3,6 @@
 import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { SunMoon } from "lucide-react"
-import { MoonIcon, SunIcon } from "@/components/Icons"
 import { Link as ScrollLink } from "react-scroll"
 import Link from "next/link"
 
@@ -98,36 +96,22 @@ const Hero = ({ onVideoLoaded, className }: HeroProps) => {
           />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-black opacity-85"></div>
+        <div className="absolute inset-0 bg-[#f7f6f2]/70 mix-blend-screen"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#f7f6f2]/50 via-[#f7f6f2]/80 to-[#f7f6f2]"></div>
       </div>
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <h1 ref={titleRef} className="text-5xl md:text-7xl font-bold mb-6 text-white">
+        <h1 ref={titleRef} className="text-5xl md:text-7xl font-bold mb-6 text-[#17201b]">
           ELEVATE YOUR AURA
         </h1>
-        <p ref={subtitleRef} className="text-xl md:text-2xl text-gray-300 mb-12">
+        <p ref={subtitleRef} className="text-xl md:text-2xl text-[#536057] mb-12">
           Experience the art of premium disposable vaping
         </p>
-        <div ref={ctaRef} className="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <div ref={ctaRef} className="flex justify-center">
           <Link
-            href="/indica"
-            className="px-8 py-3 bg-transparent border border-purple-600 text-purple-600 rounded-full text-lg font-semibold hover:bg-purple-600 hover:text-white transition-colors duration-300 flex items-center cursor-pointer"
+            href="/store"
+            className="inline-flex items-center justify-center rounded-full bg-[#17201b] px-8 py-3 text-lg font-semibold text-white shadow-lg transition-colors duration-300 hover:bg-[#33423a]"
           >
-            <MoonIcon className="mr-2" width={18} height={18} />
-            Discover Indica
-          </Link>
-          <Link
-            href="/sativa"
-            className="px-8 py-3 bg-transparent border border-yellow-500 text-yellow-500 rounded-full text-lg font-semibold hover:bg-yellow-500 hover:text-white transition-colors duration-300 flex items-center cursor-pointer"
-          >
-            <SunIcon className="mr-2" width={18} height={18} />
-            Explore Sativa
-          </Link>
-          <Link
-            href="/hybrid"
-            className="px-8 py-3 bg-transparent border border-emerald-400 text-emerald-200 rounded-full text-lg font-semibold hover:bg-emerald-400 hover:text-black transition-colors duration-300 flex items-center cursor-pointer"
-          >
-            <SunMoon className="mr-2 h-5 w-5" />
-            Discover Hybrid
+            Explore the Store
           </Link>
         </div>
       </div>
@@ -138,7 +122,7 @@ const Hero = ({ onVideoLoaded, className }: HeroProps) => {
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
       >
         <svg
-          className="animate-bounce w-6 h-6 text-white"
+          className="animate-bounce w-6 h-6 text-[#17201b]"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"

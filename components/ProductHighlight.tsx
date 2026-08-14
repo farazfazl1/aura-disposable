@@ -32,28 +32,28 @@ const ProductCard = memo(
     const getStyles = () => {
       switch (color) {
         case "purple":
-          return "border-purple-700 bg-gradient-to-br from-purple-900 to-black text-white"
+          return "border-[#c9b4e8] bg-gradient-to-br from-[#f4ecff] to-[#e6d9f7] text-[#2f1b45]"
         case "sun":
-          return "border-yellow-400 bg-gradient-to-br from-yellow-400 to-yellow-600 text-black"
+          return "border-[#e5c65f] bg-gradient-to-br from-[#fff8de] to-[#f4d278] text-[#3c2d0c]"
         case "hybrid":
-          return "border-emerald-400 bg-gradient-to-br from-emerald-500 via-teal-500 to-yellow-400 text-black"
+          return "border-[#9bd6bf] bg-gradient-to-br from-[#e1f5ec] via-[#ccede0] to-[#f7e7b2] text-[#17392f]"
         case "white":
-          return "border-gray-200 bg-gradient-to-br from-gray-100 to-white text-black"
+          return "border-[#dfe5df] bg-gradient-to-br from-[#f3f5f0] to-white text-[#17201b]"
         default:
-          return "border-gray-700 bg-gradient-to-br from-gray-900 to-black text-white"
+          return "border-[#dfe5df] bg-white text-[#17201b]"
       }
     }
 
     const getTextColor = () => {
       switch (color) {
         case "purple":
-          return "text-purple-300"
+          return "text-[#6f42c1]"
         case "sun":
-          return "text-black"
+          return "text-[#8a5a08]"
         case "hybrid":
-          return "text-black"
+          return "text-[#087f5b]"
         case "white":
-          return "text-gray-800"
+          return "text-[#536057]"
         default:
           return "gradient-text"
       }
@@ -62,15 +62,15 @@ const ProductCard = memo(
     const getButtonStyle = () => {
       switch (color) {
         case "purple":
-          return "bg-purple-600 text-white hover:bg-purple-700"
+          return "bg-[#6f42c1] text-white hover:bg-[#58309f]"
         case "sun":
-          return "bg-yellow-700 text-white hover:bg-yellow-800"
+          return "bg-[#a16207] text-white hover:bg-[#854d0e]"
         case "hybrid":
-          return "bg-emerald-700 text-white hover:bg-emerald-800"
+          return "bg-[#087f5b] text-white hover:bg-[#065f46]"
         case "white":
-          return "bg-black text-white hover:bg-gray-800"
+          return "bg-[#17201b] text-white hover:bg-[#33423a]"
         default:
-          return "bg-white text-black hover:bg-gray-200"
+          return "bg-[#17201b] text-white hover:bg-[#33423a]"
       }
     }
 
@@ -82,12 +82,12 @@ const ProductCard = memo(
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`p-8 rounded-3xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl border bg-yellow-400 flex flex-col ${getStyles()}`}
+        className={`p-8 rounded-3xl transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl border flex flex-col ${getStyles()}`}
       >
         {imageSrc ? (
           <AspectRatio
             ratio={PRODUCT_HIGHLIGHT_IMAGE_RATIO}
-            className="relative mb-6 w-full overflow-hidden rounded-2xl bg-black/20"
+            className="relative mb-6 w-full overflow-hidden rounded-2xl bg-[#17201b]/[0.06]"
           >
             <Image
               src={imageSrc}
@@ -99,11 +99,21 @@ const ProductCard = memo(
           </AspectRatio>
         ) : null}
         <div className="flex items-center mb-6">
-          <Icon className={`${color === "white" ? "text-black" : "text-white"} w-6 h-6`} />
+          <Icon
+            className={`${
+              color === "purple"
+                ? "text-[#6f42c1]"
+                : color === "sun"
+                  ? "text-[#8a5a08]"
+                  : color === "hybrid"
+                    ? "text-[#087f5b]"
+                    : "text-[#17201b]"
+            } w-6 h-6`}
+          />
           <h3 className="text-3xl font-bold ml-3">{name}</h3>
         </div>
         <p className={`text-xl font-semibold mb-4 ${getTextColor()}`}>{tagline}</p>
-        <p className={`mb-6 text-lg flex-grow ${color === "white" ? "text-gray-600" : "text-white"}`}>{description}</p>
+        <p className="mb-6 flex-grow text-lg text-[#46554c]">{description}</p>
         <div className="mt-auto">
           <Link
             href={href}
@@ -121,7 +131,7 @@ ProductCard.displayName = "ProductCard"
 
 const ProductHighlight = () => {
   return (
-    <section className="py-24 px-4 bg-black">
+    <section className="bg-[#f7f6f2] px-4 py-24">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -129,8 +139,8 @@ const ProductHighlight = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-16 tracking-tight leading-tight px-4"
         >
-          <span className="text-purple-500">ELEVATE</span> <span className="text-white">YOUR</span>{" "}
-          <span className="text-yellow-500">EXPERIENCE</span>
+          <span className="text-[#6f42c1]">ELEVATE</span> <span className="text-[#17201b]">YOUR</span>{" "}
+          <span className="text-[#a16207]">EXPERIENCE</span>
         </motion.h2>
         <motion.div
           initial={{ opacity: 0 }}
@@ -166,7 +176,7 @@ const ProductHighlight = () => {
               (window.location.href =
                 "mailto:auradisposable@gmail.com?subject=Wholesale%20Inquiry%20for%20Aura%20Vape&body=Hello%20Aura%20Vape%20Team%2C%0A%0AI'm%20interested%20in%20your%20wholesale%20options.%20Please%20provide%20me%20with%20more%20information%20about%20your%20products%20and%20pricing.%0A%0ABest%20regards%2C%0A[Your%20Name]")
             }
-            className="bg-white text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-200 transition-colors duration-300"
+            className="bg-[#17201b] text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-[#33423a] transition-colors duration-300"
           >
             Get Wholesale Pricing
           </button>
