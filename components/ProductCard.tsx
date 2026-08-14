@@ -68,7 +68,7 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
         <p className="mb-8 text-lg leading-relaxed text-[#46554c]">{description}</p>
 
         <Link
-          href={`/${type}`}
+          href={`/store?type=${type}`}
           className={`
             inline-flex items-center px-6 py-3 rounded-full text-sm font-semibold
             transition-all duration-300 ease-out transform
@@ -82,7 +82,7 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
             hover:scale-105 hover:shadow-lg
           `}
         >
-          Learn More
+          Browse {title}
           <svg
             className={`ml-2 w-5 h-5 transition-transform duration-300 ${isHovered ? "translate-x-1" : ""}`}
             fill="none"

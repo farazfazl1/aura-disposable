@@ -1,59 +1,76 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 
 interface ProductGalleryProps {
   images: string[]
   productName: string
-  accentBorder: string
-  accentBg: string
+  accentColor: string
+  softColor: string
 }
 
 export default function ProductGallery({
   images,
   productName,
-  accentBorder,
-  accentBg,
+  accentColor,
+  softColor,
 }: ProductGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   if (!images || images.length === 0) return null
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* Main Image */}
-      <div className={`rounded-3xl border ${accentBorder} ${accentBg} overflow-hidden flex justify-center items-center h-80 lg:h-[420px]`}>
-        <img
+    <div className="aura-product-visual">
+      <span
+        aria-hidden="true"
+        className="aura-product-glow"
+        style={{ background: `radial-gradient(circle, ${softColor} 0%, transparent 70%)` }}
+      />
+      <div className="aura-product-image-frame">
+        <Image
+          key={images[selectedIndex]}
           src={images[selectedIndex]}
-          alt={`${productName} - Image ${selectedIndex + 1}`}
-          className="w-full h-full object-cover"
+          alt={`${productName} Aura vape`}
+          fill
+          priority
+          sizes="(min-width: 1024px) 640px, 90vw"
+          className="aura-product-image object-contain"
         />
       </div>
 
-      {/* Thumbnails */}
-      {images.length > 1 && (
-        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-          {images.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => setSelectedIndex(index)}
-              className={`flex-shrink-0 w-24 h-24 rounded-2xl border-2 transition-all duration-300 p-2 ${
-                accentBg
-              } ${
-                selectedIndex === index
-                  ? accentBorder
-                  : "border-transparent opacity-50 hover:opacity-100"
-              }`}
-            >
-              <img
-                src={image}
-                alt={`${productName} thumbnail ${index + 1}`}
-                className="w-full h-full object-contain rounded-xl"
-              />
-            </button>
-          ))}
+      {images.length > 1 ? (
+        <div className="aura-product-thumbnails" aria-label={`${productName} gallery`}>
+          {images.map((image, index) => {
+            const isSelected = selectedIndex === index
+
+            return (
+              <button
+                key={image}
+                type="button"
+                aria-label={`Show ${productName} image ${index + 1}`}
+                aria-pressed={isSelected}
+                onClick={() => setSelectedIndex(index)}
+                className="aura-product-thumbnail"
+                style={{
+                  borderColor: isSelected ? accentColor : "rgba(255,255,255,0.45)",
+                  backgroundColor: isSelected ? softColor : "rgba(255,255,255,0.58)",
+                }}
+              >
+                <span className="relative block h-full w-full overflow-hidden rounded-full bg-white/80">
+                  <Image
+                    src={image}
+                    alt=""
+                    fill
+                    sizes="54px"
+                    className="object-contain p-1.5 mix-blend-multiply"
+                  />
+                </span>
+              </button>
+            )
+          })}
         </div>
-      )}
+      ) : null}
     </div>
   )
 }

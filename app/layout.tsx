@@ -3,6 +3,8 @@ import { Toaster } from "@/components/ui/toaster"
 import type { Metadata } from "next"
 import "./globals.css"
 import type { ReactNode } from "react"
+import { CartProvider } from "@/components/cart/CartProvider"
+import BasketDrawer from "@/components/cart/BasketDrawer"
 
 export const metadata: Metadata = {
   title: "AURA - Premium Disposable Vapes",
@@ -76,8 +78,11 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider attribute="class" forcedTheme="light" enableSystem={false}>
-          {children}
-          <Toaster />
+          <CartProvider>
+            {children}
+            <BasketDrawer />
+            <Toaster />
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

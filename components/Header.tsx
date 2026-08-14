@@ -1,11 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, SunMoon, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { useHeaderScroll } from "@/hooks/useHeaderScroll"
-import { MoonIcon, SunIcon } from "@/components/Icons"
+import BasketButton from "@/components/cart/BasketButton"
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,16 +17,6 @@ const Header = () => {
 
   const getHeaderStyle = () => {
     return "border-b border-[#dfe5df] bg-[#f7f6f2]/90 shadow-[0_8px_24px_rgba(23,32,27,0.06)] backdrop-blur-md"
-  }
-
-  const getLinkStyle = (type: "indica" | "sativa" | "hybrid") => {
-    if (type === "indica") {
-      return "text-[#6f42c1] hover:text-[#522b9f]"
-    }
-    if (type === "sativa") {
-      return "text-[#a16207] hover:text-[#854d0e]"
-    }
-    return "text-[#087f5b] hover:text-[#065f46]"
   }
 
   const getStoreLinkStyle = () => {
@@ -69,39 +59,22 @@ const Header = () => {
         { name: "Story", path: "/#story" },
         { name: "FAQ", path: "/#faq" },
       ]
-    } else if (pathname.startsWith("/indica")) {
-      return [
-        { name: "Sativa", path: "/sativa" },
-        { name: "Hybrid", path: "/hybrid" },
-        { name: "Store", path: "/store" },
-        { name: "Story", path: "/#story" },
-        { name: "FAQ", path: "/#faq" },
-      ]
-    } else if (pathname.startsWith("/sativa")) {
-      return [
-        { name: "Indica", path: "/indica" },
-        { name: "Hybrid", path: "/hybrid" },
-        { name: "Store", path: "/store" },
-        { name: "Story", path: "/#story" },
-        { name: "FAQ", path: "/#faq" },
-      ]
-    } else if (pathname.startsWith("/hybrid")) {
-      return [
-        { name: "Indica", path: "/indica" },
-        { name: "Sativa", path: "/sativa" },
-        { name: "Store", path: "/store" },
-        { name: "Story", path: "/#story" },
-        { name: "FAQ", path: "/#faq" },
-      ]
     } else if (pathname.startsWith("/store")) {
       return [
         { name: "Home", path: "/" },
-        { name: "Indica", path: "/indica" },
-        { name: "Sativa", path: "/sativa" },
-        { name: "Hybrid", path: "/hybrid" },
+        { name: "Store", path: "/store" },
+        { name: "Verify", path: "/verify" },
+        { name: "Story", path: "/#story" },
+        { name: "FAQ", path: "/#faq" },
       ]
     }
-    return []
+    return [
+      { name: "Home", path: "/" },
+      { name: "Store", path: "/store" },
+      { name: "Verify", path: "/verify" },
+      { name: "Story", path: "/#story" },
+      { name: "FAQ", path: "/#faq" },
+    ]
   }
 
   const navItems = getNavItems()
@@ -127,29 +100,31 @@ const Header = () => {
               AURA
             </Link>
           </div>
-          <nav className="hidden md:flex space-x-8">
-            <Link href="/indica" className={`flex items-center ${getLinkStyle("indica")}`}>
-              <MoonIcon className="mr-2" width={18} height={18} />
-              Indica
-            </Link>
-            <Link href="/sativa" className={`flex items-center ${getLinkStyle("sativa")}`}>
-              <SunIcon className="mr-2" width={18} height={18} />
-              Sativa
-            </Link>
-            <Link href="/hybrid" className={`flex items-center ${getLinkStyle("hybrid")}`}>
-              <SunMoon className="mr-2" width={18} height={18} />
-              Hybrid
-            </Link>
-            <Link href="/store" className={`flex items-center ${getStoreLinkStyle()}`}>
-              Store
-            </Link>
-            <Link href="/verify" className="text-[#17201b] hover:text-[#6f42c1]">
-              Verify
-            </Link>
-          </nav>
-          <button className="text-[#17201b] md:hidden" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-3 md:gap-6">
+            <nav className="hidden items-center space-x-8 md:flex">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.path}
+                  className={`text-sm font-semibold transition-colors ${
+                    item.name === "Store" ? getStoreLinkStyle() : "text-[#17201b] hover:text-[#6f42c1]"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+            <BasketButton />
+            <button
+              type="button"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              className="flex h-10 w-10 items-center justify-center rounded-full text-[#17201b] transition-colors hover:bg-[#eef1ea] md:hidden"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            </button>
+          </div>
         </div>
       </div>
       {isOpen && (

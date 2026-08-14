@@ -74,8 +74,8 @@ const ProductCard = memo(
       }
     }
 
-    const href =
-      name.toLowerCase().includes("indica") ? "/indica" : name.toLowerCase().includes("hybrid") ? "/hybrid" : "/sativa"
+    const profile = name.toLowerCase()
+    const href = `/store?type=${profile}`
 
     return (
       <motion.div
@@ -119,7 +119,7 @@ const ProductCard = memo(
             href={href}
             className={`px-6 py-3 rounded-full transition-colors duration-300 inline-block ${getButtonStyle()}`}
           >
-            Learn More
+            Browse {name}
           </Link>
         </div>
       </motion.div>
