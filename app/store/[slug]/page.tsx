@@ -310,43 +310,70 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
           </div>
         </section>
 
-        <section className="bg-[#0e100f] px-4 py-16 text-white md:py-24" aria-labelledby="details-heading">
+        <section className="aura-profile-blueprint px-4 py-16 md:py-24" style={heroStyle} aria-labelledby="details-heading">
           <div className="mx-auto max-w-7xl">
-            <div className="flex flex-col gap-5 border-b border-white/15 pb-8 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#d7b846]">Aura signature</p>
-                <h2 id="details-heading" className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.92] tracking-[-0.045em] sm:text-5xl md:text-7xl">
-                  Designed around the profile.
-                </h2>
-              </div>
-              <p className="max-w-md text-sm leading-6 text-white/60 md:text-right">
-                Every visible detail below comes directly from this release&apos;s product profile.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {detailItems.map((item, index) => (
-                <article key={`${item.label}-${index}`} className="aura-detail-card">
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[#d7b846]">
-                      {index === 0 ? <TypeIcon width={19} height={19} aria-hidden="true" /> : index === 1 ? <Package width={19} height={19} aria-hidden="true" /> : <Sparkles width={19} height={19} aria-hidden="true" />}
-                    </span>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-white/30">0{index + 1}</span>
+            <div className="grid gap-5 lg:grid-cols-[0.82fr_1.18fr]">
+              <div className="aura-blueprint-story">
+                <span className="aura-blueprint-word" aria-hidden="true">{product.name}</span>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[color:var(--hero-accent)]">
+                    <TypeIcon width={18} height={18} aria-hidden="true" />
+                    Aura / {typeLabel}
                   </div>
-                  <p className="mt-10 text-[10px] font-bold uppercase tracking-[0.2em] text-white/45">{item.label}</p>
-                  <p className="mt-3 text-xl font-bold leading-7 text-white">{item.value}</p>
-                </article>
-              ))}
+                  <h2 id="details-heading" className="mt-7 max-w-xl text-4xl font-black uppercase leading-[0.92] tracking-[-0.05em] text-white sm:text-5xl md:text-6xl">
+                    The profile, made tangible.
+                  </h2>
+                  <p className="mt-6 max-w-lg text-base leading-7 text-white/[0.72]">
+                    Color, format, and formulation come together around the character of {product.name}.
+                  </p>
+                </div>
+
+                <div className="relative z-10 mt-14 flex flex-wrap items-center gap-3 border-t border-white/15 pt-6">
+                  <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-white">
+                    {product.grade}
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-white/50">Aura signature</span>
+                </div>
+              </div>
+
+              <div className="aura-blueprint-data">
+                <div className="flex flex-col gap-3 border-b border-[color:var(--hero-deep)]/15 px-6 py-6 sm:flex-row sm:items-end sm:justify-between md:px-8">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[color:var(--hero-deep)]/55">Release profile</p>
+                    <h3 className="mt-2 text-2xl font-black uppercase tracking-[-0.035em] text-[color:var(--hero-deep)] sm:text-3xl">{product.name} at a glance</h3>
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-[color:var(--hero-deep)]/45">
+                    {detailItems.length} attributes
+                  </span>
+                </div>
+
+                <div>
+                  {detailItems.map((item, index) => {
+                    const normalizedLabel = item.label.toLowerCase()
+                    const DetailIcon = normalizedLabel === "profile" ? TypeIcon : normalizedLabel === "format" ? Package : normalizedLabel === "terpenes" ? Leaf : Sparkles
+
+                    return (
+                      <article key={`${item.label}-${index}`} className="aura-blueprint-row">
+                        <span className="aura-blueprint-icon">
+                          <DetailIcon width={20} height={20} aria-hidden="true" />
+                        </span>
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[color:var(--hero-deep)]/55">{item.label}</p>
+                          <p className="mt-2 text-lg font-bold leading-7 text-[color:var(--hero-deep)] sm:text-xl">{item.value}</p>
+                        </div>
+                      </article>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
 
-            <div className="mt-12 flex flex-col gap-4 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <Link href="/store" className="inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition-colors hover:text-white">
+            <div className="mt-8 flex items-center justify-between border-t border-[color:var(--hero-deep)]/15 pt-6">
+              <Link href="/store" className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--hero-deep)]/70 transition-colors hover:text-[color:var(--hero-deep)]">
                 <ArrowLeft size={16} aria-hidden="true" />
                 Back to all vapes
               </Link>
-              <span className={`inline-flex w-fit rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] ${theme.border} ${theme.softBg} ${theme.text}`}>
-                {product.grade}
-              </span>
+              <span className="hidden text-xs font-bold uppercase tracking-[0.18em] text-[color:var(--hero-deep)]/45 sm:inline">Built around the release</span>
             </div>
           </div>
         </section>

@@ -7,37 +7,15 @@ import { motion, useReducedMotion } from "framer-motion"
 import { MoonIcon, SunIcon } from "@/components/Icons"
 import type { StoreProduct, VapeType } from "@/lib/storeCatalog"
 
-const PRODUCT_TYPE_STYLES: Record<
-  VapeType,
-  {
-    stage: string
-    chip: string
-    text: string
-    border: string
-    button: string
-  }
-> = {
-  indica: {
-    stage: "bg-[#f4ecff]",
-    chip: "border-[#c9b4e8] bg-[#fffefa] text-[#6f42c1]",
-    text: "text-[#6f42c1]",
-    border: "border-[#c9b4e8]",
-    button: "bg-[#6f42c1] hover:bg-[#58309f]",
-  },
-  sativa: {
-    stage: "bg-[#fff7dc]",
-    chip: "border-[#e6c970] bg-[#fffefa] text-[#a16207]",
-    text: "text-[#a16207]",
-    border: "border-[#e6c970]",
-    button: "bg-[#a16207] hover:bg-[#854d0e]",
-  },
-  hybrid: {
-    stage: "bg-[#e7f5ee]",
-    chip: "border-[#a6d7c3] bg-[#fffefa] text-[#087f5b]",
-    text: "text-[#087f5b]",
-    border: "border-[#a6d7c3]",
-    button: "bg-[#087f5b] hover:bg-[#065f46]",
-  },
+const PRODUCT_ACCENTS: Record<string, { background: string; foreground: string }> = {
+  "sweet-island": { background: "#e8c84d", foreground: "#15150d" },
+  "blue-dream": { background: "#345fd1", foreground: "#ffffff" },
+  og: { background: "#70496f", foreground: "#ffffff" },
+  "og-mint": { background: "#347a59", foreground: "#ffffff" },
+  "persian-gold": { background: "#e9782d", foreground: "#171108" },
+  blueberry: { background: "#31458f", foreground: "#ffffff" },
+  jealousy: { background: "#c82f43", foreground: "#ffffff" },
+  "laughing-buddha": { background: "#c89a37", foreground: "#151108" },
 }
 
 function getTypeIcon(type: VapeType) {
@@ -50,74 +28,72 @@ export default function StoreProductGrid({ products }: { products: StoreProduct[
   const reducedMotion = useReducedMotion()
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-4">
       {products.map((product, index) => {
-        const styles = PRODUCT_TYPE_STYLES[product.type]
         const TypeIcon = getTypeIcon(product.type)
+        const accent = PRODUCT_ACCENTS[product.slug] ?? { background: "#d5aa55", foreground: "#14120d" }
 
         return (
           <motion.article
             key={product.slug}
             layout
-            initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.35, delay: reducedMotion ? 0 : index * 0.04 }}
-            className="group flex min-h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#dfe5df] bg-[#fffefa] text-[#17201b] shadow-[0_14px_40px_rgba(23,32,27,0.05)] transition duration-300 hover:-translate-y-1 hover:border-[#c7d0c9] hover:shadow-[0_20px_50px_rgba(23,32,27,0.1)]"
+            transition={{ duration: reducedMotion ? 0 : 0.4, delay: reducedMotion ? 0 : index * 0.045 }}
+            className="group flex min-h-full flex-col overflow-hidden rounded-[1.6rem] border border-[#dfe5df] bg-[#fffefa] text-[#17201b] shadow-[0_16px_44px_rgba(23,32,27,0.07)] transition duration-300 hover:-translate-y-1 hover:border-[#c7d0c9] hover:shadow-[0_24px_64px_rgba(23,32,27,0.13)]"
           >
-            <Link href={`/store/${product.slug}`} className="block" aria-label={`View ${product.name} details`}>
-              <div className={`relative aspect-[4/3] overflow-hidden border-b border-[#dfe5df] ${styles.stage}`}>
-                <span
-                  className={`absolute left-4 top-4 z-10 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${styles.chip}`}
-                >
-                  {product.type}
-                </span>
+            <Link href={`/store/${product.slug}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d5aa55] focus-visible:ring-inset" aria-label={`View ${product.name} details`}>
+              <div className="relative aspect-square overflow-hidden bg-black">
                 <Image
-                  src={product.image}
-                  alt={`${product.name} Aura vape`}
+                  src={`/images/listing/${product.slug}.webp`}
+                  alt={`${product.name} Aura vape with ${product.flavor} flavor notes`}
                   fill
-                  priority={index === 0}
+                  priority={index < 4}
                   sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-contain p-5 transition-transform duration-500 ease-out group-hover:scale-105 sm:p-6"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                 />
-                <span className="absolute bottom-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#dfe5df] bg-[#fffefa]/90 text-[#17201b] opacity-0 shadow-sm transition-all duration-300 group-hover:opacity-100">
-                  <ArrowUpRight size={17} aria-hidden="true" />
+                <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/35 text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                  <ArrowUpRight size={18} aria-hidden="true" />
                 </span>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
             </Link>
 
-            <div className="flex flex-1 flex-col p-5">
-              <div className="flex items-center justify-between gap-3">
-                <div className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] ${styles.text}`}>
-                  <TypeIcon width={16} height={16} aria-hidden="true" />
-                  {product.type}
-                </div>
-                <span className="text-lg font-semibold text-[#17201b]">{product.price}</span>
-              </div>
+            <div
+              className="flex min-h-[5.3rem] items-center justify-between gap-4 px-5 py-4"
+              style={{ backgroundColor: accent.background, color: accent.foreground }}
+            >
+              <h2
+                className="text-[1.4rem] font-black uppercase leading-[0.9] tracking-[-0.055em]"
+                style={{ fontFamily: '"Archivo Black", "Arial Black", sans-serif' }}
+              >
+                {product.name}
+              </h2>
+              <span
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border"
+                style={{ borderColor: `${accent.foreground}66` }}
+                title={product.type}
+              >
+                <TypeIcon width={18} height={18} aria-hidden="true" />
+                <span className="sr-only">{product.type}</span>
+              </span>
+            </div>
 
-              <h3 className="mt-4 font-serif text-3xl font-semibold leading-none tracking-[-0.03em]">{product.name}</h3>
-              <p className={`mt-2 text-xs font-semibold uppercase tracking-[0.12em] ${styles.text}`}>{product.grade}</p>
+            <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9b6e21]">Flavor profile</p>
+              <p className="mt-2 line-clamp-2 min-h-11 text-sm leading-6 text-[#657068]">{product.flavor}</p>
 
-              <div className="mt-5 grid grid-cols-1 gap-3 border-y border-[#dfe5df] py-4 text-sm sm:grid-cols-2">
+              <div className="mt-auto flex items-end justify-between gap-4 border-t border-[#dfe5df] pt-4">
                 <div>
-                  <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#89938c]">Taste</p>
-                  <p className="line-clamp-2 leading-5 text-[#536057]">{product.flavor}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#89938c]">{product.size}</p>
+                  <p className="mt-1 text-xl font-bold text-[#17201b]">{product.price}</p>
                 </div>
-                <div>
-                  <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#89938c]">Effects</p>
-                  <p className="line-clamp-2 leading-5 text-[#536057]">{product.effects}</p>
-                </div>
-              </div>
-
-              <p className="mt-4 line-clamp-3 text-sm leading-6 text-[#657068]">{product.description}</p>
-
-              <div className="mt-auto flex items-center justify-between gap-3 pt-6">
-                <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#89938c]">{product.size}</span>
                 <Link
                   href={`/store/${product.slug}`}
-                  className={`inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#17201b] focus-visible:ring-offset-2 ${styles.button}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-[#cfd8d1] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-[#17201b] transition-colors hover:border-[#b88932] hover:bg-[#b88932] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b88932] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fffefa]"
                 >
-                  View details
-                  <ArrowUpRight size={15} aria-hidden="true" />
+                  View
+                  <ArrowUpRight size={14} aria-hidden="true" />
                 </Link>
               </div>
             </div>
