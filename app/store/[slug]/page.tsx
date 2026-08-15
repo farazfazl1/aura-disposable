@@ -315,7 +315,7 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
             <div className="grid gap-5 lg:grid-cols-[0.82fr_1.18fr]">
               <div className="aura-blueprint-story">
                 <span className="aura-blueprint-word" aria-hidden="true">{product.name}</span>
-                <div className="relative z-10">
+                <div className="aura-blueprint-copy relative z-10">
                   <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[color:var(--hero-accent)]">
                     <TypeIcon width={18} height={18} aria-hidden="true" />
                     Aura / {typeLabel}
@@ -328,7 +328,7 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
                   </p>
                 </div>
 
-                <div className="relative z-10 mt-14 flex flex-wrap items-center gap-3 border-t border-white/15 pt-6">
+                <div className="aura-blueprint-meta relative z-10 mt-14 flex flex-wrap items-center gap-3 border-t border-white/15 pt-6">
                   <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-white">
                     {product.grade}
                   </span>

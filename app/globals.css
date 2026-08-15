@@ -38,11 +38,15 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--aura-paper);
   color-scheme: light;
 }
 
 body {
+  max-width: 100%;
+  overflow-x: hidden;
   color: rgb(var(--foreground-rgb));
   background: var(--aura-paper);
   font-family: "Inter", sans-serif;
@@ -402,26 +406,32 @@ select {
 .aura-blueprint-story {
   position: relative;
   display: flex;
-  min-height: 520px;
+  min-height: clamp(28rem, 38vw, 34rem);
   flex-direction: column;
   justify-content: space-between;
   padding: clamp(1.75rem, 4vw, 3rem);
   overflow: hidden;
   border-radius: 2rem;
-  background:
-    radial-gradient(circle at 80% 12%, rgba(255, 255, 255, 0.16), transparent 28%),
-    var(--hero-deep);
+  background: var(--hero-deep);
   box-shadow: 0 28px 80px rgba(23, 32, 27, 0.14);
+}
+
+.aura-blueprint-copy {
+  min-width: 0;
+}
+
+.aura-blueprint-meta {
+  margin-top: auto;
 }
 
 .aura-blueprint-word {
   position: absolute;
-  right: -0.06em;
-  bottom: -0.09em;
-  max-width: 110%;
+  right: 1rem;
+  bottom: 1rem;
+  max-width: 82%;
   color: transparent;
   font-family: "Archivo Black", "Arial Black", sans-serif;
-  font-size: clamp(4.5rem, 9vw, 8.5rem);
+  font-size: clamp(3.5rem, 5.5vw, 5.5rem);
   line-height: 0.76;
   letter-spacing: -0.075em;
   text-align: right;
@@ -480,6 +490,7 @@ select {
 @media (max-width: 1023px) {
   .aura-product-stage {
     min-height: 610px;
+    overflow-x: hidden;
   }
 
   .aura-product-visual {
@@ -499,6 +510,22 @@ select {
 
   .aura-profile-table {
     margin-top: 0.5rem;
+  }
+
+  .aura-blueprint-story {
+    min-height: 0;
+    justify-content: flex-start;
+  }
+
+  .aura-blueprint-meta {
+    margin-top: 3.5rem;
+  }
+
+  .aura-blueprint-word {
+    right: 1rem;
+    bottom: 0.75rem;
+    max-width: 82%;
+    font-size: clamp(3rem, 10vw, 5rem);
   }
 }
 
@@ -578,6 +605,68 @@ select {
   .aura-profile-chip {
     padding-inline: 0.75rem;
     font-size: 0.72rem;
+  }
+
+  .aura-profile-table {
+    display: grid;
+    gap: 0.75rem;
+    border-top: 0;
+  }
+
+  .aura-profile-row {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .aura-profile-row > div {
+    min-width: 0;
+  }
+
+  .aura-profile-row:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .aura-profile-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .aura-profile-chip {
+    max-width: 100%;
+    min-height: 2rem;
+    padding-inline: 0.68rem;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .aura-blueprint-story {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .aura-blueprint-meta {
+    margin-top: 2.5rem;
+  }
+
+  .aura-blueprint-word {
+    display: block;
+    top: 1.5rem;
+    right: 1rem;
+    bottom: auto;
+    max-width: 45%;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(0.72rem, 3.25vw, 0.95rem);
+    line-height: 1.1;
+    letter-spacing: 0.12em;
+    opacity: 1;
+    -webkit-text-stroke: 0;
   }
 }
 
