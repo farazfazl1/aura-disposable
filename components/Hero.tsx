@@ -119,6 +119,7 @@ const Hero = ({ onVideoLoaded, className }: HeroProps) => {
         to="products"
         smooth={true}
         duration={500}
+        offset={-96}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
       >
         <svg

@@ -42,6 +42,8 @@ html {
   overflow-x: hidden;
   background: var(--aura-paper);
   color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -671,6 +673,10 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .aura-product-image {
     animation: none;
   }

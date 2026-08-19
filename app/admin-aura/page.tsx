@@ -18,6 +18,39 @@ type PurchaseRequest = {
   quantity?: number
 }
 
+type BasketLineItem = {
+  slug: string
+  name: string
+  format: string
+  quantity: number
+  unitPrice: number
+  lineTotal: number
+}
+
+type BasketOrderNote = {
+  kind: "basket_order"
+  subtotal: number
+  items: BasketLineItem[]
+}
+
+function parseBasketNote(note: string | undefined): BasketOrderNote | null {
+  if (!note) return null
+  try {
+    const parsed = JSON.parse(note)
+    if (
+      parsed &&
+      parsed.kind === "basket_order" &&
+      typeof parsed.subtotal === "number" &&
+      Array.isArray(parsed.items)
+    ) {
+      return parsed as BasketOrderNote
+    }
+  } catch {
+    // legacy purchase requests store a plain-string note
+  }
+  return null
+}
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
 const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
@@ -239,11 +272,15 @@ const AdminPage = () => {
         ) : (
           <div className="space-y-6">
             <div className="grid gap-6 lg:grid-cols-2">
-              {visibleRequests.map((request) => (
+              {visibleRequests.map((request) => {
+                const basket = parseBasketNote(request.delivery_note)
+                return (
               <div key={request.id} className="rounded-3xl border border-[#dfe5df] bg-white p-6 shadow-sm">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.25em] text-[#657068]">Product</p>
+                      <p className="text-xs uppercase tracking-[0.25em] text-[#657068]">
+                        {basket ? "Basket Order" : "Product"}
+                      </p>
                       <p className="text-xl font-semibold">{request.product_name}</p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -278,17 +315,36 @@ const AdminPage = () => {
                     <span className="text-[#657068]">Name</span>
                     <span>{request.name}</span>
                   </div>
-                  <div className="grid gap-1">
-                    <span className="text-[#657068]">Order Details</span>
-                    <div className="flex items-center gap-2">
-                      <span className="rounded bg-[#eef1ea] px-2 py-1 text-sm font-medium text-[#46554c]">
-                        Qty: {request.quantity ?? 5}
-                      </span>
-                      <span className="rounded border border-green-200 bg-green-50 px-2 py-1 text-sm font-bold text-green-700">
-                        Total: ${200 + (Math.max(request.quantity ?? 5, 5) - 5) * 35}
+                  {basket ? (
+                    <div className="grid gap-1">
+                      <span className="text-[#657068]">Order Items</span>
+                      <ul className="space-y-1">
+                        {basket.items.map((line, index) => (
+                          <li key={index} className="flex justify-between gap-3">
+                            <span>
+                              {line.quantity}× {line.name} ({line.format})
+                            </span>
+                            <span className="font-semibold text-[#17201b]">${line.quantity * line.unitPrice}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <span className="mt-1 w-fit rounded border border-green-200 bg-green-50 px-2 py-1 text-sm font-bold text-green-700">
+                        Subtotal: ${basket.subtotal}
                       </span>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="grid gap-1">
+                      <span className="text-[#657068]">Order Details</span>
+                      <div className="flex items-center gap-2">
+                        <span className="rounded bg-[#eef1ea] px-2 py-1 text-sm font-medium text-[#46554c]">
+                          Qty: {request.quantity ?? 5}
+                        </span>
+                        <span className="rounded border border-green-200 bg-green-50 px-2 py-1 text-sm font-bold text-green-700">
+                          Total: ${200 + (Math.max(request.quantity ?? 5, 5) - 5) * 35}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                   <div className="grid gap-1">
                     <span className="text-[#657068]">Email</span>
                     <a className="underline decoration-[#9aa79d]" href={`mailto:${request.email}`}>
@@ -336,7 +392,8 @@ const AdminPage = () => {
                   </div>
                 </div>
               </div>
-            ))}
+              )
+            })}
             </div>
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
               <span className="text-sm text-[#657068]">

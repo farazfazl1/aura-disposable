@@ -29,7 +29,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [honeypot, setHoneypot] = useState("")
-  const phonePattern = "^\\+?1?\\s?\\(?[2-9]\\d{2}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$"
+  const phonePattern = "^\\+?1?\\s?\\(?[2-9]\\d{2}\\)?[\\s.\\-]?\\d{3}[\\s.\\-]?\\d{4}$"
   const emailPattern = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
   const minIntervalMs = 60000
 

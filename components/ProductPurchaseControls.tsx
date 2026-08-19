@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
+import { COMPARE_AT_PRICE, MAX_ORDER_QUANTITY, unitPriceForQuantity } from "@/lib/pricing"
 
 type ProductPurchaseControlsProps = {
   slug: string
@@ -34,9 +35,11 @@ export default function ProductPurchaseControls({
   const [quantity, setQuantity] = useState(1)
   const [selectedFormat, setSelectedFormat] = useState(formats[0] ?? "Standard")
   const unitPrice = numericPrice(price)
+  const tierPrice = unitPriceForQuantity(quantity)
+  const bulkSavings = (unitPrice - tierPrice) * quantity
 
   const decrease = () => setQuantity((current) => Math.max(1, current - 1))
-  const increase = () => setQuantity((current) => Math.min(99, current + 1))
+  const increase = () => setQuantity((current) => Math.min(MAX_ORDER_QUANTITY, current + 1))
 
   const addToBasket = () => {
     addItem(
@@ -54,6 +57,15 @@ export default function ProductPurchaseControls({
 
   return (
     <div className="mt-8 border-t border-white/20 pt-6">
+      <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <span className="rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#17201b]">
+          30% off
+        </span>
+        <p className="text-sm font-semibold text-white">
+          <span className="mr-2 text-white/45 line-through">{currency.format(COMPARE_AT_PRICE)}</span>
+          {currency.format(unitPrice)} <span className="font-normal text-white/65">each</span>
+        </p>
+      </div>
       <fieldset>
         <legend className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/65">Choose size</legend>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -96,7 +108,7 @@ export default function ProductPurchaseControls({
           <button
             type="button"
             onClick={increase}
-            disabled={quantity >= 99}
+            disabled={quantity >= MAX_ORDER_QUANTITY}
             className="flex h-10 w-10 items-center justify-center rounded-full transition duration-150 hover:bg-white/15 active:scale-95 disabled:cursor-not-allowed disabled:opacity-35"
             aria-label={`Increase ${name} quantity`}
           >
@@ -114,10 +126,24 @@ export default function ProductPurchaseControls({
             Add to basket
           </span>
           <span className="rounded-full bg-[#17201b] px-3 py-1.5 text-xs text-white">
-            {currency.format(unitPrice * quantity)}
+            {currency.format(tierPrice * quantity)}
           </span>
         </button>
       </div>
+
+      <p className="mt-4 text-xs leading-5 text-white/70">
+        {quantity >= 5 ? (
+          <>
+            <span className="font-bold text-white">Bulk price: {currency.format(tierPrice)} each</span>
+            {" "}— you&apos;re saving {currency.format(bulkSavings)}.
+          </>
+        ) : (
+          <>
+            Bulk pricing starts at 5+ — {currency.format(unitPriceForQuantity(5))} each, down to{" "}
+            {currency.format(unitPriceForQuantity(1000))} at 1,000+.
+          </>
+        )}
+      </p>
     </div>
   )
 }

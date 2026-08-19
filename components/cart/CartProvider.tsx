@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
+import { MAX_ORDER_QUANTITY, unitPriceForQuantity, volumeDiscountPercent } from "@/lib/pricing"
 
 export type CartItem = {
   id: string
@@ -18,6 +19,10 @@ type CartContextValue = {
   items: CartItem[]
   totalItems: number
   subtotal: number
+  baseSubtotal: number
+  savings: number
+  discountPercent: number
+  discountedUnitPrice: number
   isBasketOpen: boolean
   setBasketOpen: (open: boolean) => void
   addItem: (item: AddCartItem, quantity: number) => void
@@ -30,7 +35,7 @@ const STORAGE_KEY = "aura-basket-v1"
 const CartContext = createContext<CartContextValue | null>(null)
 
 function clampQuantity(quantity: number) {
-  return Math.min(99, Math.max(1, Math.round(quantity)))
+  return Math.min(MAX_ORDER_QUANTITY, Math.max(1, Math.round(quantity)))
 }
 
 function isCartItem(value: unknown): value is CartItem {
@@ -109,10 +114,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setItems((currentItems) => currentItems.filter((item) => item.id !== id))
     }
 
+    const totalItems = items.reduce((total, item) => total + item.quantity, 0)
+    const discountedUnitPrice = unitPriceForQuantity(totalItems)
+    const subtotal = items.reduce((total, item) => total + discountedUnitPrice * item.quantity, 0)
+    const baseSubtotal = items.reduce((total, item) => total + item.unitPrice * item.quantity, 0)
+
     return {
       items,
-      totalItems: items.reduce((total, item) => total + item.quantity, 0),
-      subtotal: items.reduce((total, item) => total + item.unitPrice * item.quantity, 0),
+      totalItems,
+      subtotal,
+      baseSubtotal,
+      savings: baseSubtotal - subtotal,
+      discountPercent: volumeDiscountPercent(totalItems),
+      discountedUnitPrice,
       isBasketOpen,
       setBasketOpen,
       addItem,
