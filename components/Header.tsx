@@ -1,78 +1,33 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import type { CSSProperties } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Instagram, Mail, Menu, X } from "lucide-react"
 import Link from "next/link"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useHeaderScroll } from "@/hooks/useHeaderScroll"
 import BasketButton from "@/components/cart/BasketButton"
 
 type NavItem = {
   name: string
   path: string
-  accent: string
 }
 
-const WHOLESALE_HREF =
-  "mailto:auradisposable@gmail.com?subject=Wholesale%20Inquiry%20for%20Aura%20Vape&body=Hello%20Aura%20Vape%20Team%2C%0A%0AI%27m%20interested%20in%20your%20wholesale%20options.%20Please%20provide%20me%20with%20more%20information%20about%20your%20products%20and%20pricing.%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D"
+const NAV_ITEMS: NavItem[] = [
+  { name: "Store", path: "/store" },
+  { name: "Verify", path: "/verify" },
+]
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
   const pathname = usePathname()
   const visible = useHeaderScroll()
-
-  const getNavItems = (): NavItem[] => {
-    if (pathname === "/") {
-      return [
-        { name: "Products", path: "/#products", accent: "#6f42c1" },
-        { name: "Verify", path: "/verify", accent: "#087f5b" },
-        { name: "Store", path: "/store", accent: "#a16207" },
-        { name: "Story", path: "/#story", accent: "#6f42c1" },
-        { name: "FAQ", path: "/#faq", accent: "#a16207" },
-      ]
-    }
-    return [
-      { name: "Home", path: "/", accent: "#6f42c1" },
-      { name: "Store", path: "/store", accent: "#a16207" },
-      { name: "Verify", path: "/verify", accent: "#087f5b" },
-      { name: "Story", path: "/#story", accent: "#6f42c1" },
-      { name: "FAQ", path: "/#faq", accent: "#a16207" },
-    ]
-  }
-
-  const navItems = getNavItems()
 
   const isActive = (item: NavItem) => {
     if (item.path === "/") return pathname === "/"
     if (item.path === "/store") return pathname.startsWith("/store")
     if (item.path === "/verify") return pathname === "/verify"
     return false
-  }
-
-  const handleNavigation = (path: string) => {
-    setIsOpen(false)
-    if (path.startsWith("/#")) {
-      if (pathname !== "/") {
-        router.push("/")
-        setTimeout(() => {
-          const element = document.querySelector(path.substring(1))
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" })
-          }
-        }, 100)
-      } else {
-        const element = document.querySelector(path.substring(1))
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" })
-        }
-      }
-    } else {
-      router.push(path)
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" })
-    }
   }
 
   // Close the menu whenever the route changes.
@@ -117,10 +72,6 @@ const Header = () => {
           <div className="flex-shrink-0">
             <Link
               href="/"
-              onClick={(event) => {
-                event.preventDefault()
-                handleNavigation("/")
-              }}
               aria-label="AURA — home"
               className="text-2xl font-bold tracking-tight text-[#17201b]"
             >
@@ -131,26 +82,21 @@ const Header = () => {
           <div className="flex items-center gap-2 md:gap-6">
             {/* Desktop navigation */}
             <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
-              {navItems.map((item) => {
+              {NAV_ITEMS.map((item) => {
                 const active = isActive(item)
                 return (
                   <Link
                     key={item.name}
                     href={item.path}
-                    onClick={(event) => {
-                      event.preventDefault()
-                      handleNavigation(item.path)
-                    }}
-                    style={{ "--accent": item.accent } as CSSProperties}
                     className={`group relative rounded-full px-3.5 py-1.5 text-sm font-semibold transition-all duration-300 ease-out ${
                       active
-                        ? "text-[var(--accent)]"
-                        : "text-[#17201b] hover:-translate-y-0.5 hover:text-[var(--accent)]"
+                        ? "text-[#087f5b]"
+                        : "text-[#17201b] hover:-translate-y-0.5 hover:text-[#087f5b]"
                     }`}
                   >
                     <span
                       aria-hidden="true"
-                      className={`absolute inset-0 rounded-full bg-[var(--accent)] transition-all duration-300 ease-out ${
+                      className={`absolute inset-0 rounded-full bg-[#087f5b] transition-all duration-300 ease-out ${
                         active ? "opacity-[0.15]" : "opacity-0 scale-95 group-hover:scale-100 group-hover:opacity-[0.15]"
                       }`}
                     ></span>
@@ -201,14 +147,13 @@ const Header = () => {
             >
               <nav aria-label="Mobile" className="px-6 py-3">
                 <ul className="divide-y divide-[#dfe5df]">
-                  {navItems.map((item, index) => {
+                  {NAV_ITEMS.map((item, index) => {
                     const active = isActive(item)
                     return (
                       <li key={item.name}>
-                        <button
-                          type="button"
-                          onClick={() => handleNavigation(item.path)}
-                          style={{ "--accent": item.accent } as CSSProperties}
+                        <Link
+                          href={item.path}
+                          onClick={() => setIsOpen(false)}
                           className="group flex w-full items-center justify-between py-4 text-left"
                         >
                           <span className="flex items-baseline gap-3">
@@ -217,7 +162,7 @@ const Header = () => {
                             </span>
                             <span
                               className={`text-2xl font-bold uppercase tracking-tight transition-colors duration-200 ${
-                                active ? "text-[var(--accent)]" : "text-[#17201b] group-hover:text-[var(--accent)]"
+                                active ? "text-[#087f5b]" : "text-[#17201b] group-hover:text-[#087f5b]"
                               }`}
                             >
                               {item.name}
@@ -227,9 +172,9 @@ const Header = () => {
                             size={20}
                             strokeWidth={2}
                             aria-hidden="true"
-                            className="text-[#a8b0ab] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]"
+                            className="text-[#a8b0ab] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#087f5b]"
                           />
-                        </button>
+                        </Link>
                       </li>
                     )
                   })}
@@ -237,15 +182,7 @@ const Header = () => {
               </nav>
 
               <div className="border-t border-[#dfe5df] px-6 py-6">
-                <a
-                  href={WHOLESALE_HREF}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#17201b] px-6 py-3.5 text-sm font-semibold text-[#fffefa] transition-colors duration-300 hover:bg-[#33423a]"
-                >
-                  Get Wholesale Pricing
-                  <ArrowUpRight size={16} strokeWidth={2} aria-hidden="true" />
-                </a>
-
-                <div className="mt-6 flex items-center justify-between">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <a
                       href="https://www.instagram.com/auradisposable"

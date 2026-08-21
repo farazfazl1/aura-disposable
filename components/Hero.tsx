@@ -13,7 +13,7 @@ interface HeroProps {
 const HERO_PRODUCTS = [
   { src: "/images/cutouts/og.png", className: "aura-home-product-one" },
   { src: "/images/cutouts/blue-dream.png", className: "aura-home-product-two" },
-  { src: "/images/cutouts/persian-gold.png", className: "aura-home-product-three" },
+  { src: "/images/cutouts/blueberry.png", className: "aura-home-product-three" },
   { src: "/images/cutouts/jealousy.png", className: "aura-home-product-four" },
 ] as const
 
