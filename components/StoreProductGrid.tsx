@@ -6,7 +6,7 @@ import { ArrowUpRight, SunMoon } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import { MoonIcon, SunIcon } from "@/components/Icons"
 import type { StoreProduct, VapeType } from "@/lib/storeCatalog"
-import { COMPARE_AT_PRICE } from "@/lib/pricing"
+import { PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
 
 const PRODUCT_ACCENTS: Record<string, { background: string; foreground: string }> = {
   "sweet-island": { background: "#e8c84d", foreground: "#15150d" },
@@ -54,7 +54,7 @@ export default function StoreProductGrid({ products }: { products: StoreProduct[
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                 />
                 <span className="absolute left-4 top-4 rounded-full bg-[#6f42c1] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-white shadow-[0_6px_18px_rgba(0,0,0,0.28)]">
-                  30% off
+                  {PERMANENT_DISCOUNT_PERCENT}% off total
                 </span>
                 <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/35 text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
                   <ArrowUpRight size={18} aria-hidden="true" />
@@ -92,7 +92,7 @@ export default function StoreProductGrid({ products }: { products: StoreProduct[
                   <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#89938c]">{product.size}</p>
                   <div className="mt-1 flex items-baseline gap-2">
                     <p className="text-lg font-bold text-[#17201b] sm:text-xl">{product.price}</p>
-                    <span className="text-sm font-semibold text-[#89938c] line-through">${COMPARE_AT_PRICE}</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#89938c]">before order discount</span>
                   </div>
                 </div>
                 <Link

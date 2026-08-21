@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js"
 import { ArrowLeft, Loader2 } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
 import { useToast } from "@/hooks/use-toast"
-import { COMPARE_AT_PRICE } from "@/lib/pricing"
+import { PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
 
 type CheckoutFormProps = {
   onBack: () => void
@@ -15,7 +15,7 @@ type CheckoutFormProps = {
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
-  maximumFractionDigits: 0,
+  maximumFractionDigits: 2,
 })
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
@@ -30,7 +30,16 @@ const inputClass =
   "w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b] placeholder:text-[#98a39b] focus:outline-none focus:ring-2 focus:ring-[#6f42c1]/20"
 
 export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) {
-  const { items, subtotal, baseSubtotal, discountedUnitPrice, totalItems, clearBasket } = useCart()
+  const {
+    items,
+    totalItems,
+    baseSubtotal,
+    volumeSubtotal,
+    permanentDiscount,
+    total,
+    tierUnitPrice,
+    clearBasket,
+  } = useCart()
   const { toast } = useToast()
 
   const [name, setName] = useState("")
@@ -43,9 +52,7 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const isEligible = deliveryArea === "orange-county"
-  const compareAtSubtotal = totalItems * COMPARE_AT_PRICE
-  const totalSavings = compareAtSubtotal - subtotal
-  const totalDiscountPercent = compareAtSubtotal > 0 ? Math.round((totalSavings / compareAtSubtotal) * 100) : 0
+  const totalSavings = baseSubtotal - total
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -91,8 +98,8 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
       name: item.name,
       format: item.format,
       quantity: item.quantity,
-      unitPrice: discountedUnitPrice,
-      lineTotal: discountedUnitPrice * item.quantity,
+      unitPrice: tierUnitPrice,
+      lineTotal: tierUnitPrice * item.quantity,
     }))
     const productName = lineItems.map((line) => `${line.quantity}× ${line.name} ${line.format}`).join(", ")
 
@@ -105,7 +112,14 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
       address: address.trim(),
       quantity: totalItems,
       status: "pending",
-      delivery_note: JSON.stringify({ kind: "basket_order", subtotal, items: lineItems }),
+      delivery_note: JSON.stringify({
+        kind: "basket_order",
+        volumeSubtotal,
+        permanentDiscount,
+        discountPercent: PERMANENT_DISCOUNT_PERCENT,
+        subtotal: total,
+        items: lineItems,
+      }),
     })
 
     if (insertError) {
@@ -146,19 +160,19 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
           <div className="mb-4 rounded-2xl border border-[#c9b4e8] bg-[#17201b] p-4 text-white shadow-[0_14px_40px_rgba(23,32,27,0.18)]">
             <div className="flex items-center justify-between gap-3">
               <span className="rounded-full bg-gradient-to-r from-[#6f42c1] via-[#a16207] to-[#087f5b] px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]">
-                30% off
+                Permanent {PERMANENT_DISCOUNT_PERCENT}% off
               </span>
-              <span className="text-xs font-semibold text-white/60">bulk pricing applied</span>
+              <span className="text-xs font-semibold text-white/60">applied after bulk pricing</span>
             </div>
             <div className="mt-3 flex items-end justify-between gap-3">
               <div>
                 <p className="text-xs text-white/55">You save</p>
                 <p className="text-3xl font-black tracking-[-0.03em] text-[#7fd6b8]">{currency.format(totalSavings)}</p>
-                <p className="mt-1 text-xs text-white/55">{totalDiscountPercent}% off total</p>
+                <p className="mt-1 text-xs text-white/55">bulk savings + permanent discount</p>
               </div>
               <div className="text-right">
-                <p className="text-sm text-white/45 line-through">{currency.format(compareAtSubtotal)}</p>
-                <p className="text-2xl font-black">{currency.format(subtotal)}</p>
+                <p className="text-sm text-white/45 line-through">{currency.format(volumeSubtotal)}</p>
+                <p className="text-2xl font-black">{currency.format(total)}</p>
               </div>
             </div>
           </div>
@@ -172,19 +186,24 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
                     {item.quantity}× {item.name} <span className="text-[#89938c]">({item.format})</span>
                   </span>
                   <span className="shrink-0 font-semibold text-[#17201b]">
-                    {currency.format(discountedUnitPrice * item.quantity)}
+                    {currency.format(tierUnitPrice * item.quantity)}
                   </span>
                 </li>
               ))}
             </ul>
-            <div className="mt-3 flex justify-between border-t border-[#eef0ea] pt-3 text-sm font-bold text-[#17201b]">
-              <span>Subtotal</span>
-              <span className="text-right">
-                {baseSubtotal > subtotal && (
-                  <span className="mr-2 text-xs font-semibold text-[#89938c] line-through">{currency.format(baseSubtotal)}</span>
-                )}
-                {currency.format(subtotal)}
-              </span>
+            <div className="mt-3 space-y-2 border-t border-[#eef0ea] pt-3 text-sm">
+              <div className="flex justify-between gap-3 text-[#657068]">
+                <span>Volume subtotal</span>
+                <span className="font-semibold text-[#17201b]">{currency.format(volumeSubtotal)}</span>
+              </div>
+              <div className="flex justify-between gap-3 text-[#087f5b]">
+                <span>Permanent {PERMANENT_DISCOUNT_PERCENT}% discount</span>
+                <span className="font-bold">−{currency.format(permanentDiscount)}</span>
+              </div>
+              <div className="flex justify-between gap-3 border-t border-[#eef0ea] pt-2 font-bold text-[#17201b]">
+                <span>Total</span>
+                <span>{currency.format(total)}</span>
+              </div>
             </div>
           </div>
 
@@ -306,7 +325,7 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
                 Placing order…
               </>
             ) : (
-              <>Place order · {currency.format(subtotal)}</>
+              <>Place order · {currency.format(total)}</>
             )}
           </button>
         </div>

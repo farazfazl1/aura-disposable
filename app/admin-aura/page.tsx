@@ -30,8 +30,17 @@ type BasketLineItem = {
 type BasketOrderNote = {
   kind: "basket_order"
   subtotal: number
+  volumeSubtotal?: number
+  permanentDiscount?: number
+  discountPercent?: number
   items: BasketLineItem[]
 }
+
+const currency = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 2,
+})
 
 function parseBasketNote(note: string | undefined): BasketOrderNote | null {
   if (!note) return null
@@ -324,13 +333,21 @@ const AdminPage = () => {
                             <span>
                               {line.quantity}× {line.name} ({line.format})
                             </span>
-                            <span className="font-semibold text-[#17201b]">${line.quantity * line.unitPrice}</span>
+                            <span className="font-semibold text-[#17201b]">{currency.format(line.lineTotal)}</span>
                           </li>
                         ))}
                       </ul>
-                      <span className="mt-1 w-fit rounded border border-green-200 bg-green-50 px-2 py-1 text-sm font-bold text-green-700">
-                        Subtotal: ${basket.subtotal}
-                      </span>
+                      <div className="mt-2 grid w-fit gap-1 rounded border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800">
+                        {typeof basket.volumeSubtotal === "number" && (
+                          <span>Volume subtotal: {currency.format(basket.volumeSubtotal)}</span>
+                        )}
+                        {typeof basket.permanentDiscount === "number" && (
+                          <span>
+                            Permanent {basket.discountPercent ?? 30}% discount: −{currency.format(basket.permanentDiscount)}
+                          </span>
+                        )}
+                        <span className="font-bold">Total: {currency.format(basket.subtotal)}</span>
+                      </div>
                     </div>
                   ) : (
                     <div className="grid gap-1">

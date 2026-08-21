@@ -9,7 +9,7 @@ import ProductGallery from "@/components/ProductGallery"
 import ProductPurchaseControls from "@/components/ProductPurchaseControls"
 import StoreProductGrid from "@/components/StoreProductGrid"
 import { STORE_PRODUCTS, type VapeType } from "@/lib/storeCatalog"
-import { COMPARE_AT_PRICE } from "@/lib/pricing"
+import { PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
 
 function typeIcon(type: VapeType) {
   if (type === "indica") return MoonIcon
@@ -268,9 +268,9 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
                     <span key={format} className="aura-format-badge">{format}</span>
                   ))}
                   <span className="ml-auto flex items-baseline gap-2 text-lg font-bold text-white">
-                    <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] text-white ring-1 ring-white/30">30% off</span>
+                    <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] text-white ring-1 ring-white/30">{PERMANENT_DISCOUNT_PERCENT}% off total</span>
                     {product.price}
-                    <span className="text-sm font-semibold text-white/45 line-through">${COMPARE_AT_PRICE}</span>
+                    <span className="text-sm font-semibold text-white/55">before order discount</span>
                   </span>
                 </div>
               </div>

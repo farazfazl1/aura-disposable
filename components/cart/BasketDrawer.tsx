@@ -6,7 +6,11 @@ import Link from "next/link"
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
 import CheckoutForm from "@/components/cart/CheckoutForm"
-import { MAX_ORDER_QUANTITY, VOLUME_TIERS, nextTierForQuantity } from "@/lib/pricing"
+import {
+  MAX_ORDER_QUANTITY,
+  PERMANENT_DISCOUNT_PERCENT,
+  nextTierForQuantity,
+} from "@/lib/pricing"
 import {
   Sheet,
   SheetClose,
@@ -19,18 +23,20 @@ import {
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
-  maximumFractionDigits: 0,
+  maximumFractionDigits: 2,
 })
 
 export default function BasketDrawer() {
   const {
     items,
     totalItems,
-    subtotal,
     baseSubtotal,
-    savings,
-    discountPercent,
-    discountedUnitPrice,
+    volumeSubtotal,
+    volumeSavings,
+    volumeDiscountPercent,
+    permanentDiscount,
+    total,
+    tierUnitPrice,
     isBasketOpen,
     setBasketOpen,
     updateQuantity,
@@ -161,10 +167,10 @@ export default function BasketDrawer() {
                                 </button>
                               </div>
                               <div className="text-right">
-                                <p className="font-bold text-[#17201b]">{currency.format(discountedUnitPrice * item.quantity)}</p>
-                                {discountPercent > 0 && (
+                                <p className="font-bold text-[#17201b]">{currency.format(tierUnitPrice * item.quantity)}</p>
+                                {volumeDiscountPercent > 0 && (
                                   <p className="mt-0.5 text-[11px] font-semibold text-[#087f5b]">
-                                    {currency.format(discountedUnitPrice)} each
+                                    {currency.format(tierUnitPrice)} each
                                   </p>
                                 )}
                               </div>
@@ -177,16 +183,16 @@ export default function BasketDrawer() {
                 </div>
 
                 <div className="border-t border-[#dfe5df] bg-[#fffefa] px-6 py-5">
-                  {savings > 0 && (
+                  {volumeSavings > 0 && (
                     <div className="mb-3 flex items-center justify-between gap-3 rounded-xl border border-[#b9ddce] bg-[#e1f5ec] px-4 py-3">
                       <div>
                         <p className="text-sm font-black uppercase tracking-[0.06em] text-[#087f5b]">
-                          {discountPercent}% off bulk price
+                          {volumeDiscountPercent}% off bulk price
                         </p>
-                        <p className="mt-0.5 text-xs text-[#087f5b]/80">You&apos;re saving {currency.format(savings)}</p>
+                        <p className="mt-0.5 text-xs text-[#087f5b]/80">You&apos;re saving {currency.format(volumeSavings)}</p>
                       </div>
                       <span className="text-xl font-black text-[#087f5b]">
-                        {currency.format(discountedUnitPrice)} <span className="text-xs font-bold">each</span>
+                        {currency.format(tierUnitPrice)} <span className="text-xs font-bold">each</span>
                       </span>
                     </div>
                   )}
@@ -203,35 +209,24 @@ export default function BasketDrawer() {
                     )
                   })()}
 
-                  <details className="group mb-4 rounded-xl border border-[#dfe5df] bg-[#f7f8f4] px-4 py-3">
-                    <summary className="flex cursor-pointer list-none items-center justify-between text-xs font-bold uppercase tracking-[0.12em] text-[#536057]">
-                      Bulk pricing
-                      <span aria-hidden="true" className="text-[#89938c] transition-transform group-open:rotate-180">▾</span>
-                    </summary>
-                    <ul className="mt-3 space-y-1.5 border-t border-[#eef0ea] pt-3">
-                      {VOLUME_TIERS.map((tier) => {
-                        const active = tier.unitPrice === discountedUnitPrice
-                        return (
-                          <li
-                            key={tier.minQty}
-                            className={`flex justify-between text-xs ${active ? "font-bold text-[#087f5b]" : "text-[#657068]"}`}
-                          >
-                            <span>{tier.minQty.toLocaleString("en-US")}+ vapes</span>
-                            <span>{currency.format(tier.unitPrice)} each</span>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </details>
-
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#657068]">Subtotal</p>
-                      <p className="mt-1 text-xs text-[#89938c]">Shipping and taxes calculated at checkout</p>
+                  <div className="space-y-2 border-t border-[#eef0ea] pt-4 text-sm">
+                    <div className="flex items-center justify-between gap-4 text-[#657068]">
+                      <span>Volume subtotal</span>
+                      <span className="font-semibold text-[#17201b]">{currency.format(volumeSubtotal)}</span>
                     </div>
-                    <div className="text-right">
-                      {savings > 0 && <p className="text-xs text-[#89938c] line-through">{currency.format(baseSubtotal)}</p>}
-                      <p className="text-2xl font-black text-[#17201b]">{currency.format(subtotal)}</p>
+                    <div className="flex items-center justify-between gap-4 text-[#087f5b]">
+                      <span>Permanent {PERMANENT_DISCOUNT_PERCENT}% discount</span>
+                      <span className="font-bold">−{currency.format(permanentDiscount)}</span>
+                    </div>
+                    <div className="flex items-end justify-between gap-4 border-t border-[#eef0ea] pt-3">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#657068]">Total</p>
+                        <p className="mt-1 text-xs text-[#89938c]">Shipping and taxes calculated at checkout</p>
+                      </div>
+                      <div className="text-right">
+                        {baseSubtotal > total && <p className="text-xs text-[#89938c] line-through">{currency.format(baseSubtotal)}</p>}
+                        <p className="text-2xl font-black text-[#17201b]">{currency.format(total)}</p>
+                      </div>
                     </div>
                   </div>
                   <button
@@ -239,7 +234,7 @@ export default function BasketDrawer() {
                     onClick={() => setView("checkout")}
                     className="mt-5 w-full rounded-full bg-[#17201b] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#33423a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#17201b] focus-visible:ring-offset-2"
                   >
-                    Checkout
+                    Checkout · {currency.format(total)}
                   </button>
                   <p className="mt-2 text-center text-[11px] leading-5 text-[#657068]">
                     Pay the courier at the door — no online payment required.

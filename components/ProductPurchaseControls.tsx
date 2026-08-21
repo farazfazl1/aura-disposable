@@ -3,7 +3,12 @@
 import { useState } from "react"
 import { Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
-import { COMPARE_AT_PRICE, MAX_ORDER_QUANTITY, unitPriceForQuantity } from "@/lib/pricing"
+import {
+  calculateOrderPricing,
+  MAX_ORDER_QUANTITY,
+  PERMANENT_DISCOUNT_PERCENT,
+  unitPriceForQuantity,
+} from "@/lib/pricing"
 
 type ProductPurchaseControlsProps = {
   slug: string
@@ -21,7 +26,7 @@ function numericPrice(price: string) {
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
-  maximumFractionDigits: 0,
+  maximumFractionDigits: 2,
 })
 
 export default function ProductPurchaseControls({
@@ -35,8 +40,9 @@ export default function ProductPurchaseControls({
   const [quantity, setQuantity] = useState(1)
   const [selectedFormat, setSelectedFormat] = useState(formats[0] ?? "Standard")
   const unitPrice = numericPrice(price)
-  const tierPrice = unitPriceForQuantity(quantity)
-  const bulkSavings = (unitPrice - tierPrice) * quantity
+  const orderPricing = calculateOrderPricing(quantity)
+  const tierPrice = orderPricing.unitPrice
+  const bulkSavings = (unitPrice - orderPricing.unitPrice) * quantity
 
   const decrease = () => setQuantity((current) => Math.max(1, current - 1))
   const increase = () => setQuantity((current) => Math.min(MAX_ORDER_QUANTITY, current + 1))
@@ -59,11 +65,10 @@ export default function ProductPurchaseControls({
     <div className="mt-8 border-t border-white/20 pt-6">
       <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2">
         <span className="rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#17201b]">
-          30% off
+          {PERMANENT_DISCOUNT_PERCENT}% off order total
         </span>
         <p className="text-sm font-semibold text-white">
-          <span className="mr-2 text-white/45 line-through">{currency.format(COMPARE_AT_PRICE)}</span>
-          {currency.format(unitPrice)} <span className="font-normal text-white/65">each</span>
+          {currency.format(unitPrice)} <span className="font-normal text-white/65">each before quantity pricing</span>
         </p>
       </div>
       <fieldset>
@@ -126,22 +131,26 @@ export default function ProductPurchaseControls({
             Add to basket
           </span>
           <span className="rounded-full bg-[#17201b] px-3 py-1.5 text-xs text-white">
-            {currency.format(tierPrice * quantity)}
+            {currency.format(orderPricing.total)}
           </span>
         </button>
       </div>
 
       <p className="mt-4 text-xs leading-5 text-white/70">
-        {quantity >= 5 ? (
+        <span className="font-bold text-white">
+          {quantity.toLocaleString("en-US")} {quantity === 1 ? "vape" : "vapes"} at {currency.format(tierPrice)} each
+        </span>{" "}
+        = {currency.format(orderPricing.volumeSubtotal)}, then {PERMANENT_DISCOUNT_PERCENT}% off total
+        (−{currency.format(orderPricing.permanentDiscount)}) ={" "}
+        <span className="font-bold text-white">{currency.format(orderPricing.total)}</span>.
+        {quantity < 5 && (
           <>
-            <span className="font-bold text-white">Bulk price: {currency.format(tierPrice)} each</span>
-            {" "}— you&apos;re saving {currency.format(bulkSavings)}.
+            {" "}Bulk pricing starts at 5+ ({currency.format(unitPriceForQuantity(5))} each) and reaches{" "}
+            {currency.format(unitPriceForQuantity(1000))} each at 1,000+.
           </>
-        ) : (
-          <>
-            Bulk pricing starts at 5+ — {currency.format(unitPriceForQuantity(5))} each, down to{" "}
-            {currency.format(unitPriceForQuantity(1000))} at 1,000+.
-          </>
+        )}
+        {quantity >= 5 && bulkSavings > 0 && (
+          <> Quantity pricing saves another {currency.format(bulkSavings)} before the permanent discount.</>
         )}
       </p>
     </div>

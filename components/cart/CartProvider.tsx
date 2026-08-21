@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
-import { MAX_ORDER_QUANTITY, unitPriceForQuantity, volumeDiscountPercent } from "@/lib/pricing"
+import { calculateOrderPricing, MAX_ORDER_QUANTITY, volumeDiscountPercent } from "@/lib/pricing"
 
 export type CartItem = {
   id: string
@@ -18,11 +18,13 @@ type AddCartItem = Omit<CartItem, "quantity">
 type CartContextValue = {
   items: CartItem[]
   totalItems: number
-  subtotal: number
   baseSubtotal: number
-  savings: number
-  discountPercent: number
-  discountedUnitPrice: number
+  volumeSubtotal: number
+  volumeSavings: number
+  volumeDiscountPercent: number
+  permanentDiscount: number
+  total: number
+  tierUnitPrice: number
   isBasketOpen: boolean
   setBasketOpen: (open: boolean) => void
   addItem: (item: AddCartItem, quantity: number) => void
@@ -115,18 +117,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
 
     const totalItems = items.reduce((total, item) => total + item.quantity, 0)
-    const discountedUnitPrice = unitPriceForQuantity(totalItems)
-    const subtotal = items.reduce((total, item) => total + discountedUnitPrice * item.quantity, 0)
     const baseSubtotal = items.reduce((total, item) => total + item.unitPrice * item.quantity, 0)
+    const pricing = calculateOrderPricing(totalItems)
 
     return {
       items,
       totalItems,
-      subtotal,
       baseSubtotal,
-      savings: baseSubtotal - subtotal,
-      discountPercent: volumeDiscountPercent(totalItems),
-      discountedUnitPrice,
+      volumeSubtotal: pricing.volumeSubtotal,
+      volumeSavings: baseSubtotal - pricing.volumeSubtotal,
+      volumeDiscountPercent: volumeDiscountPercent(totalItems),
+      permanentDiscount: pricing.permanentDiscount,
+      total: pricing.total,
+      tierUnitPrice: pricing.unitPrice,
       isBasketOpen,
       setBasketOpen,
       addItem,

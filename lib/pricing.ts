@@ -6,8 +6,8 @@ export type VolumeTier = {
 // Base price a customer pays for a single vape.
 export const BASE_UNIT_PRICE = 40
 
-// "Was" price used for the permanent 30% OFF badge ($40 ≈ 30% off $57).
-export const COMPARE_AT_PRICE = 57
+// This promotion is applied after the quantity-based unit price is calculated.
+export const PERMANENT_DISCOUNT_PERCENT = 30
 
 export const MAX_ORDER_QUANTITY = 1000
 
@@ -49,4 +49,24 @@ export function nextTierForQuantity(quantity: number): VolumeTier | null {
 export function volumeDiscountPercent(quantity: number): number {
   const unitPrice = unitPriceForQuantity(quantity)
   return Math.round((1 - unitPrice / BASE_UNIT_PRICE) * 100)
+}
+
+function roundCurrency(amount: number): number {
+  return Math.round((amount + Number.EPSILON) * 100) / 100
+}
+
+export function calculateOrderPricing(quantity: number) {
+  const safeQuantity = Math.min(MAX_ORDER_QUANTITY, Math.max(0, Math.floor(quantity)))
+  const unitPrice = unitPriceForQuantity(Math.max(1, safeQuantity))
+  const volumeSubtotal = roundCurrency(unitPrice * safeQuantity)
+  const permanentDiscount = roundCurrency(volumeSubtotal * (PERMANENT_DISCOUNT_PERCENT / 100))
+  const total = roundCurrency(volumeSubtotal - permanentDiscount)
+
+  return {
+    quantity: safeQuantity,
+    unitPrice,
+    volumeSubtotal,
+    permanentDiscount,
+    total,
+  }
 }
