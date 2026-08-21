@@ -68,7 +68,7 @@ const FAQ = () => {
     {
       question: "What ingredients are used in Aura products?",
       answer:
-        "Our vapes contain premium THC distillate, live resin, and carefully selected natural terpenes to preserve unique flavor profiles and potency.",
+        "Our vapes use premium live resin and carefully selected natural terpenes to preserve their distinct flavor profiles.",
     },
     {
       question: "What safety precautions should I observe?",
