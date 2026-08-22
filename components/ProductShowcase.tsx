@@ -14,7 +14,6 @@ interface Product {
   effects: string[]
   flavors: string[]
   terpenes: string[]
-  thcContent: string
   color: string
   textColor: string
   hoverColor: string
@@ -199,11 +198,6 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = memo(({ products, theme,
                 </motion.div>
               ))}
             </div>
-          </div>
-
-          {/* THC Content */}
-          <div className="text-center">
-            <span className="text-xl sm:text-2xl font-semibold">{currentProductData.thcContent}</span>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center pt-2">

@@ -24,7 +24,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     slug: "sweet-island",
     name: "Sweet Island",
     type: "sativa",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/12.jpg",
     gallery: ["/images/12.jpg", "/images/4.jpg"],
     flavor: "Coconut • Guava • Mango • Pineapple",
@@ -46,7 +46,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     slug: "blue-dream",
     name: "Blue Dream",
     type: "sativa",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/8.jpg",
     gallery: ["/images/8.jpg", "/images/5.jpg"],
     flavor: "Sweet Blueberry",
@@ -62,16 +62,13 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     finish:
       "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.",
     notes: ["Lorem Citrus", "Ipsum Bloom", "Dolor Sweet", "Sit Bright"],
-    specs: [
-      { label: "THC", value: "80-90%" },
-      { label: "Terpenes", value: "Limonene • Pinene • Myrcene • Ocimene" },
-    ],
+    specs: [{ label: "Terpenes", value: "Limonene • Pinene • Myrcene • Ocimene" }],
   },
   {
     slug: "og",
     name: "OG",
     type: "indica",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/IMG_20260408_135851_018.jpg",
     gallery: ["/images/IMG_20260408_135851_018.jpg"],
     flavor: "Berry, Bubble Gum, Earthy",
@@ -88,7 +85,6 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.",
     notes: ["Lorem Floral", "Ipsum Smoke", "Dolor Calm", "Sit Velvet"],
     specs: [
-      { label: "THC", value: "80-90%" },
       { label: "Battery", value: "Premium Core" },
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
@@ -98,7 +94,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     slug: "og-mint",
     name: "OG Mint",
     type: "indica",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/10.jpg",
     gallery: ["/images/10.jpg", "/images/6.jpg"],
     flavor: "Cool Mint • Earthy OG • Pine •",
@@ -114,7 +110,6 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     finish: "Curabitur aliquet quam id dui posuere blandit.",
     notes: ["Lorem Mint", "Ipsum Cool", "Dolor Shadow", "Sit Crisp"],
     specs: [
-      { label: "THC", value: "80-90%" },
       { label: "Battery", value: "Premium Core" },
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
@@ -124,7 +119,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     slug: "persian-gold",
     name: "Persian Gold",
     type: "sativa",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/9.jpg",
     gallery: ["/images/9.jpg", "/images/2 (1).jpg"],
     flavor: "Exotic Spice, Floral, Sweet Citrus",
@@ -141,7 +136,6 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
     notes: ["Lorem Berry", "Ipsum Spark", "Dolor Lift", "Sit Energy"],
     specs: [
-      { label: "THC", value: "80-90%" },
       { label: "Battery", value: "Premium Core" },
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
@@ -151,7 +145,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     slug: "blueberry",
     name: "Blueberry",
     type: "sativa",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/13.jpg",
     gallery: ["/images/13.jpg", "/images/1.jpg"],
     flavor: "Sweet Blueberry, Light Citrus",
@@ -173,7 +167,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     slug: "jealousy",
     name: "Jealousy",
     type: "hybrid",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/11.jpg",
     gallery: ["/images/11.jpg", "/images/3.jpg"],
     flavor: "Earthy • Fruity • Kush",
@@ -189,7 +183,6 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     finish: "Clean kush notes with a subtle fruity sweetness.",
     notes: ["Earthy Kush", "Bright Fruit", "Smooth Uplift", "Social Ease"],
     specs: [
-      { label: "THC", value: "80-90%" },
       { label: "Battery", value: "Premium Core" },
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
@@ -199,7 +192,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     slug: "laughing-buddha",
     name: "Laughing Buddha",
     type: "sativa",
-    grade: "Premium Grade | 80-90% THC",
+    grade: "Premium Grade",
     image: "/images/7.jpg",
     gallery: ["/images/7.jpg"],
     flavor: "Earthy • Gas • Pine",
@@ -215,7 +208,6 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     finish: "Fresh pine clarity with a light gassy character.",
     notes: ["Earthy", "Gas", "Pine"],
     specs: [
-      { label: "THC", value: "80-90%" },
       { label: "Battery", value: "Premium Core" },
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
@@ -271,44 +263,44 @@ const SHOWCASE_COLORS: Record<
   { color: string; hoverColor: string; textColor: string }
 > = {
   "sweet-island-skunk": {
-    color: "#4CB4A1",
-    hoverColor: "#5DC5B2",
-    textColor: "text-white",
+    color: "#d9f0e8",
+    hoverColor: "#c6e7dc",
+    textColor: "text-gray-900",
   },
   "blurr-dream": {
-    color: "#5B7FD1",
-    hoverColor: "#6B8FE1",
-    textColor: "text-white",
+    color: "#e0e8fb",
+    hoverColor: "#d0dcf6",
+    textColor: "text-gray-900",
   },
   "double-bubble-og": {
-    color: "#4a2c5c",
-    hoverColor: "#5c3a72",
-    textColor: "text-white",
+    color: "#eadcf6",
+    hoverColor: "#dfcef0",
+    textColor: "text-gray-900",
   },
   "og-mint": {
-    color: "#6c776e",
-    hoverColor: "#7c877e",
-    textColor: "text-white",
+    color: "#dce9e1",
+    hoverColor: "#cfe1d7",
+    textColor: "text-gray-900",
   },
   saffron: {
-    color: "#D4AF37",
-    hoverColor: "#E5C048",
+    color: "#fff0b8",
+    hoverColor: "#ffe79a",
     textColor: "text-gray-900",
   },
   blueberry: {
-    color: "#354377",
-    hoverColor: "#455487",
-    textColor: "text-white",
+    color: "#dce5fb",
+    hoverColor: "#ccd9f6",
+    textColor: "text-gray-900",
   },
   "laughing-buddha": {
-    color: "#EAB308",
-    hoverColor: "#FACC15",
+    color: "#ffefb3",
+    hoverColor: "#ffe68e",
     textColor: "text-gray-900",
   },
   jealousy: {
-    color: "#2B5D5B",
-    hoverColor: "#3A6F6D",
-    textColor: "text-white",
+    color: "#d8eee5",
+    hoverColor: "#c5e3d6",
+    textColor: "text-gray-900",
   },
 };
 
@@ -320,7 +312,6 @@ export type ShowcaseProduct = {
   effects: string[];
   flavors: string[];
   terpenes: string[];
-  thcContent: string;
   color: string;
   textColor: string;
   hoverColor: string;
@@ -329,9 +320,9 @@ export type ShowcaseProduct = {
 
 export function storeProductToShowcase(p: StoreProduct): ShowcaseProduct {
   const palette = SHOWCASE_COLORS[p.slug] ?? {
-    color: "#111827",
-    hoverColor: "#1f2937",
-    textColor: "text-white",
+    color: "#ffffff",
+    hoverColor: "#f3f5f0",
+    textColor: "text-gray-900",
   };
   return {
     slug: p.slug,
@@ -341,7 +332,6 @@ export function storeProductToShowcase(p: StoreProduct): ShowcaseProduct {
     effects: splitToTags(p.effects),
     flavors: splitToTags(p.flavor),
     terpenes: terpenesFromSpecs(p.specs),
-    thcContent: p.grade,
     color: palette.color,
     textColor: palette.textColor,
     hoverColor: palette.hoverColor,

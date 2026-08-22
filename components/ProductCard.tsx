@@ -18,14 +18,14 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
 
   const bgClass =
     type === "indica"
-      ? "bg-purple-900/90 backdrop-blur-lg"
+      ? "border border-[#c9b4e8] bg-gradient-to-br from-[#f4ecff] to-[#e6d9f7]"
       : type === "sativa"
-        ? "bg-gradient-to-br from-yellow-400/90 to-yellow-500/90 backdrop-blur-lg"
-        : "bg-gradient-to-br from-purple-700/80 via-emerald-400/80 to-yellow-400/80 backdrop-blur-lg"
+        ? "border border-[#e6c970] bg-gradient-to-br from-[#fff8de] to-[#f4d278]"
+        : "border border-[#9bd6bf] bg-gradient-to-br from-[#e1f5ec] via-[#ccede0] to-[#f7e7b2]"
 
   const Icon = type === "indica" ? MoonIcon : type === "sativa" ? SunIcon : SunMoon
   const glowColor =
-    type === "indica" ? "rgba(147, 51, 234, 0.7)" : type === "sativa" ? "rgba(234, 179, 8, 0.7)" : "rgba(16, 185, 129, 0.7)"
+    type === "indica" ? "rgba(111, 66, 193, 0.22)" : type === "sativa" ? "rgba(161, 98, 7, 0.2)" : "rgba(8, 127, 91, 0.2)"
 
   return (
     <motion.div
@@ -51,38 +51,38 @@ const ProductCard = ({ type, title, tagline, description }: ProductCardProps) =>
         <div className="flex items-center mb-4">
           <Icon
             className={`w-6 h-6 ${
-              type === "indica" ? "text-purple-300" : type === "sativa" ? "text-yellow-200" : "text-emerald-100"
-            }`}
-          />
-          <h2 className="text-3xl font-bold text-white ml-3 tracking-wider">{title}</h2>
+            type === "indica" ? "text-[#6f42c1]" : type === "sativa" ? "text-[#8a5a08]" : "text-[#087f5b]"
+          }`}
+        />
+          <h2 className="ml-3 text-3xl font-bold tracking-wider text-[#17201b]">{title}</h2>
         </div>
 
         <p
           className={`text-xl font-medium mb-4 ${
-            type === "indica" ? "text-purple-200" : type === "sativa" ? "text-yellow-100" : "text-emerald-100"
+            type === "indica" ? "text-[#6f42c1]" : type === "sativa" ? "text-[#8a5a08]" : "text-[#087f5b]"
           }`}
         >
           {tagline}
         </p>
 
-        <p className="text-white/90 text-lg mb-8 leading-relaxed">{description}</p>
+        <p className="mb-8 text-lg leading-relaxed text-[#46554c]">{description}</p>
 
         <Link
-          href={`/${type}`}
+          href={`/store?type=${type}`}
           className={`
             inline-flex items-center px-6 py-3 rounded-full text-sm font-semibold
             transition-all duration-300 ease-out transform
             ${
               type === "indica"
-                ? "bg-purple-700 text-white hover:bg-purple-600"
+                ? "bg-[#6f42c1] text-white hover:bg-[#58309f]"
                 : type === "sativa"
-                  ? "bg-yellow-300 text-gray-900 hover:bg-yellow-200"
-                  : "bg-emerald-400 text-black hover:bg-emerald-300"
+                  ? "bg-[#a16207] text-white hover:bg-[#854d0e]"
+                  : "bg-[#087f5b] text-white hover:bg-[#065f46]"
             }
             hover:scale-105 hover:shadow-lg
           `}
         >
-          Learn More
+          Browse {title}
           <svg
             className={`ml-2 w-5 h-5 transition-transform duration-300 ${isHovered ? "translate-x-1" : ""}`}
             fill="none"

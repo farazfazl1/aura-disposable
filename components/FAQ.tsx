@@ -12,17 +12,17 @@ const FAQItem = ({ question, answer }: { question: string; answer: string | JSX.
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-black border border-gray-800 rounded-3xl p-6 hover:bg-gray-900 transition-colors duration-300 cursor-pointer"
+      className="cursor-pointer rounded-3xl border border-[#dfe5df] bg-white p-6 transition-colors duration-300 hover:bg-[#f7f9f5]"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
-          <h3 className="text-xl font-medium text-white">{question}</h3>
+          <h3 className="text-xl font-medium text-[#17201b]">{question}</h3>
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
             {isOpen ? (
-              <ChevronUp className="w-6 h-6 text-gray-400" />
+              <ChevronUp className="h-6 w-6 text-[#657068]" />
             ) : (
-              <ChevronDown className="w-6 h-6 text-gray-400" />
+              <ChevronDown className="h-6 w-6 text-[#657068]" />
             )}
           </motion.div>
         </div>
@@ -34,7 +34,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string | JSX.
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="text-gray-400 leading-relaxed pt-2 border-t border-gray-800">{answer}</p>
+              <p className="border-t border-[#dfe5df] pt-2 leading-relaxed text-[#657068]">{answer}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -68,7 +68,7 @@ const FAQ = () => {
     {
       question: "What ingredients are used in Aura products?",
       answer:
-        "Our vapes contain premium THC distillate, live resin, and carefully selected natural terpenes to preserve unique flavor profiles and potency.",
+        "Our vapes use premium live resin and carefully selected natural terpenes to preserve their distinct flavor profiles.",
     },
     {
       question: "What safety precautions should I observe?",
@@ -83,11 +83,11 @@ const FAQ = () => {
   ]
 
   return (
-    <section className="py-24 px-4 bg-black" id="faq">
+    <section className="bg-[#eef1ea] px-4 py-24" id="faq">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">FAQ</h2>
-          <p className="text-gray-400 text-lg">Everything you need to know about Aura Vape</p>
+          <h2 className="mb-4 text-4xl font-bold text-[#17201b] md:text-5xl">FAQ</h2>
+          <p className="text-lg text-[#657068]">Everything you need to know about Aura Vape</p>
         </div>
         <motion.div
           className="grid gap-4"
@@ -105,4 +105,3 @@ const FAQ = () => {
 }
 
 export default FAQ
-

@@ -23,7 +23,7 @@ const BrandStory = () => {
   }
 
   return (
-    <section ref={ref} className="py-24 bg-black text-white">
+    <section ref={ref} className="bg-[#fffefa] py-24 text-[#17201b]">
       <div className="max-w-6xl mx-auto px-4">
         <motion.h2
           initial="hidden"
@@ -43,7 +43,7 @@ const BrandStory = () => {
               Every element of our products, from the precision-engineered vapor delivery to the timeless monochrome
               aesthetic, is meticulously crafted to elevate your experience.
             </p>
-            <blockquote className="text-2xl font-italic my-8 pl-4 border-l-4 border-white">
+            <blockquote className="my-8 border-l-4 border-[#6f42c1] pl-4 text-2xl font-italic text-[#6f42c1]">
               &quot;Vaping, Redefined.&quot;
             </blockquote>
           </motion.div>
@@ -68,10 +68,10 @@ const BrandStory = () => {
                 initial="hidden"
                 animate={controls}
                 variants={fadeInUp}
-                className="bg-gray-900 p-6 rounded-lg transition-all duration-300 hover:bg-gray-800"
+                className="rounded-lg border border-[#e0e5df] bg-[#f3f5f0] p-6 transition-all duration-300 hover:bg-white"
               >
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-300">{item.description}</p>
+                <p className="text-[#5a665e]">{item.description}</p>
               </motion.div>
             ))}
           </motion.div>
