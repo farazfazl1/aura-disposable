@@ -29,7 +29,7 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [honeypot, setHoneypot] = useState("")
-  const phonePattern = "^\\+?1?\\s?\\(?[2-9]\\d{2}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$"
+  const phonePattern = "^\\+?1?\\s?\\(?[2-9]\\d{2}\\)?[\\s.\\-]?\\d{3}[\\s.\\-]?\\d{4}$"
   const emailPattern = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
   const minIntervalMs = 60000
 
@@ -112,26 +112,26 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
           Purchase Request
         </button>
       </DialogTrigger>
-      <DialogContent className="w-[92vw] max-w-lg bg-black text-white border border-gray-800 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-h-[90vh] w-[92vw] max-w-lg overflow-y-auto border-[#dfe5df] bg-[#fffefa] text-[#17201b]">
         <DialogHeader className="text-left">
           <DialogTitle className="text-2xl font-semibold">Purchase Request</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-2 text-gray-300">
+        <div className="grid gap-2 text-[#536057]">
           <p>Share your details and our team will contact you to finalize the order.</p>
-          <ul className="list-disc pl-5 text-sm text-gray-400">
+          <ul className="list-disc pl-5 text-sm text-[#657068]">
             <li>Requests are limited to Orange County, CA.</li>
             <li>Delivery is free within 15 miles of Orange County.</li>
             <li>Payment is not online and must be paid to the courier at the door.</li>
             <li>The courier will text when arriving for pickup.</li>
           </ul>
-          <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mt-2">
-            <p className="text-yellow-200 text-sm font-semibold mb-1">Minimum Order: 5 Units ($200)</p>
-            <p className="text-yellow-200/80 text-xs">Each additional unit is $35.</p>
+          <div className="mt-2 rounded-xl border border-[#e6c970] bg-[#fff7dc] p-4">
+            <p className="mb-1 text-sm font-semibold text-[#805b0b]">Minimum Order: 5 Units ($200)</p>
+            <p className="text-xs text-[#8a6a26]">Each additional unit is $35.</p>
           </div>
         </div>
         <form className="grid gap-4" onSubmit={handleSubmit}>
           <div className="hidden">
-            <label className="text-sm text-gray-300" htmlFor="purchase-website">
+            <label className="text-sm text-[#536057]" htmlFor="purchase-website">
               Website
             </label>
             <input
@@ -139,11 +139,11 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
               name="website"
               value={honeypot}
               onChange={(event) => setHoneypot(event.target.value)}
-              className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white"
+              className="w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b]"
             />
           </div>
           <div className="grid gap-2">
-            <label className="text-sm text-gray-300" htmlFor="purchase-area">
+            <label className="text-sm text-[#536057]" htmlFor="purchase-area">
               Delivery area
             </label>
             <select
@@ -151,17 +151,17 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
               name="deliveryArea"
               value={deliveryArea}
               onChange={(event) => setDeliveryArea(event.target.value)}
-              className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b] focus:outline-none focus:ring-2 focus:ring-[#6f42c1]/20"
             >
               <option value="orange-county">Orange County, CA</option>
               <option value="other">Outside Orange County</option>
             </select>
             {!isEligible && (
-              <p className="text-sm text-orange-200">We can only fulfill orders within Orange County.</p>
+              <p className="text-sm text-orange-700">We can only fulfill orders within Orange County.</p>
             )}
           </div>
           <div className="grid gap-2">
-            <label className="text-sm text-gray-300" htmlFor="purchase-quantity">
+            <label className="text-sm text-[#536057]" htmlFor="purchase-quantity">
               Quantity
             </label>
             <div className="flex items-center gap-4">
@@ -176,15 +176,15 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
                   const val = Number(event.target.value)
                   setQuantity(val)
                 }}
-                className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b] placeholder:text-[#98a39b] focus:outline-none focus:ring-2 focus:ring-[#6f42c1]/20"
               />
-              <div className="whitespace-nowrap text-sm text-gray-400 font-mono bg-white/5 px-4 py-3 rounded-xl border border-white/10">
+              <div className="whitespace-nowrap rounded-xl border border-[#dfe5df] bg-[#eef1ea] px-4 py-3 font-mono text-sm text-[#657068]">
                 Total: ${quantity >= 5 ? 200 + (quantity - 5) * 35 : 0}
               </div>
             </div>
           </div>
           <div className="grid gap-2">
-            <label className="text-sm text-gray-300" htmlFor="purchase-name">
+            <label className="text-sm text-[#536057]" htmlFor="purchase-name">
               Name
             </label>
             <input
@@ -193,12 +193,12 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
               required
               value={name}
               onChange={(event) => setName(event.target.value)}
-              className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b] placeholder:text-[#98a39b] focus:outline-none focus:ring-2 focus:ring-[#6f42c1]/20"
               placeholder="Your full name"
             />
           </div>
           <div className="grid gap-2">
-            <label className="text-sm text-gray-300" htmlFor="purchase-email">
+            <label className="text-sm text-[#536057]" htmlFor="purchase-email">
               Email
             </label>
             <input
@@ -209,12 +209,12 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               pattern={emailPattern}
-              className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b] placeholder:text-[#98a39b] focus:outline-none focus:ring-2 focus:ring-[#6f42c1]/20"
               placeholder="you@email.com"
             />
           </div>
           <div className="grid gap-2">
-            <label className="text-sm text-gray-300" htmlFor="purchase-phone">
+            <label className="text-sm text-[#536057]" htmlFor="purchase-phone">
               Phone
             </label>
             <input
@@ -226,12 +226,12 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
               onChange={(event) => setPhone(event.target.value)}
               pattern={phonePattern}
               inputMode="tel"
-              className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b] placeholder:text-[#98a39b] focus:outline-none focus:ring-2 focus:ring-[#6f42c1]/20"
               placeholder="+1 555 123 4567"
             />
           </div>
           <div className="grid gap-2">
-            <label className="text-sm text-gray-300" htmlFor="purchase-address">
+            <label className="text-sm text-[#536057]" htmlFor="purchase-address">
               Address
             </label>
             <input
@@ -240,12 +240,12 @@ const PurchaseRequestDialog = ({ productName, buttonClass, fullWidth }: Purchase
               required
               value={address}
               onChange={(event) => setAddress(event.target.value)}
-              className="w-full rounded-xl border border-gray-700 bg-black/60 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-xl border border-[#cbd6cd] bg-[#f7f6f2] px-4 py-3 text-[#17201b] placeholder:text-[#98a39b] focus:outline-none focus:ring-2 focus:ring-[#6f42c1]/20"
               placeholder="Street, City, State, ZIP"
             />
           </div>
           {error && (
-            <div className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
               {error}
             </div>
           )}

@@ -3,6 +3,8 @@ import { Toaster } from "@/components/ui/toaster"
 import type { Metadata } from "next"
 import "./globals.css"
 import type { ReactNode } from "react"
+import { CartProvider } from "@/components/cart/CartProvider"
+import BasketDrawer from "@/components/cart/BasketDrawer"
 
 export const metadata: Metadata = {
   title: "AURA - Premium Disposable Vapes",
@@ -59,7 +61,7 @@ export default function RootLayout({
   children: ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="icon"
@@ -72,15 +74,17 @@ export default function RootLayout({
           sizes="180x180"
           href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/LOGO-vkTxr7AVIvz95MEazBJ1jHjkPbCnwx.png"
         />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#f7f6f2" />
       </head>
       <body>
-        <ThemeProvider attribute="class">
-          {children}
-          <Toaster />
+        <ThemeProvider attribute="class" forcedTheme="light" enableSystem={false}>
+          <CartProvider>
+            {children}
+            <BasketDrawer />
+            <Toaster />
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>
   )
 }
-

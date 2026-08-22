@@ -30,16 +30,12 @@ const ProductSlide: React.FC<ProductSlideProps> = ({ name, tagline, description,
         <h4 className="text-lg font-semibold mb-2">Available Sizes</h4>
         <p>{sizes.join(", ")}</p>
       </div>
-      <div className="mb-6">
-        <h4 className="text-lg font-semibold mb-2">THC Content</h4>
-        <p>THC of pen is 80-90%</p>
-      </div>
       <div>
         <h4 className="text-lg font-semibold mb-2">Engineered for Excellence</h4>
         <p>
-          At the heart of {name} is our dedication to purity and innovation. Using premium THC distillate, live resin,
-          and a meticulously curated blend of natural terpenes, {name} captures the bold essence and exhilarating energy
-          of its heritage.
+          At the heart of {name} is our dedication to purity and innovation. Using premium live resin and a
+          meticulously curated blend of natural terpenes, {name} captures the bold essence and exhilarating energy of
+          its heritage.
         </p>
       </div>
     </motion.div>
@@ -47,4 +43,3 @@ const ProductSlide: React.FC<ProductSlideProps> = ({ name, tagline, description,
 }
 
 export default ProductSlide
-
