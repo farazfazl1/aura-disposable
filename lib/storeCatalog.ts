@@ -73,7 +73,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/IMG_20260408_135851_018.jpg"],
     flavor: "Berry, Bubble Gum, Earthy",
     effects: "Calm, Rest, Deep Relaxation",
-    size: "1ml . 2ml",
+    size: "1ml",
     price: "$40",
     description:
       "OG is a rich, dessert-inspired indica profile blending sweet berry notes with nostalgic bubble gum and smooth earthy depth. Creamy on the inhale and grounding on the finish, this strain is crafted for evening wind-down, body ease, and tranquil rest.",
