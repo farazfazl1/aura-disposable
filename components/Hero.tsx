@@ -51,16 +51,23 @@ const Hero = ({ onVideoLoaded, className }: HeroProps) => {
         </div>
 
         <div className="aura-home-product-stage">
-          <Image
-            src="/images/aura-hero-collection.png"
-            alt="Four Aura disposable vapes with fruit-inspired flavors"
-            fill
-            priority
-            sizes="(max-width: 767px) 100vw, 58vw"
-            className="aura-home-hero-image"
-            onLoad={markHeroReady}
-            onError={markHeroReady}
-          />
+          <div className="aura-home-product-disc" aria-hidden="true" />
+          <div className="aura-home-product-orbits" aria-hidden="true">
+            <span className="aura-home-product-orbit aura-home-product-orbit-wide" />
+            <span className="aura-home-product-orbit aura-home-product-orbit-tall" />
+          </div>
+          <div className="aura-home-product-lineup">
+            <Image
+              src="/images/aura-hero-collection.png"
+              alt="Four Aura disposable vapes with fruit-inspired flavors"
+              fill
+              priority
+              sizes="(max-width: 767px) 100vw, 58vw"
+              className="aura-home-hero-image"
+              onLoad={markHeroReady}
+              onError={markHeroReady}
+            />
+          </div>
         </div>
       </div>
     </section>
