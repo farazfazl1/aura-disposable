@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
 import { calculateOrderPricing, MAX_ORDER_QUANTITY, volumeDiscountPercent } from "@/lib/pricing"
+import { isStoreFormatAvailable } from "@/lib/storeCatalog"
 
 export type CartItem = {
   id: string
@@ -71,6 +72,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setItems(
           parsed
             .filter(isCartItem)
+            .filter((item) => isStoreFormatAvailable(item.slug, item.format))
             .map((item) => ({ ...item, quantity: clampQuantity(item.quantity) })),
         )
       }
@@ -88,6 +90,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<CartContextValue>(() => {
     const addItem = (item: AddCartItem, quantity: number) => {
+      if (!isStoreFormatAvailable(item.slug, item.format)) return
+
       const safeQuantity = clampQuantity(quantity)
 
       setItems((currentItems) => {

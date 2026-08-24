@@ -44,7 +44,7 @@ const Hero = ({ onVideoLoaded, className }: HeroProps) => {
 
           <div className="aura-home-hero-actions">
             <Link href="/store" className="aura-home-hero-primary">
-              View all products
+              Shop Now
               <ArrowUpRight size={17} strokeWidth={2} aria-hidden="true" />
             </Link>
           </div>

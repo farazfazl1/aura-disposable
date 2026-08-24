@@ -2,10 +2,10 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, SunMoon } from "lucide-react"
+import { ArrowUpRight, SunMoon, Zap } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import { MoonIcon, SunIcon } from "@/components/Icons"
-import type { StoreProduct, VapeType } from "@/lib/storeCatalog"
+import type { StoreProduct } from "@/lib/storeCatalog"
 import { PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
 
 const PRODUCT_ACCENTS: Record<string, { background: string; foreground: string }> = {
@@ -19,9 +19,10 @@ const PRODUCT_ACCENTS: Record<string, { background: string; foreground: string }
   "laughing-buddha": { background: "#c89a37", foreground: "#151108" },
 }
 
-function getTypeIcon(type: VapeType) {
-  if (type === "indica") return MoonIcon
-  if (type === "hybrid") return SunMoon
+function getProductIcon(product: StoreProduct) {
+  if (product.slug === "jealousy") return Zap
+  if (product.type === "indica") return MoonIcon
+  if (product.type === "hybrid") return SunMoon
   return SunIcon
 }
 
@@ -31,7 +32,7 @@ export default function StoreProductGrid({ products }: { products: StoreProduct[
   return (
     <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-4">
       {products.map((product, index) => {
-        const TypeIcon = getTypeIcon(product.type)
+        const TypeIcon = getProductIcon(product)
         const accent = PRODUCT_ACCENTS[product.slug] ?? { background: "#17201b", foreground: "#ffffff" }
 
         return (

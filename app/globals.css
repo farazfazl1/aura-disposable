@@ -831,6 +831,12 @@ select {
 
   .aura-product-overview-grid {
     gap: 3rem;
+    margin-inline: -0.25rem;
+    padding: 2rem 1.25rem 2.5rem;
+    border-top: 0;
+    border-radius: 1.5rem;
+    background: var(--hero-deep);
+    box-shadow: 0 24px 60px rgba(17, 28, 22, 0.2);
   }
 
   .aura-profile-chip {
