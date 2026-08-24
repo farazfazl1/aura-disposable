@@ -8,6 +8,7 @@ import { useCart } from "@/components/cart/CartProvider"
 import CheckoutForm from "@/components/cart/CheckoutForm"
 import {
   MAX_ORDER_QUANTITY,
+  MINIMUM_ORDER_TOTAL,
   PERMANENT_DISCOUNT_PERCENT,
   nextTierForQuantity,
 } from "@/lib/pricing"
@@ -44,6 +45,8 @@ export default function BasketDrawer() {
     clearBasket,
   } = useCart()
   const [view, setView] = useState<"basket" | "checkout">("basket")
+  const amountToMinimum = Math.max(0, MINIMUM_ORDER_TOTAL - total)
+  const meetsMinimumOrder = amountToMinimum === 0
 
   return (
     <Sheet
@@ -232,12 +235,15 @@ export default function BasketDrawer() {
                   <button
                     type="button"
                     onClick={() => setView("checkout")}
-                    className="mt-5 w-full rounded-full bg-[#17201b] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#33423a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#17201b] focus-visible:ring-offset-2"
+                    disabled={!meetsMinimumOrder}
+                    className="mt-5 w-full rounded-full bg-[#17201b] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#33423a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#17201b] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[#aeb7b0] disabled:text-white/80"
                   >
-                    Checkout · {currency.format(total)}
+                    {meetsMinimumOrder
+                      ? `Checkout · ${currency.format(total)}`
+                      : `Add ${currency.format(amountToMinimum)} more`}
                   </button>
                   <p className="mt-2 text-center text-[11px] leading-5 text-[#657068]">
-                    Pay the courier at the door — no online payment required.
+                    Minimum order is {currency.format(MINIMUM_ORDER_TOTAL)} after discounts. Pay the courier at the door.
                   </p>
                   <button
                     type="button"

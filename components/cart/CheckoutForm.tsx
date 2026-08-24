@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js"
 import { ArrowLeft, Loader2 } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
 import { useToast } from "@/hooks/use-toast"
-import { PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
+import { MINIMUM_ORDER_TOTAL, PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
 
 type CheckoutFormProps = {
   onBack: () => void
@@ -52,6 +52,7 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const isEligible = deliveryArea === "orange-county"
+  const meetsMinimumOrder = total >= MINIMUM_ORDER_TOTAL
   const totalSavings = baseSubtotal - total
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -62,6 +63,10 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
     }
     if (items.length === 0) {
       setError("Your basket is empty.")
+      return
+    }
+    if (!meetsMinimumOrder) {
+      setError(`Minimum order is ${currency.format(MINIMUM_ORDER_TOTAL)} after discounts.`)
       return
     }
     if (!supabase) {
@@ -209,7 +214,7 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
 
           <p className="mb-4 rounded-xl border border-[#e6c970] bg-[#fff7dc] p-3 text-xs leading-5 text-[#805b0b]">
             Payment is not collected online — you&apos;ll pay the courier at the door. We currently deliver within Orange
-            County, CA.
+            County, CA. Minimum order is {currency.format(MINIMUM_ORDER_TOTAL)} after discounts.
           </p>
 
           <div className="hidden">
@@ -316,7 +321,7 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
         <div className="border-t border-[#dfe5df] bg-[#fffefa] px-6 py-5">
           <button
             type="submit"
-            disabled={isSubmitting || !isEligible}
+            disabled={isSubmitting || !isEligible || !meetsMinimumOrder}
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#17201b] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#33423a] disabled:cursor-not-allowed disabled:opacity-55"
           >
             {isSubmitting ? (
