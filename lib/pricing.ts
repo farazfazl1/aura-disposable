@@ -9,6 +9,9 @@ export const BASE_UNIT_PRICE = 40
 // This promotion is applied after the quantity-based unit price is calculated.
 export const PERMANENT_DISCOUNT_PERCENT = 30
 
+// Orders must reach this final total after all quantity and permanent discounts.
+export const MINIMUM_ORDER_TOTAL = 160
+
 export const MAX_ORDER_QUANTITY = 1000
 
 // Wholesale volume tiers. Once the total order quantity reaches each threshold,

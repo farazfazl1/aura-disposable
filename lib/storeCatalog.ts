@@ -19,6 +19,15 @@ export type StoreProduct = {
   specs: { label: string; value: string }[];
 };
 
+export const STORE_FORMATS = ["1ml", "2ml"] as const;
+
+export function isStoreFormatAvailable(slug: string, format: string): boolean {
+  const normalizedFormat = format.replace(/\s+/g, "").toLowerCase();
+
+  // OG is the only active 1ml flavor. Every other flavor currently ships as 2ml.
+  return slug.toLowerCase() === "og" ? normalizedFormat === "1ml" : normalizedFormat === "2ml";
+}
+
 export const STORE_PRODUCTS: StoreProduct[] = [
   {
     slug: "sweet-island",
@@ -29,7 +38,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/12.jpg", "/images/4.jpg"],
     flavor: "Coconut • Guava • Mango • Pineapple",
     effects: "Creative Energy • Uplifted • Happy • Focused",
-    size: "1ml . 2ml",
+    size: "1ml • 2ml",
     price: "$40",
     description:
       "Elevate your session with Sweet Island - a vibrant sativa profile infused with lush tropical sweetness and classic skunk depth. Bright fruit layers meet crisp herbal undertones, delivering a clean cerebral lift and an effortlessly happy vibe. Designed for daytime momentum, creativity, and social flow.",
@@ -51,7 +60,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/8.jpg", "/images/5.jpg"],
     flavor: "Sweet Blueberry",
     effects: "Creative, Energy, Focus, Uplift",
-    size: "1ml . 2ml",
+    size: "1ml • 2ml",
     price: "$40",
     description:
       "Blue Dream is a vibrant berry-forward strain profile inspired by the classic fusion of Blueberry and Haze. Juicy blueberry sweetness opens the experience, layered with subtle citrus brightness and fresh pine undertones. Smooth on the inhale and clean on the finish — designed for daytime creativity, mental clarity, and an elevated social rhythm.",
@@ -73,7 +82,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/IMG_20260408_135851_018.jpg"],
     flavor: "Berry, Bubble Gum, Earthy",
     effects: "Calm, Rest, Deep Relaxation",
-    size: "1ml",
+    size: "1ml • 2ml",
     price: "$40",
     description:
       "OG is a rich, dessert-inspired indica profile blending sweet berry notes with nostalgic bubble gum and smooth earthy depth. Creamy on the inhale and grounding on the finish, this strain is crafted for evening wind-down, body ease, and tranquil rest.",
@@ -99,7 +108,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/10.jpg", "/images/6.jpg"],
     flavor: "Cool Mint • Earthy OG • Pine •",
     effects: "Deep Relaxation • Body Calm • Restful",
-    size: "1ml . 2ml",
+    size: "1ml • 2ml",
     price: "$40",
     description:
       "OG Mint is a cool, earthy indica profile layered with crisp mint and classic OG depth. Smooth on the inhale with a refreshing herbal finish, this strain settles into a soothing full-body calm. Crafted for evening wind-down, quiet moments, and deep restorative rest.",
@@ -124,7 +133,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/9.jpg", "/images/2 (1).jpg"],
     flavor: "Exotic Spice, Floral, Sweet Citrus",
     effects: "Uplifted • Creative Energy • Focus • Euphoric",
-    size: "1ml - 2ml",
+    size: "1ml • 2ml",
     price: "$40",
     description:
       "Persian Gold is a rare, spice-forward sativa profile inspired by the warmth and elegance of golden saffron threads. Delicate floral sweetness blends with subtle citrus brightness and a smooth herbal finish. Light on the body yet vibrant in the mind - crafted for daytime clarity, elevated mood, and creative momentum.",
@@ -150,7 +159,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/13.jpg", "/images/1.jpg"],
     flavor: "Sweet Blueberry, Light Citrus",
     effects: "Uplifted • Creative Energy • Focus • Happy",
-    size: "1ml - 2ml",
+    size: "1ml • 2ml",
     price: "$40",
     description:
       "Blueberry is a vibrant fruit-forward sativa bursting with juicy berry sweetness and a subtle citrus lift. Smooth and clean on the inhale, it delivers a bright cerebral buzz with steady focus and feel-good energy - perfect for daytime creativity and social flow.",
@@ -172,7 +181,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gallery: ["/images/11.jpg", "/images/3.jpg"],
     flavor: "Earthy • Fruity • Kush",
     effects: "Creative Boost • Euphoria • Talkative • Social Energy",
-    size: "1ml - 2ml",
+    size: "1ml • 2ml",
     price: "$40",
     description:
       "Elevate your experience with Jealousy - a refined hybrid that blends earthy richness with vibrant fruit undertones. Designed for smooth mental uplift and relaxed body ease, this strain delivers social warmth, giggly euphoria, and effortless clarity.",
@@ -255,7 +264,7 @@ function parseSizes(size: string): string[] {
   if (matches?.length) {
     return matches.map((m) => m.replace(/\s+/g, "").toLowerCase());
   }
-  return ["1ml", "2ml"];
+  return [...STORE_FORMATS];
 }
 
 const SHOWCASE_COLORS: Record<

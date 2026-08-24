@@ -8,10 +8,11 @@ import { MoonIcon, SunIcon } from "@/components/Icons"
 import ProductGallery from "@/components/ProductGallery"
 import ProductPurchaseControls from "@/components/ProductPurchaseControls"
 import StoreProductGrid from "@/components/StoreProductGrid"
-import { STORE_PRODUCTS, type VapeType } from "@/lib/storeCatalog"
+import { isStoreFormatAvailable, STORE_PRODUCTS, type VapeType } from "@/lib/storeCatalog"
 import { PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
 
-function typeIcon(type: VapeType) {
+function typeIcon(type: VapeType, slug: string) {
+  if (slug === "jealousy") return Zap
   if (type === "indica") return MoonIcon
   if (type === "hybrid") return SunMoon
   return SunIcon
@@ -77,12 +78,12 @@ const PRODUCT_HERO_THEMES: Record<
     image: "/images/cutouts/sweet-island.png",
     heroStart: "#fff9cf",
     heroMiddle: "#f1d86d",
-    heroEnd: "#b98f16",
-    heroDeep: "#6d4f00",
-    accent: "#3f730f",
+    heroEnd: "#2b5b3b",
+    heroDeep: "#183d2a",
+    accent: "#ffe27a",
   },
   "blue-dream": {
-    image: "/images/cutouts/blue-dream.png",
+    image: "/images/cutouts/blue-dream-full.png",
     heroStart: "#f2f6ff",
     heroMiddle: "#b7cbea",
     heroEnd: "#5479aa",
@@ -155,7 +156,7 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
   const typeStyles = typeTheme(product.type)
   const productHero = PRODUCT_HERO_THEMES[product.slug]
   const theme = { ...typeStyles, ...productHero }
-  const TypeIcon = typeIcon(product.type)
+  const TypeIcon = typeIcon(product.type, product.slug)
   const typeLabel = product.type.charAt(0).toUpperCase() + product.type.slice(1)
   const availableFormats = product.size.match(/\d+\s*ml/gi)?.map((format) => format.replace(/\s+/g, "")) ?? [product.size]
   const flavorTags = splitTags(product.flavor)
@@ -264,9 +265,19 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
 
                 <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/20 pt-6">
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Available in</span>
-                  {availableFormats.map((format) => (
-                    <span key={format} className="aura-format-badge">{format}</span>
-                  ))}
+                  {availableFormats.map((format) => {
+                    const isAvailable = isStoreFormatAvailable(product.slug, format)
+
+                    return (
+                      <span
+                        key={format}
+                        className={`aura-format-badge ${isAvailable ? "" : "opacity-40 line-through"}`}
+                        title={isAvailable ? undefined : "Currently unavailable"}
+                      >
+                        {format}
+                      </span>
+                    )
+                  })}
                   <span className="ml-auto flex items-baseline gap-2 text-lg font-bold text-white">
                     <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] text-white ring-1 ring-white/30">{PERMANENT_DISCOUNT_PERCENT}% off total</span>
                     {product.price}

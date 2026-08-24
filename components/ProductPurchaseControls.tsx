@@ -6,9 +6,11 @@ import { useCart } from "@/components/cart/CartProvider"
 import {
   calculateOrderPricing,
   MAX_ORDER_QUANTITY,
+  MINIMUM_ORDER_TOTAL,
   PERMANENT_DISCOUNT_PERCENT,
   unitPriceForQuantity,
 } from "@/lib/pricing"
+import { isStoreFormatAvailable } from "@/lib/storeCatalog"
 
 type ProductPurchaseControlsProps = {
   slug: string
@@ -38,7 +40,9 @@ export default function ProductPurchaseControls({
 }: ProductPurchaseControlsProps) {
   const { addItem } = useCart()
   const [quantity, setQuantity] = useState(1)
-  const [selectedFormat, setSelectedFormat] = useState(formats[0] ?? "Standard")
+  const firstAvailableFormat = formats.find((format) => isStoreFormatAvailable(slug, format)) ?? ""
+  const [selectedFormat, setSelectedFormat] = useState(firstAvailableFormat)
+  const activeFormat = isStoreFormatAvailable(slug, selectedFormat) ? selectedFormat : firstAvailableFormat
   const unitPrice = numericPrice(price)
   const orderPricing = calculateOrderPricing(quantity)
   const tierPrice = orderPricing.unitPrice
@@ -48,13 +52,15 @@ export default function ProductPurchaseControls({
   const increase = () => setQuantity((current) => Math.min(MAX_ORDER_QUANTITY, current + 1))
 
   const addToBasket = () => {
+    if (!activeFormat) return
+
     addItem(
       {
-        id: `${slug}:${selectedFormat.toLowerCase()}`,
+        id: `${slug}:${activeFormat.toLowerCase()}`,
         slug,
         name,
         image,
-        format: selectedFormat,
+        format: activeFormat,
         unitPrice,
       },
       quantity,
@@ -75,16 +81,21 @@ export default function ProductPurchaseControls({
         <legend className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/65">Choose size</legend>
         <div className="mt-3 flex flex-wrap gap-2">
           {formats.map((format) => {
-            const isSelected = selectedFormat === format
+            const isAvailable = isStoreFormatAvailable(slug, format)
+            const isSelected = isAvailable && activeFormat === format
 
             return (
               <button
                 key={format}
                 type="button"
                 aria-pressed={isSelected}
+                aria-label={isAvailable ? `${format} size` : `${format} size unavailable`}
+                disabled={!isAvailable}
                 onClick={() => setSelectedFormat(format)}
-                className={`min-w-14 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-[0.08em] transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                  isSelected
+                className={`min-w-[5.75rem] rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-[0.08em] transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
+                  !isAvailable
+                    ? "cursor-not-allowed border-white/15 bg-white/[0.04] text-white/35 line-through"
+                    : isSelected
                     ? "border-white bg-white text-[#17201b] shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
                     : "border-white/35 bg-white/10 text-white hover:border-white/65 hover:bg-white/15"
                 }`}
@@ -94,6 +105,9 @@ export default function ProductPurchaseControls({
             )
           })}
         </div>
+        <p className="mt-2 text-[11px] font-medium text-white/55">
+          Unavailable sizes remain visible for reference.
+        </p>
       </fieldset>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-[auto_minmax(0,1fr)]">
@@ -124,11 +138,12 @@ export default function ProductPurchaseControls({
         <button
           type="button"
           onClick={addToBasket}
-          className="group inline-flex min-h-12 w-full items-center justify-between gap-4 rounded-full bg-white px-5 py-3 text-sm font-bold text-[#17201b] shadow-[0_12px_32px_rgba(22,25,23,0.14)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#f4f1ea] hover:shadow-[0_16px_36px_rgba(22,25,23,0.2)] active:translate-y-0 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          disabled={!activeFormat}
+          className="group inline-flex min-h-12 w-full items-center justify-between gap-4 rounded-full bg-white px-5 py-3 text-sm font-bold text-[#17201b] shadow-[0_12px_32px_rgba(22,25,23,0.14)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#f4f1ea] hover:shadow-[0_16px_36px_rgba(22,25,23,0.2)] active:translate-y-0 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:bg-white"
         >
           <span className="inline-flex items-center gap-2">
             <ShoppingBag size={18} aria-hidden="true" />
-            Add to basket
+            {activeFormat ? "Add to basket" : "Currently unavailable"}
           </span>
           <span className="rounded-full bg-[#17201b] px-3 py-1.5 text-xs text-white">
             {currency.format(orderPricing.total)}
@@ -152,6 +167,9 @@ export default function ProductPurchaseControls({
         {quantity >= 5 && bulkSavings > 0 && (
           <> Quantity pricing saves another {currency.format(bulkSavings)} before the permanent discount.</>
         )}
+      </p>
+      <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.1em] text-white/55">
+        Minimum order {currency.format(MINIMUM_ORDER_TOTAL)} after discounts
       </p>
     </div>
   )
