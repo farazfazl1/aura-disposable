@@ -242,6 +242,58 @@ export function getFeaturedStoreProducts(): StoreProduct[] {
   );
 }
 
+export type StoreProductRecommendation = {
+  product: StoreProduct;
+  reason: string;
+};
+
+function normalizedTags(value: string): string[] {
+  return splitToTags(value).map((tag) => tag.toLowerCase());
+}
+
+function sharedTags(left: string, right: string): string[] {
+  const rightTags = new Set(normalizedTags(right));
+  return normalizedTags(left).filter((tag) => rightTags.has(tag));
+}
+
+export function getCheckoutRecommendations(
+  cartSlugs: string[],
+  limit = 2,
+): StoreProductRecommendation[] {
+  const selectedSlugs = new Set(cartSlugs);
+  const selectedProducts = STORE_PRODUCTS.filter((product) => selectedSlugs.has(product.slug));
+
+  return STORE_PRODUCTS.filter((product) => !selectedSlugs.has(product.slug))
+    .map((product, catalogIndex) => {
+      let bestScore = 0;
+      let reason = "Popular Aura pick";
+
+      for (const selectedProduct of selectedProducts) {
+        const matchingFlavors = sharedTags(product.flavor, selectedProduct.flavor);
+        const matchingEffects = sharedTags(product.effects, selectedProduct.effects);
+        const sameType = product.type === selectedProduct.type;
+        const score =
+          (sameType ? 12 : 0) + matchingFlavors.length * 4 + matchingEffects.length * 2;
+
+        if (score <= bestScore) continue;
+
+        bestScore = score;
+        if (matchingFlavors.length > 0) {
+          reason = `Shares ${matchingFlavors[0]} flavor notes`;
+        } else if (sameType) {
+          reason = `Similar ${product.type} profile`;
+        } else if (matchingEffects.length > 0) {
+          reason = `Shares a ${matchingEffects[0]} effect`;
+        }
+      }
+
+      return { product, reason, score: bestScore, catalogIndex };
+    })
+    .sort((left, right) => right.score - left.score || left.catalogIndex - right.catalogIndex)
+    .slice(0, Math.max(0, limit))
+    .map(({ product, reason }) => ({ product, reason }));
+}
+
 export function storeProductsByType(type: VapeType): StoreProduct[] {
   return STORE_PRODUCTS.filter((p) => p.type === type);
 }
