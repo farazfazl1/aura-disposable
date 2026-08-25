@@ -4,6 +4,7 @@ import { useState } from "react"
 import { createClient } from "@supabase/supabase-js"
 import { ArrowLeft, Loader2 } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
+import CheckoutRecommendations from "@/components/cart/CheckoutRecommendations"
 import { useToast } from "@/hooks/use-toast"
 import { MINIMUM_ORDER_TOTAL, PERMANENT_DISCOUNT_PERCENT } from "@/lib/pricing"
 
@@ -211,6 +212,8 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
               </div>
             </div>
           </div>
+
+          <CheckoutRecommendations />
 
           <p className="mb-4 rounded-xl border border-[#e6c970] bg-[#fff7dc] p-3 text-xs leading-5 text-[#805b0b]">
             Payment is not collected online — you&apos;ll pay the courier at the door. We currently deliver within Orange
