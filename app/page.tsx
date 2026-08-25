@@ -6,7 +6,6 @@ import Header from "@/components/Header"
 import Hero from "@/components/Hero"
 import LoadingScreen from "@/components/LoadingScreen"
 
-const ProductHighlight = dynamic(() => import("@/components/ProductHighlight"), { ssr: false })
 const BrandStory = dynamic(() => import("@/components/BrandStory"), { ssr: false })
 const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false })
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false })
@@ -21,9 +20,6 @@ export default function Home() {
         <Header />
         <Hero onVideoLoaded={() => setIsLoading(false)} className="pb-0" />
         <Suspense fallback={<div>Loading...</div>}>
-          <div id="products">
-            <ProductHighlight />
-          </div>
           <div id="story">
             <BrandStory />
           </div>
