@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Plus, Sparkles } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
+import { buildRecommendedCartItem } from "@/components/cart/recommendedCartItem"
 import { useToast } from "@/hooks/use-toast"
 import { BASE_UNIT_PRICE } from "@/lib/pricing"
 import {
@@ -98,14 +99,12 @@ export default function CheckoutRecommendations() {
                 type="button"
                 onClick={() => {
                   addItem(
-                    {
-                      id: `${product.slug}:${format}`,
+                    buildRecommendedCartItem({
                       slug: product.slug,
                       name: product.name,
-                      image: product.image,
                       format,
                       unitPrice: BASE_UNIT_PRICE,
-                    },
+                    }),
                     1,
                   )
                   toast({
