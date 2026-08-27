@@ -5,6 +5,7 @@ import "./globals.css"
 import type { ReactNode } from "react"
 import { CartProvider } from "@/components/cart/CartProvider"
 import BasketDrawer from "@/components/cart/BasketDrawer"
+import AgeGate from "@/components/AgeGate"
 
 export const metadata: Metadata = {
   title: "AURA - Premium Disposable Vapes",
@@ -78,11 +79,14 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider attribute="class" forcedTheme="light" enableSystem={false}>
-          <CartProvider>
-            {children}
-            <BasketDrawer />
-            <Toaster />
-          </CartProvider>
+          <AgeGate />
+          <div id="aura-site-shell">
+            <CartProvider>
+              {children}
+              <BasketDrawer />
+              <Toaster />
+            </CartProvider>
+          </div>
         </ThemeProvider>
       </body>
     </html>
