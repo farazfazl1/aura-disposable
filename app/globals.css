@@ -301,6 +301,439 @@ select {
   .aura-home-product-stage { height: 22.5rem; }
 }
 
+.aura-operation-guide {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(5rem, 9vw, 8rem) 1rem;
+  border-bottom: 1px solid var(--aura-line);
+  background:
+    radial-gradient(circle at 7% 15%, rgba(111, 66, 193, 0.1), transparent 25rem),
+    radial-gradient(circle at 92% 86%, rgba(8, 127, 91, 0.09), transparent 28rem),
+    var(--aura-paper);
+}
+
+.aura-operation-guide::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(23, 32, 27, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 32, 27, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black, transparent 38%, transparent 70%, black);
+  content: "";
+  pointer-events: none;
+}
+
+.aura-operation-guide-inner {
+  width: min(100%, 80rem);
+  margin: 0 auto;
+}
+
+.aura-operation-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: end;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.aura-operation-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.25rem;
+  color: var(--aura-green);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.aura-operation-eyebrow span {
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.aura-operation-title {
+  display: flex;
+  flex-direction: column;
+  color: var(--aura-ink);
+  font-family: "Archivo Black", "Arial Black", sans-serif;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.075em;
+  text-transform: uppercase;
+}
+
+.aura-operation-title span {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--aura-ink);
+}
+
+.aura-operation-intro-copy {
+  padding-bottom: 0.35rem;
+  color: var(--aura-muted);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.75;
+}
+
+.aura-operation-note {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--aura-line);
+  color: var(--aura-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.aura-operation-console {
+  padding: clamp(0.35rem, 0.8vw, 0.7rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: clamp(1.35rem, 3vw, 2.5rem);
+  background: #090d12;
+  box-shadow: 0 34px 90px rgba(9, 13, 18, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.aura-operation-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: clamp(1rem, 2.5vw, 2rem);
+  background: #05070a;
+}
+
+.aura-operation-poster,
+.aura-operation-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aura-operation-poster {
+  filter: saturate(0.95) contrast(1.04);
+}
+
+.aura-operation-media::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(2, 4, 7, 0.58));
+  content: "";
+  pointer-events: none;
+}
+
+.aura-operation-video {
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.aura-operation-play {
+  position: absolute;
+  right: 50%;
+  bottom: clamp(1rem, 4vw, 3rem);
+  z-index: 3;
+  display: flex;
+  min-height: 4.5rem;
+  padding: 0.55rem 1rem 0.55rem 0.6rem;
+  transform: translateX(50%);
+  align-items: center;
+  gap: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: rgba(8, 10, 14, 0.8);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  color: white;
+  text-align: left;
+  backdrop-filter: blur(16px);
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.aura-operation-play:hover {
+  transform: translateX(50%) translateY(-3px);
+  border-color: rgba(67, 169, 255, 0.9);
+  background: rgba(10, 16, 24, 0.94);
+}
+
+.aura-operation-play:focus-visible {
+  outline: 3px solid #43a9ff;
+  outline-offset: 4px;
+}
+
+.aura-operation-play-icon {
+  display: flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: white;
+  color: #0b1119;
+}
+
+.aura-operation-play-copy {
+  display: grid;
+  min-width: 8.5rem;
+  gap: 0.15rem;
+}
+
+.aura-operation-play-copy strong {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aura-operation-play-copy span {
+  color: rgba(255, 255, 255, 0.65);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.aura-operation-modebar {
+  display: flex;
+  min-height: 5rem;
+  padding: 1rem clamp(0.9rem, 2.5vw, 2rem);
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  color: white;
+}
+
+.aura-operation-modebar > p {
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.aura-operation-modes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.7rem 1.25rem;
+}
+
+.aura-operation-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.aura-operation-mode strong {
+  color: rgba(255, 255, 255, 0.52);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.aura-operation-mode-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  box-shadow: 0 0 14px currentColor;
+}
+
+.aura-operation-steps {
+  display: grid;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+  overflow: hidden;
+  border: 1px solid var(--aura-line);
+  border-radius: 2rem;
+  background: rgba(255, 254, 250, 0.8);
+  box-shadow: 0 24px 70px rgba(23, 32, 27, 0.08);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  backdrop-filter: blur(12px);
+}
+
+.aura-operation-step {
+  min-width: 0;
+  min-height: 15rem;
+  padding: clamp(1.35rem, 2.4vw, 2rem);
+  border-right: 1px solid var(--aura-line);
+}
+
+.aura-operation-step:last-child {
+  border-right: 0;
+}
+
+.aura-operation-step-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--aura-green);
+}
+
+.aura-operation-step-number {
+  color: #a6afa9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+
+.aura-operation-step > p {
+  margin-top: 2.5rem;
+  color: var(--aura-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.aura-operation-step > strong {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--aura-ink);
+  font-family: "Archivo Black", "Arial Black", sans-serif;
+  font-size: clamp(1.55rem, 2.3vw, 2.25rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.aura-operation-step > span:last-child {
+  display: block;
+  margin-top: 1.1rem;
+  color: var(--aura-muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .aura-operation-intro {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .aura-operation-intro-copy {
+    max-width: 40rem;
+  }
+
+  .aura-operation-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aura-operation-step {
+    min-height: 13rem;
+  }
+
+  .aura-operation-step:nth-child(2) {
+    border-right: 0;
+  }
+
+  .aura-operation-step:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--aura-line);
+  }
+}
+
+@media (max-width: 640px) {
+  .aura-operation-guide {
+    padding: 4.75rem 0.75rem;
+  }
+
+  .aura-operation-title {
+    font-size: clamp(3rem, 15vw, 4.5rem);
+  }
+
+  .aura-operation-intro {
+    padding-inline: 0.25rem;
+  }
+
+  .aura-operation-console {
+    border-radius: 1.35rem;
+  }
+
+  .aura-operation-media {
+    border-radius: 1rem;
+  }
+
+  .aura-operation-play {
+    bottom: 0.85rem;
+    min-height: 3.2rem;
+    padding: 0.35rem 0.8rem 0.35rem 0.4rem;
+    gap: 0.6rem;
+  }
+
+  .aura-operation-play-icon {
+    width: 2.45rem;
+    height: 2.45rem;
+  }
+
+  .aura-operation-play-icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .aura-operation-play-copy {
+    min-width: 0;
+  }
+
+  .aura-operation-play-copy strong {
+    font-size: 0.7rem;
+  }
+
+  .aura-operation-play-copy span {
+    font-size: 0.58rem;
+  }
+
+  .aura-operation-modebar {
+    display: block;
+    padding: 1.1rem 0.85rem 1.25rem;
+  }
+
+  .aura-operation-modes {
+    display: grid;
+    margin-top: 0.85rem;
+    justify-content: stretch;
+    gap: 0.65rem 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aura-operation-mode {
+    min-width: 0;
+  }
+
+  .aura-operation-steps {
+    border-radius: 1.35rem;
+    grid-template-columns: 1fr;
+  }
+
+  .aura-operation-step {
+    min-height: 0;
+    padding: 1.35rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--aura-line);
+  }
+
+  .aura-operation-step:nth-child(3) {
+    border-bottom: 1px solid var(--aura-line);
+  }
+
+  .aura-operation-step:last-child {
+    border-bottom: 0;
+  }
+
+  .aura-operation-step > p {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-operation-play {
+    transition: none;
+  }
+}
+
 .gradient-text {
   background: linear-gradient(45deg, var(--aura-purple), var(--aura-green));
   -webkit-background-clip: text;
