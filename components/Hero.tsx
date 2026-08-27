@@ -70,6 +70,10 @@ const Hero = ({ onVideoLoaded, className }: HeroProps) => {
           </div>
         </div>
       </div>
+      <div className="aura-age-badge" role="img" aria-label="21+ only">
+        <span className="aura-age-badge-ring" aria-hidden="true" />
+        <span className="aura-age-badge-label" aria-hidden="true">+21</span>
+      </div>
     </section>
   )
 }

@@ -7,6 +7,7 @@ import Hero from "@/components/Hero"
 import LoadingScreen from "@/components/LoadingScreen"
 
 const BrandStory = dynamic(() => import("@/components/BrandStory"), { ssr: false })
+const VapeOperationGuide = dynamic(() => import("@/components/VapeOperationGuide"), { ssr: false })
 const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false })
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false })
 
@@ -20,6 +21,7 @@ export default function Home() {
         <Header />
         <Hero onVideoLoaded={() => setIsLoading(false)} className="pb-0" />
         <Suspense fallback={<div>Loading...</div>}>
+          <VapeOperationGuide />
           <div id="story">
             <BrandStory />
           </div>
