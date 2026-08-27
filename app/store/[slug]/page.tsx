@@ -6,6 +6,7 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { MoonIcon, SunIcon } from "@/components/Icons"
 import ProductGallery from "@/components/ProductGallery"
+import ProductColorProvider from "@/components/ProductColorProvider"
 import ProductPurchaseControls from "@/components/ProductPurchaseControls"
 import StoreProductGrid from "@/components/StoreProductGrid"
 import { isStoreFormatAvailable, STORE_PRODUCTS, type VapeType } from "@/lib/storeCatalog"
@@ -185,7 +186,8 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
     <div className="aura-page min-h-screen">
       <Header />
       <main className="pt-16 md:pt-20">
-        <section className="aura-product-hero" style={heroStyle}>
+        <ProductColorProvider colors={product.colors ?? []}>
+          <section className="aura-product-hero" style={heroStyle}>
           <div className="relative z-10 mx-auto max-w-[1500px] px-4 pb-16 pt-7 sm:px-6 lg:px-10 lg:pb-24">
             <nav aria-label="Breadcrumb" className="text-[10px] font-bold uppercase tracking-[0.2em] text-[color:var(--hero-deep)]">
               <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -324,7 +326,8 @@ export default function StoreProductPage({ params }: { params: { slug: string } 
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </ProductColorProvider>
 
         <section className="aura-profile-blueprint px-4 py-16 md:py-24" style={heroStyle} aria-labelledby="details-heading">
           <div className="mx-auto max-w-7xl">

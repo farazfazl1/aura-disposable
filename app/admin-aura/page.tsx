@@ -22,6 +22,7 @@ type BasketLineItem = {
   slug: string
   name: string
   format: string
+  color?: string
   quantity: number
   unitPrice: number
   lineTotal: number
@@ -331,7 +332,8 @@ const AdminPage = () => {
                         {basket.items.map((line, index) => (
                           <li key={index} className="flex justify-between gap-3">
                             <span>
-                              {line.quantity}× {line.name} ({line.format})
+                              {line.quantity}× {line.name} ({line.format}
+                              {line.color ? ` · ${line.color}` : ""})
                             </span>
                             <span className="font-semibold text-[#17201b]">{currency.format(line.lineTotal)}</span>
                           </li>

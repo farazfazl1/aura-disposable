@@ -133,13 +133,14 @@ export default function BasketDrawer() {
                                 </Link>
                                 <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#657068]">
                                   {item.format}
+                                  {item.color ? ` · ${item.color}` : ""}
                                 </p>
                               </div>
                               <button
                                 type="button"
                                 onClick={() => removeItem(item.id)}
                                 className="rounded-full p-2 text-[#89938c] transition-colors hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300"
-                                aria-label={`Remove ${item.name} ${item.format} from basket`}
+                                aria-label={`Remove ${item.name} ${item.format}${item.color ? ` ${item.color}` : ""} from basket`}
                               >
                                 <Trash2 size={16} aria-hidden="true" />
                               </button>

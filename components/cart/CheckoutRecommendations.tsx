@@ -66,6 +66,7 @@ export default function CheckoutRecommendations() {
             isStoreFormatAvailable(product.slug, option),
           )
           if (!format) return null
+          const defaultColor = product.colors?.[0]
 
           return (
             <article
@@ -104,16 +105,19 @@ export default function CheckoutRecommendations() {
                       name: product.name,
                       format,
                       unitPrice: BASE_UNIT_PRICE,
+                      colorId: defaultColor?.id,
+                      color: defaultColor?.name,
+                      image: defaultColor?.image,
                     }),
                     1,
                   )
                   toast({
                     title: `${product.name} added`,
-                    description: `${format} was added to your basket.`,
+                    description: `${format}${defaultColor ? ` · ${defaultColor.name}` : ""} was added to your basket.`,
                   })
                 }}
                 className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#c7d0c9] bg-white text-[#17201b] shadow-sm transition duration-200 hover:border-[#17201b] hover:bg-[#17201b] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#17201b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fffefa]"
-                aria-label={`Add one ${product.name} ${format} to basket`}
+                aria-label={`Add one ${product.name} ${format}${defaultColor ? ` ${defaultColor.name}` : ""} to basket`}
               >
                 <Plus size={17} aria-hidden="true" />
               </button>

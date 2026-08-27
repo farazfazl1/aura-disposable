@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { useProductColor } from "@/components/ProductColorProvider"
 
 interface ProductGalleryProps {
   images: string[]
@@ -17,8 +18,12 @@ export default function ProductGallery({
   softColor,
 }: ProductGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const productColor = useProductColor()
 
   if (!images || images.length === 0) return null
+
+  const selectedImage = productColor?.selectedColor?.image ?? images[selectedIndex]
+  const selectedColorName = productColor?.selectedColor?.name
 
   return (
     <div className="aura-product-visual">
@@ -29,9 +34,9 @@ export default function ProductGallery({
       />
       <div className="aura-product-image-frame">
         <Image
-          key={images[selectedIndex]}
-          src={images[selectedIndex]}
-          alt={`${productName} Aura vape`}
+          key={selectedImage}
+          src={selectedImage}
+          alt={`${productName}${selectedColorName ? ` ${selectedColorName}` : ""} Aura vape`}
           fill
           priority
           sizes="(min-width: 1024px) 640px, 90vw"

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/components/cart/CartProvider"
+import { useProductColor } from "@/components/ProductColorProvider"
 import {
   calculateOrderPricing,
   MAX_ORDER_QUANTITY,
@@ -39,6 +40,7 @@ export default function ProductPurchaseControls({
   formats,
 }: ProductPurchaseControlsProps) {
   const { addItem } = useCart()
+  const productColor = useProductColor()
   const [quantity, setQuantity] = useState(1)
   const firstAvailableFormat = formats.find((format) => isStoreFormatAvailable(slug, format)) ?? ""
   const [selectedFormat, setSelectedFormat] = useState(firstAvailableFormat)
@@ -56,11 +58,12 @@ export default function ProductPurchaseControls({
 
     addItem(
       {
-        id: `${slug}:${activeFormat.toLowerCase()}`,
+        id: [slug, activeFormat.toLowerCase(), productColor?.selectedColor?.id].filter(Boolean).join(":"),
         slug,
         name,
-        image,
+        image: productColor?.selectedColor?.image ?? image,
         format: activeFormat,
+        color: productColor?.selectedColor?.name,
         unitPrice,
       },
       quantity,
@@ -109,6 +112,39 @@ export default function ProductPurchaseControls({
           Unavailable sizes remain visible for reference.
         </p>
       </fieldset>
+
+      {productColor && productColor.colors.length > 1 ? (
+        <fieldset className="mt-5">
+          <legend className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/65">Choose color</legend>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {productColor.colors.map((color) => {
+              const isSelected = productColor.selectedColor?.id === color.id
+
+              return (
+                <button
+                  key={color.id}
+                  type="button"
+                  aria-pressed={isSelected}
+                  aria-label={`${color.name} color`}
+                  onClick={() => productColor.selectColor(color.id)}
+                  className={`inline-flex min-h-11 items-center gap-2.5 rounded-full border px-3.5 py-2 text-xs font-bold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
+                    isSelected
+                      ? "border-white bg-white text-[#17201b] shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
+                      : "border-white/35 bg-white/10 text-white hover:border-white/65 hover:bg-white/15"
+                  }`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-6 w-6 rounded-full border border-black/20 shadow-[inset_0_0_0_2px_rgba(255,255,255,0.22)]"
+                    style={{ backgroundColor: color.swatch }}
+                  />
+                  {color.name}
+                </button>
+              )
+            })}
+          </div>
+        </fieldset>
+      ) : null}
 
       <div className="mt-5 grid gap-3 sm:grid-cols-[auto_minmax(0,1fr)]">
         <div className="flex h-12 items-center justify-between rounded-full border border-white/35 bg-white/10 p-1 text-white backdrop-blur-sm sm:w-[148px]">

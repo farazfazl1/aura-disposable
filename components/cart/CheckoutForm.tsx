@@ -103,11 +103,14 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
       slug: item.slug,
       name: item.name,
       format: item.format,
+      color: item.color,
       quantity: item.quantity,
       unitPrice: tierUnitPrice,
       lineTotal: tierUnitPrice * item.quantity,
     }))
-    const productName = lineItems.map((line) => `${line.quantity}× ${line.name} ${line.format}`).join(", ")
+    const productName = lineItems
+      .map((line) => `${line.quantity}× ${line.name} ${line.format}${line.color ? ` ${line.color}` : ""}`)
+      .join(", ")
 
     const { error: insertError } = await supabase.from("purchase_requests").insert({
       product_name: productName,
@@ -189,7 +192,10 @@ export default function CheckoutForm({ onBack, onComplete }: CheckoutFormProps) 
               {items.map((item) => (
                 <li key={item.id} className="flex justify-between gap-3 text-[#46554c]">
                   <span className="min-w-0 truncate">
-                    {item.quantity}× {item.name} <span className="text-[#89938c]">({item.format})</span>
+                    {item.quantity}× {item.name}{" "}
+                    <span className="text-[#89938c]">
+                      ({item.format}{item.color ? ` · ${item.color}` : ""})
+                    </span>
                   </span>
                   <span className="shrink-0 font-semibold text-[#17201b]">
                     {currency.format(tierUnitPrice * item.quantity)}
