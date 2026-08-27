@@ -19,3 +19,25 @@ test("recommended products use the same cutout image as direct product-page addi
     unitPrice: 40,
   })
 })
+
+test("recommended OG items preserve the default color variant", () => {
+  const item = buildRecommendedCartItem({
+    slug: "og",
+    name: "OG",
+    format: "1ml",
+    unitPrice: 40,
+    colorId: "black",
+    color: "Black",
+    image: "/images/cutouts/og.png",
+  })
+
+  assert.deepEqual(item, {
+    id: "og:1ml:black",
+    slug: "og",
+    name: "OG",
+    image: "/images/cutouts/og.png",
+    format: "1ml",
+    color: "Black",
+    unitPrice: 40,
+  })
+})

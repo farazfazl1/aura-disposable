@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
 import { calculateOrderPricing, MAX_ORDER_QUANTITY, volumeDiscountPercent } from "@/lib/pricing"
-import { isStoreFormatAvailable } from "@/lib/storeCatalog"
+import { getDefaultStoreProductColor, isStoreFormatAvailable } from "@/lib/storeCatalog"
 
 export type CartItem = {
   id: string
@@ -10,6 +10,7 @@ export type CartItem = {
   name: string
   image: string
   format: string
+  color?: string
   unitPrice: number
   quantity: number
 }
@@ -51,6 +52,7 @@ function isCartItem(value: unknown): value is CartItem {
     typeof item.name === "string" &&
     typeof item.image === "string" &&
     typeof item.format === "string" &&
+    (item.color === undefined || typeof item.color === "string") &&
     typeof item.unitPrice === "number" &&
     Number.isFinite(item.unitPrice) &&
     typeof item.quantity === "number" &&
@@ -73,7 +75,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
           parsed
             .filter(isCartItem)
             .filter((item) => isStoreFormatAvailable(item.slug, item.format))
-            .map((item) => ({ ...item, quantity: clampQuantity(item.quantity) })),
+            .map((item) => {
+              const defaultColor = getDefaultStoreProductColor(item.slug)
+
+              if (!defaultColor || item.color) {
+                return { ...item, quantity: clampQuantity(item.quantity) }
+              }
+
+              return {
+                ...item,
+                id: `${item.slug}:${item.format.toLowerCase()}:${defaultColor.id}`,
+                image: defaultColor.image,
+                color: defaultColor.name,
+                quantity: clampQuantity(item.quantity),
+              }
+            }),
         )
       }
     } catch {
@@ -93,14 +109,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!isStoreFormatAvailable(item.slug, item.format)) return
 
       const safeQuantity = clampQuantity(quantity)
+      const defaultColor = getDefaultStoreProductColor(item.slug)
+      const normalizedItem =
+        defaultColor && !item.color
+          ? {
+              ...item,
+              id: `${item.slug}:${item.format.toLowerCase()}:${defaultColor.id}`,
+              image: defaultColor.image,
+              color: defaultColor.name,
+            }
+          : item
 
       setItems((currentItems) => {
-        const existingItem = currentItems.find((currentItem) => currentItem.id === item.id)
+        const existingItem = currentItems.find((currentItem) => currentItem.id === normalizedItem.id)
 
-        if (!existingItem) return [...currentItems, { ...item, quantity: safeQuantity }]
+        if (!existingItem) return [...currentItems, { ...normalizedItem, quantity: safeQuantity }]
 
         return currentItems.map((currentItem) =>
-          currentItem.id === item.id
+          currentItem.id === normalizedItem.id
             ? { ...currentItem, quantity: clampQuantity(currentItem.quantity + safeQuantity) }
             : currentItem,
         )

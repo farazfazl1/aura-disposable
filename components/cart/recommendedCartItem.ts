@@ -3,6 +3,9 @@ type RecommendedCartItemInput = {
   name: string
   format: string
   unitPrice: number
+  colorId?: string
+  color?: string
+  image?: string
 }
 
 export function buildRecommendedCartItem({
@@ -10,13 +13,17 @@ export function buildRecommendedCartItem({
   name,
   format,
   unitPrice,
+  colorId,
+  color,
+  image,
 }: RecommendedCartItemInput) {
   return {
-    id: `${slug}:${format}`,
+    id: [slug, format, colorId].filter(Boolean).join(":"),
     slug,
     name,
-    image: `/images/cutouts/${slug}.png`,
+    image: image ?? `/images/cutouts/${slug}.png`,
     format,
+    ...(color ? { color } : {}),
     unitPrice,
   }
 }

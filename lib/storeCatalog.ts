@@ -1,5 +1,12 @@
 export type VapeType = "indica" | "sativa" | "hybrid";
 
+export type StoreProductColor = {
+  id: string;
+  name: string;
+  image: string;
+  swatch: string;
+};
+
 export type StoreProduct = {
   slug: string;
   name: string;
@@ -17,6 +24,7 @@ export type StoreProduct = {
   finish: string;
   notes: string[];
   specs: { label: string; value: string }[];
+  colors?: StoreProductColor[];
 };
 
 export const STORE_FORMATS = ["1ml", "2ml"] as const;
@@ -97,6 +105,20 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       { label: "Battery", value: "Premium Core" },
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
+    ],
+    colors: [
+      {
+        id: "black",
+        name: "Black",
+        image: "/images/cutouts/og.png",
+        swatch: "#1b1a19",
+      },
+      {
+        id: "ivory",
+        name: "Ivory",
+        image: "/images/cutouts/og-ivory.png",
+        swatch: "#e7e5da",
+      },
     ],
   },
   {
@@ -223,6 +245,10 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     ],
   },
 ];
+
+export function getDefaultStoreProductColor(slug: string): StoreProductColor | undefined {
+  return STORE_PRODUCTS.find((product) => product.slug.toLowerCase() === slug.toLowerCase())?.colors?.[0];
+}
 
 const FEATURED_SLUG_ORDER = [
   "sweet-island",
