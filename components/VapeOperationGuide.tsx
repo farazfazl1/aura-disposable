@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Flame, Gauge, Play, Power, Wind } from "lucide-react"
+import { Flame, Gauge, Power, Wind } from "lucide-react"
 
 const operationSteps = [
   {
@@ -96,17 +96,11 @@ export default function VapeOperationGuide() {
                 />
                 <button
                   type="button"
-                  className="aura-operation-play"
+                  className="aura-operation-play-hotspot"
                   onClick={() => setIsPlaying(true)}
                   aria-label="Play the 24-second Aura operation tutorial"
                 >
-                  <span className="aura-operation-play-icon" aria-hidden="true">
-                    <Play size={22} fill="currentColor" />
-                  </span>
-                  <span className="aura-operation-play-copy">
-                    <strong>Watch tutorial</strong>
-                    <span>00:24</span>
-                  </span>
+                  <span className="sr-only">Watch tutorial</span>
                 </button>
               </>
             )}

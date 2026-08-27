@@ -433,67 +433,28 @@ select {
   display: block;
 }
 
-.aura-operation-play {
+.aura-operation-play-hotspot {
   position: absolute;
-  right: 50%;
-  bottom: clamp(1rem, 4vw, 3rem);
+  bottom: 8%;
+  left: 11.5%;
   z-index: 3;
-  display: flex;
-  min-height: 4.5rem;
-  padding: 0.55rem 1rem 0.55rem 0.6rem;
-  transform: translateX(50%);
-  align-items: center;
-  gap: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.32);
+  width: 31%;
+  height: 14%;
+  border: 0;
   border-radius: 999px;
-  background: rgba(8, 10, 14, 0.8);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  color: white;
-  text-align: left;
-  backdrop-filter: blur(16px);
-  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 180ms ease, box-shadow 180ms ease;
 }
 
-.aura-operation-play:hover {
-  transform: translateX(50%) translateY(-3px);
-  border-color: rgba(67, 169, 255, 0.9);
-  background: rgba(10, 16, 24, 0.94);
+.aura-operation-play-hotspot:hover {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 28px rgba(67, 169, 255, 0.22);
 }
 
-.aura-operation-play:focus-visible {
+.aura-operation-play-hotspot:focus-visible {
   outline: 3px solid #43a9ff;
   outline-offset: 4px;
-}
-
-.aura-operation-play-icon {
-  display: flex;
-  width: 3.25rem;
-  height: 3.25rem;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: white;
-  color: #0b1119;
-}
-
-.aura-operation-play-copy {
-  display: grid;
-  min-width: 8.5rem;
-  gap: 0.15rem;
-}
-
-.aura-operation-play-copy strong {
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.aura-operation-play-copy span {
-  color: rgba(255, 255, 255, 0.65);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
 }
 
 .aura-operation-modebar {
@@ -657,33 +618,12 @@ select {
     border-radius: 1rem;
   }
 
-  .aura-operation-play {
-    bottom: 0.85rem;
-    min-height: 3.2rem;
-    padding: 0.35rem 0.8rem 0.35rem 0.4rem;
-    gap: 0.6rem;
-  }
-
-  .aura-operation-play-icon {
-    width: 2.45rem;
-    height: 2.45rem;
-  }
-
-  .aura-operation-play-icon svg {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .aura-operation-play-copy {
-    min-width: 0;
-  }
-
-  .aura-operation-play-copy strong {
-    font-size: 0.7rem;
-  }
-
-  .aura-operation-play-copy span {
-    font-size: 0.58rem;
+  .aura-operation-play-hotspot {
+    bottom: 3%;
+    left: 6%;
+    width: 42%;
+    height: 24%;
+    min-height: 2.75rem;
   }
 
   .aura-operation-modebar {
@@ -729,7 +669,7 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aura-operation-play {
+  .aura-operation-play-hotspot {
     transition: none;
   }
 }
