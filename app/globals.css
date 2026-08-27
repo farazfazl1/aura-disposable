@@ -716,26 +716,34 @@ select {
   display: block;
 }
 
-.aura-operation-play-hotspot {
+.aura-operation-play-button {
   position: absolute;
-  bottom: 8%;
-  left: 11.5%;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 5rem;
+  height: 5rem;
+  padding: 0;
+  place-items: center;
   z-index: 3;
-  width: 31%;
-  height: 14%;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background: rgba(5, 10, 17, 0.72);
+  box-shadow: 0 12px 30px rgba(2, 4, 7, 0.38);
+  color: white;
   cursor: pointer;
-  transition: background-color 180ms ease, box-shadow 180ms ease;
+  backdrop-filter: blur(8px);
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
 }
 
-.aura-operation-play-hotspot:hover {
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: 0 0 28px rgba(67, 169, 255, 0.22);
+.aura-operation-play-button:hover {
+  transform: translate(-50%, calc(-50% - 2px));
+  background: rgba(5, 10, 17, 0.9);
+  box-shadow: 0 16px 34px rgba(2, 4, 7, 0.46);
 }
 
-.aura-operation-play-hotspot:focus-visible {
+.aura-operation-play-button:focus-visible {
   outline: 3px solid #43a9ff;
   outline-offset: 4px;
 }
@@ -901,12 +909,9 @@ select {
     border-radius: 1rem;
   }
 
-  .aura-operation-play-hotspot {
-    bottom: 3%;
-    left: 6%;
-    width: 42%;
-    height: 24%;
-    min-height: 2.75rem;
+  .aura-operation-play-button {
+    width: 3.75rem;
+    height: 3.75rem;
   }
 
   .aura-operation-modebar {
@@ -952,7 +957,7 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aura-operation-play-hotspot {
+  .aura-operation-play-button {
     transition: none;
   }
 }
