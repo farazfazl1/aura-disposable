@@ -43,7 +43,8 @@ html {
   background: var(--aura-paper);
   color-scheme: light;
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  scroll-padding-block-start: 96px;
+  scrollbar-gutter: stable;
 }
 
 body {
