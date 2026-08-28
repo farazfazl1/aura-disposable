@@ -106,20 +106,6 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
     ],
-    colors: [
-      {
-        id: "black",
-        name: "Black",
-        image: "/images/cutouts/og.png",
-        swatch: "#1b1a19",
-      },
-      {
-        id: "ivory",
-        name: "Ivory",
-        image: "/images/cutouts/og-ivory.png",
-        swatch: "#e7e5da",
-      },
-    ],
   },
   {
     slug: "og-mint",
@@ -243,11 +229,29 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       { label: "Device", value: "Disposable" },
       { label: "Series", value: "Aura Signature" },
     ],
+    colors: [
+      {
+        id: "black",
+        name: "Black",
+        image: "/images/cutouts/laughing-buddha.png",
+        swatch: "#1b1a19",
+      },
+      {
+        id: "ivory",
+        name: "Ivory",
+        image: "/images/cutouts/laughing-buddha-ivory.png",
+        swatch: "#e7e5da",
+      },
+    ],
   },
 ];
 
 export function getDefaultStoreProductColor(slug: string): StoreProductColor | undefined {
-  return STORE_PRODUCTS.find((product) => product.slug.toLowerCase() === slug.toLowerCase())?.colors?.[0];
+  return getStoreProductColors(slug)[0];
+}
+
+export function getStoreProductColors(slug: string): StoreProductColor[] {
+  return STORE_PRODUCTS.find((product) => product.slug.toLowerCase() === slug.toLowerCase())?.colors ?? [];
 }
 
 const FEATURED_SLUG_ORDER = [
