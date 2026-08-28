@@ -2,7 +2,8 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
 import { calculateOrderPricing, MAX_ORDER_QUANTITY, volumeDiscountPercent } from "@/lib/pricing"
-import { getDefaultStoreProductColor, isStoreFormatAvailable } from "@/lib/storeCatalog"
+import { getStoreProductColors, isStoreFormatAvailable } from "@/lib/storeCatalog"
+import { normalizeCartItemVariant } from "@/components/cart/cartItemVariant"
 
 export type CartItem = {
   id: string
@@ -75,21 +76,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
           parsed
             .filter(isCartItem)
             .filter((item) => isStoreFormatAvailable(item.slug, item.format))
-            .map((item) => {
-              const defaultColor = getDefaultStoreProductColor(item.slug)
-
-              if (!defaultColor || item.color) {
-                return { ...item, quantity: clampQuantity(item.quantity) }
-              }
-
-              return {
-                ...item,
-                id: `${item.slug}:${item.format.toLowerCase()}:${defaultColor.id}`,
-                image: defaultColor.image,
-                color: defaultColor.name,
-                quantity: clampQuantity(item.quantity),
-              }
-            }),
+            .map((item) =>
+              normalizeCartItemVariant(
+                { ...item, quantity: clampQuantity(item.quantity) },
+                getStoreProductColors(item.slug),
+              ),
+            ),
         )
       }
     } catch {
@@ -109,16 +101,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!isStoreFormatAvailable(item.slug, item.format)) return
 
       const safeQuantity = clampQuantity(quantity)
-      const defaultColor = getDefaultStoreProductColor(item.slug)
-      const normalizedItem =
-        defaultColor && !item.color
-          ? {
-              ...item,
-              id: `${item.slug}:${item.format.toLowerCase()}:${defaultColor.id}`,
-              image: defaultColor.image,
-              color: defaultColor.name,
-            }
-          : item
+      const normalizedItem = normalizeCartItemVariant(item, getStoreProductColors(item.slug))
 
       setItems((currentItems) => {
         const existingItem = currentItems.find((currentItem) => currentItem.id === normalizedItem.id)
