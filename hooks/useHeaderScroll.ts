@@ -1,22 +1,37 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function useHeaderScroll() {
-  const [prevScrollPos, setPrevScrollPos] = useState(0)
   const [visible, setVisible] = useState(true)
+  const previousScrollPos = useRef(0)
+  const animationFrame = useRef<number | null>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset
-      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10)
-      setPrevScrollPos(currentScrollPos)
+    const updateVisibility = () => {
+      const currentScrollPos = window.scrollY
+      const shouldBeVisible = currentScrollPos < 10 || currentScrollPos < previousScrollPos.current
+
+      previousScrollPos.current = currentScrollPos
+      setVisible((currentVisible) => (currentVisible === shouldBeVisible ? currentVisible : shouldBeVisible))
+      animationFrame.current = null
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [prevScrollPos])
+    const handleScroll = () => {
+      if (animationFrame.current !== null) return
+      animationFrame.current = window.requestAnimationFrame(updateVisibility)
+    }
+
+    updateVisibility()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (animationFrame.current !== null) {
+        window.cancelAnimationFrame(animationFrame.current)
+      }
+    }
+  }, [])
 
   return visible
 }
-
