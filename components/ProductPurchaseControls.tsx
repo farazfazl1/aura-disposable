@@ -77,7 +77,7 @@ export default function ProductPurchaseControls({
           {PERMANENT_DISCOUNT_PERCENT}% off order total
         </span>
         <p className="text-sm font-semibold text-white">
-          {currency.format(unitPrice)} <span className="font-normal text-white/65">each before quantity pricing</span>
+          {price} <span className="font-normal uppercase tracking-[0.08em] text-white/65">DISCOUNT APPLIED AT CHECKOUT</span>
         </p>
       </div>
       <fieldset>
